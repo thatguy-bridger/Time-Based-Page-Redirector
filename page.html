@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    
+    <style>
+        body {
+            padding-left: 120px;
+            padding-right: 120px;
+            background-image: url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjk5Ni0wMDlfMS1rcm9pcjRkay5qcGc.jpg');
+        }
+        h1 {
+          font-size: 45px;
+          text-align: center;
+          color: rgb(255, 0, 0);
+        }
+        h3 {
+          font-size: 32px;
+          text-align: center;
+          color: rgb(133, 0, 145);
+        }
+        p {
+          font-size: 24px;
+          text-align: center;
+          color: rgb(209, 105, 91);
+        }
+        a {
+          font-size: 24px;
+          text-align: center;
+          color: rgb(0, 164, 230);
+        }
+      </style>
+<head>
+  <title>Pick A Class</title>
+  <link rel="shortcut icon" href="redirector.png" type="image/x-icon">
+</head>
+<body>
+  <h1>Sorry, it looks like you aren't in school right now, so your current class couldn't be selected.</h1>
+  <h3>Pick A Class. Current Time:<div id = "Time"></div></h3> 
+  <p>
+    Period 1: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
+  </p>
+  <p>
+    Period 2: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
+  </p>
+  <p>
+    Period 3: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
+  </p>
+  <p>
+    Period 4: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
+  </p>
+  <p>
+    Period 5: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
+  </p>
+  <p>
+    Period 6: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
+  </p>
+  <p>
+    Period 7: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
+  </p>
+  <p>
+    Period 8: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
+  </p>
+  <p>----------------------------------------------------------------------------------------------------------------------------</p>
+  <h2 style="text-align: center; font-size: 40px">SCHEDULES</h2>
+  <div style="text-align: center;"><img src="Mon-Thur.png" alt="An image" style="justify-content: center;"><text style="font-size: 100px;">  </text><img src="Friday.png" alt="An image" style="justify-content: center;"></div>
+  <p>________________________________________________________________________________________________________________________</p>
+  <text style="text-align: center;">Redirector - Bridger's Custom Website</text>
+</body>
+<script>
+    function displayTime() {
+    const date = new Date();
+    const time = date.toLocaleTimeString();
+    document.getElementById("Time").textContent = time;
+    }
+    displayTime();
+    setInterval(displayTime, 1000);
+    function refresh() {
+        window.location.href = "sender.html"
+    }
+    setInterval(refresh, 30000)
+  </script>
+</html>
