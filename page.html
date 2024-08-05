@@ -28,9 +28,9 @@
           color: rgb(0, 164, 230);
         }
         button {
-          font-size: 24px;
+          font-size: 16px;
           text-align: center;
-          color: rgb(0, 164, 230);
+          color: rgb(133, 0, 145);
         }
       </style>
 <head>
@@ -39,7 +39,7 @@
 </head>
 <body>
   <h1>Sorry, it looks like you aren't in school right now, so your current class couldn't be selected.</h1>
-  <h3>Pick A Class. Current Time:<div id = "Time"></div></h3><button>REFRESH</button>
+  <h3>Pick A Class. Current Time:<div id = "Time"></div></h3><button id = "Refresh">REFRESH</button>
   <p>
     Period 1: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="_blank">Open Group</a>
   </p>
@@ -82,5 +82,8 @@
         window.location.href = "sender.html"
     }
     setInterval(refresh, 30000)
+    document.getElementById("Refresh").addEventListener('click',() => {
+        refresh()
+    });
   </script>
 </html>
