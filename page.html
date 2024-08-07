@@ -109,31 +109,20 @@
     displayTime();
     setInterval(displayTime, 200);
     function refresh() {
-        document.getElementById("Refresh").innerHTML = "REFRESHING..."
-        delay(200)
-        document.getElementById("Refresh").innerHTML = "REFRESHING.."
-        delay(200)
-        document.getElementById("Refresh").innerHTML = "REFRESHING."
-        delay(200)
-        document.getElementById("Refresh").innerHTML = "REFRESHING"
-        delay(200)
-        document.getElementById("Refresh").innerHTML = "REFRESHING."
-        delay(200)
-        document.getElementById("Refresh").innerHTML = "REFRESHING.."
-        delay(200)
-        document.getElementById("Refresh").innerHTML = "REFRESHING..."
-        delay(200)
-        window.location.href = "sender.html"
-        
-        
+        while (count < 11) {
+        document.getElementById("Refresh").innerHTML = "REFRESHING" + dots;
+        dots += ".";
+        if (dots.length > 3) {
+          dots = ".";
+        }
+        count++;
+        setTimeout(() => {}, 200);
+      }  
     }
     setInterval(refresh, 30000)
     document.getElementById("Refresh").addEventListener('click',() => {
         refresh()
     });
-    function delay(ms) {
-        left = getTime();
-        while ((getTime() - left < ms)){}
-    }
+    
   </script>
 </html>
