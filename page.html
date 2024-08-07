@@ -109,8 +109,9 @@
     displayTime();
     setInterval(displayTime, 200);
     function refresh() {
+        count = 0;
         while (count < 11) {
-        document.getElementById("Refresh").innerHTML = "REFRESHING" + dots;
+        document.getElementById("Refresh").innerHTML = "Refreshing" + dots;
         dots += ".";
         if (dots.length > 3) {
           dots = ".";
