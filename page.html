@@ -107,7 +107,7 @@
     document.getElementById("Time").textContent = time;
     }
     displayTime();
-    setInterval(displayTime, 1500);
+    setInterval(displayTime, 800);
     function refresh() {
       setTimeout(() => {
         document.getElementById("Refresh").innerHTML = "Refreshing.";
@@ -125,14 +125,14 @@
                                 document.getElementById("Refresh").innerHTML = "Refreshing...";
                                 setTimeout(() => {
                                     window.location.href = "sender.html";
-                                  }, 1500);
-                              }, 1500);
-                          }, 1500);
-                      }, 1500);
-                  }, 1500);
-              }, 1500);
-          }, 1500);
-      }, 1500);
+                                  }, 800);
+                              }, 800);
+                          }, 800);
+                      }, 800);
+                  }, 800);
+              }, 800);
+          }, 800);
+      }, 800);
     }
     setInterval(refresh, 30000)
     document.getElementById("Refresh").addEventListener('click',() => {
