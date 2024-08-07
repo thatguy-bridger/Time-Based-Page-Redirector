@@ -109,7 +109,10 @@
     displayTime();
     setInterval(displayTime, 1000);
     function refresh() {
-        window.location.href = "sender.html"
+        document.getElementById("Refresh").innerHTML = "REFRESHING..."
+        setTimeout(function() {
+            window.location.href = "sender.html"
+        } ,1000)
     }
     setInterval(refresh, 30000)
     document.getElementById("Refresh").addEventListener('click',() => {
