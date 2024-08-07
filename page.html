@@ -69,7 +69,7 @@
 </head>
 <body>
   <h1>Sorry, it looks like you aren't in school right now, so your current class couldn't be selected.</h1>
-  <h3>Pick A Class. Current Time:<div id = "Time"></div></h3><button id = "Refresh"> REFRESH </button>
+  <h3>Pick A Class. Current Time:<div id = "Time"></div></h3><button id = "Refresh"> Refresh </button>
   <p>
     Period 1: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
@@ -109,18 +109,30 @@
     displayTime();
     setInterval(displayTime, 200);
     function refresh() {
-        count = 0;
-        dots = "";
-        while (count < 11) {
-        document.getElementById("Refresh").innerHTML = "Refreshing" + dots;
-        dots += ".";
-        if (dots.length > 3) {
-          dots = ".";
-        }
-        count++;
-        setTimeout(() => {}, 200);
-      }
-   // window.location.href = "sender.html";
+      setTimeout(() => {
+        document.getElementById("Refresh").innerHTML = "Refreshing.";
+        setTimeout(() => {
+            document.getElementById("Refresh").innerHTML = "Refreshing..";
+            setTimeout(() => {
+                document.getElementById("Refresh").innerHTML = "Refreshing...";
+                setTimeout(() => {
+                    document.getElementById("Refresh").innerHTML = "Refreshing..";
+                    setTimeout(() => {
+                        document.getElementById("Refresh").innerHTML = "Refreshing.";
+                        setTimeout(() => {
+                            document.getElementById("Refresh").innerHTML = "Refreshing..";
+                            setTimeout(() => {
+                                document.getElementById("Refresh").innerHTML = "Refreshing...";
+                                setTimeout(() => {
+                                    window.location.href = "sender.html";
+                                  }, 200);
+                              }, 200);
+                          }, 200);
+                      }, 200);
+                  }, 200);
+              }, 200);
+          }, 200);
+      }, 200);
     }
     setInterval(refresh, 30000)
     document.getElementById("Refresh").addEventListener('click',() => {
