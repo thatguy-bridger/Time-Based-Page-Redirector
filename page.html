@@ -118,8 +118,10 @@
           dots = ".";
         }
         count++;
-      }
-        window.location.href = "sender.html"
+        setTimeout(() => {
+        window.location.href = "";
+        }, 200);
+      }  
     }
     setInterval(refresh, 30000)
     document.getElementById("Refresh").addEventListener('click',() => {
