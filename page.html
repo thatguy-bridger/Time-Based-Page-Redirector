@@ -103,7 +103,7 @@
 </head>
 <body>
   <h1>Sorry, it looks like you aren't in school right now, so your current class couldn't be selected.</h1>
-  <h3>Pick A Class. Current Time:<div id = "Time"></div></h3><button id = "Refresh"> Refresh </button>
+  <h3>Pick A Class.<div id = "Time"></div></h3><button id = "Refresh"> Refresh </button>
   <p title= "Geography - Room 1209, Mrs. Witherspoon (A Day 7:45AM - 9:05AM)">
     Period 1: <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
@@ -143,15 +143,15 @@
     const year = now.getFullYear();
     const month = now.getMonth()+1;
     const day = now.getDate();
-    time += " Date: month+"."+day+"."+year "
+    time = time + " Date: month+"."+day+"."+year "
     if (!adays.includes(month+"."+day+"."+year) && !bdays.includes(month+"."+day+"."+year)) {
-        time += "There is no school today"
+        time = time + "There is no school today"
     }
     if (adays.includes(month+"."+day+"."+year)) {
-        time += "Today is an A Day"
+        time = time + "Today is an A Day"
     }
     if (bdays.includes(month+"."+day+"."+year)) {
-        time += "Today is a B Day"
+        time = time + "Today is a B Day"
     }
     document.getElementById("Time").textContent = time;
     displayTime();
