@@ -32,12 +32,12 @@
           color: rgb(113, 0, 125);
         }
         p {
-          font-size: 24px;
+          font-size: 22px;
           text-align: center;
           color: rgb(209, 105, 91);
         }
         a {
-          font-size: 24px;
+          font-size: 22px;
           text-align: center;
           color: rgb(0, 164, 230);
           transition-duration: 1s;
@@ -78,7 +78,7 @@
           color: rgb(0, 164, 230);
           display: inline-block;
           margin: 0px;
-          font-size: 24px;
+          font-size: 22px;
           text-decoration: underline; 
           cursor: pointer;
           border: 0px solid rgba(255,255,255,0);
@@ -95,6 +95,10 @@
           cursor: pointer;
           border: 0px solid rgba(255,255,255,0);
         }
+        .class-container {
+          display: flex;
+          justify-content: space-around; /* Distribute space evenly around the items */
+        }
 
       </style>
 <head>
@@ -104,34 +108,45 @@
 <body>
   <h1>Pick A Class</h1>
   <h3><div id = "Time"></div></h3><button id = "Refresh"> Refresh </button>
-  <div><p title= "Advisory - Room 2405, Mrs. Gathro (A Day 7:45AM - 9:05AM)">
-    Advisory - <a href="https://canyons.instructure.com/courses/1814181" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1814181" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
+  <p title= "Advisory - Room 2405, Mrs. Gathro (A Day 7:45AM - 9:05AM)">
+    Advisory - <a href="https://canyons.instructure.com/courses/1814181" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1814181" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>  
+  </p>
+  <div class="class-container">
+  <h3>A DAY</h3>
+  <h3>B DAY</h3>
+  </div>
+  <div class="class-container">
+  <p title= "Geography - Room 1209, Mrs. Witherspoon (A Day 7:45AM - 9:05AM)">
+    Period 1 - <a href="https://canyons.instructure.com/courses/1813424" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1813424" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
   <p title= "Weight Training - Room 1803, Mr. Burdette (B Day 7:45AM - 9:05AM)">
     Period 5 - <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
   </div>
-  <p title= "Geography - Room 1209, Mrs. Witherspoon (A Day 7:45AM - 9:05AM)">
-    Period 1 - <a href="https://canyons.instructure.com/courses/1813424" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1813424" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
-  </p>
+  <div class="class-container">
   <p title= "Mechanical Design - Room 1916, Mr. Maupin (A Day 9:45AM - 11:05AM)">
     Period 2 - <a href="https://canyons.instructure.com/courses/1815055" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1815055" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
-  </p>
-  <p title= "German - Room 2213, Mr. Thomas (A Day 11:10AM - 1:00PM)">
-    Period 3 - <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
-  </p>
-  <p title= "English - Room 1310, Ms. Fryer (A Day 1:05PM - 2:25PM)">
-    Period 4 - <a href="https://canyons.instructure.com/courses/1813068" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1813068" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
   <p title= "Marketing - Room 2125, Mr. Ohrn (B Day 9:45AM - 11:05AM)">
     Period 6 - <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
+  </div>
+  <div class="class-container">
+  <p title= "German - Room 2213, Mr. Thomas (A Day 11:10AM - 1:00PM)">
+    Period 3 - <a href="https://canyons.instructure.com/" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
+  </p>
   <p title= "Math - Room 2103, Mrs. Kennedy (B Day 11:10AM - 1:00PM)">
     Period 7 - <a href="https://canyons.instructure.com/courses/1813313" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1813313" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
+  </p>
+  </div>
+  <div class="class-container">
+  <p title= "English - Room 1310, Ms. Fryer (A Day 1:05PM - 2:25PM)">
+    Period 4 - <a href="https://canyons.instructure.com/courses/1813068" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1813068" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
   <p title= "Biology - Room 1139, Mrs. Nedrich (B Day 1:05PM - 2:25PM)">
     Period 8 - <a href="https://canyons.instructure.com/courses/1815190" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1815190" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
+  </div>
   <p>____________________________________________________________________________</p>
   <h2 style="text-align: center; font-size: 40px; color: white;">SCHEDULES</h2>
   <div style="text-align: center;"><img src="Mon-Thur.png" alt="An image" style="justify-content: center;"><text style="font-size: 100px;">  </text><img src="Friday.png" alt="An image" style="justify-content: center;"></div>
