@@ -148,13 +148,13 @@
     const day = date.getDate();
     time += "  |  Date: " + month+"."+day+"."+year + "  |  "
     if (!adays.includes(month+"."+day+"."+year) && !bdays.includes(month+"."+day+"."+year)) {
-        time += "There is no school today"
+        time += "No School"
     }
     if (adays.includes(month+"."+day+"."+year)) {
-        time += "Today is an A Day"
+        time += "A Day"
     }
     if (bdays.includes(month+"."+day+"."+year)) {
-        time += "Today is a B Day"
+        time += "B Day"
     }
     document.getElementById("Time").textContent = time;
     }
