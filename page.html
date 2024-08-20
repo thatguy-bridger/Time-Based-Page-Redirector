@@ -22,7 +22,7 @@
           margin-bottom: -15px;
         }
         h3 {
-          font-size: 32px;
+          font-size: 30px;
           text-align: center;
           color: rgb(133, 0, 145);
           transition-duration: 1s;
@@ -52,16 +52,17 @@
         
         button {
           background-color: rgb(133, 0, 145);
-          color: white;
+          color: rgb(100,200,255);
           margin: auto;
           text-align: center;
+          text-decoration: underline; 
           display: block;
           font-size: 16px;
           font-family: cursive;
-          padding-left: 200px;
-          padding-right: 200px;
-          padding-top: 15px;
-          padding-bottom: 15px;
+          padding-left: 40px;
+          padding-right: 40px;
+          padding-top: 12px;
+          padding-bottom: 12px;
           transition-duration: 1.5s;
           cursor: pointer;
           border: 3px solid rgb(255,255,255);
@@ -72,10 +73,8 @@
           box-shadow: 0 12px 16px 0 rgba(255,255,255,0.5), 0 17px 50px 0 rgba(255,255,255,0.25);
           background-color: white;
           color: rgb(133, 0, 145);
-          padding-left: 100px;
-          padding-right: 100px;
-          padding-top: 10px;
-          padding-bottom: 10px;
+          padding-top: 15px;
+          padding-bottom: 15px;
           border: 3px solid rgb(133, 0, 145);     
           border-radius: 60px;
         }
@@ -103,8 +102,8 @@
         }
         .class-container {
           display: flex;
-          justify-content: space-around; /* Distribute space evenly around the items */
-          margin-bottom: -15px
+          justify-content: space-around;
+          margin-bottom: -15px;
         }
 
       </style>
@@ -114,7 +113,22 @@
 </head>
 <body>
   <h1>Pick A Class</h1>
-  <h3><div id = "Time"></div></h3><button id = "Refresh"> Refresh </button>
+  <h3><div id = "Time"></div></h3>
+  <div class="class-container" style="margin-bottom: 0px">
+  <button onclick="location.href='https://canyons.instructure.com'" style="padding-right: 25px; padding-left: 25px">Dashboard</button>
+  <a style="font-size: 60px">|</a>
+  <button onclick="location.href='https://altahawkeye.org'" style="padding-right: 25px; padding-left: 25px">Newspaper</button>
+  <a style="font-size: 60px">|</a>
+  <button onclick="location.href='https://student.canyonsdistrict.org'" style="padding-right: 30px; padding-left: 30px">Skyward</button>
+  <a style="font-size: 60px">|</a>
+  <button id = "Refresh" style="font-size: 25px; color: orange; text-decoration: none;"> Refresh </button>
+  <a style="font-size: 60px">|</a>
+  <button onclick="location.href='https://mail.google.com'"> Email </button>
+  <a style="font-size: 60px">|</a>
+  <button onclick="location.href='https://calendar.google.com'"> Calendar </button>
+  <a style="font-size: 60px">|</a>
+  <button onclick="location.href='https://calendar.google.com'"> Drive </button>
+  </div>
   <p title= "Advisory - Room 2405, Mrs. Gathro (A Day 7:45AM - 9:05AM)" style= "margin-bottom: -20px">
     Advisory - <a href="https://canyons.instructure.com/courses/1814181" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1814181" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>  
   </p>
@@ -154,10 +168,10 @@
     Period 8 - <a href="https://canyons.instructure.com/courses/1815190" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1815190" target="">Open In Current Tab</a> <text> | </text> <button1>Open Group</button1>
   </p>
   </div>
-  <p>_____________________________________________________________________________________________________</p>
+  <p>______________________________________________________________________________________________________________________________________________________________</p>
   <h2 style="text-align: center; font-size: 40px; color: white;">SCHEDULES</h2>
   <div style="text-align: center;"><img src="Mon-Thur.png" alt="An image" style="justify-content: center;"><text style="font-size: 100px;">  </text><img src="Friday.png" alt="An image" style="justify-content: center;"></div>
-  <p>_____________________________________________________________________________________________________</p>
+  <p>______________________________________________________________________________________________________________________________________________________________</p>
   <text style="text-align: center; color: white;">Redirector - Bridger's Custom Website</text>
 </body>
 <script>
