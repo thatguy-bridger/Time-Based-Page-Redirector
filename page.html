@@ -1,222 +1,385 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Pick A Class</title>
+    <link rel="shortcut icon" href="redirector.png" type="image/x-icon" />
     <style>
-        img {
-           width: 373px;
-           height: 239px;
-           transition-duration: 1.5s; 
-        }
-        img:hover {
-           width: 447px;
-           height: 286px;
-        }
-        body {
-            padding-left: 120px;
-            padding-right: 120px;
-            background-image: url('https://static.vecteezy.com/system/resources/previews/021/680/298/original/seamless-geometric-pattern-with-stripes-modern-background-with-repeating-lines-dark-pattern-luxury-monochrome-backdrop-texture-for-wrapping-paper-branding-business-corporate-style-free-vector.jpg');
-        }
-        h1 {
-          font-size: 65px;
-          text-align: center;
-          color: rgb(255, 0, 0);
-          margin-bottom: -15px;
-        }
-        h3 {
-          font-size: 30px;
-          text-align: center;
-          color: rgb(133, 0, 145);
-          transition-duration: 1s;
-        }
-        h3:hover {
-          font-size: 40px;
-          text-align: center;
-          color: rgb(113, 0, 125);
-        }
-        p {
-          font-size: 15px;
-          text-align: center;
-          color: rgb(209, 105, 91);
-        }
-        a {
-          font-size: 15px;
-          text-align: center;
-          color: rgb(0, 164, 230);
-          transition-duration: 1s;
-        }
+      img {
+        width: 373px;
+        height: 239px;
+        transition-duration: 1.5s;
+      }
+      img:hover {
+        width: 447px;
+        height: 286px;
+      }
+      body {
+        padding-left: 120px;
+        padding-right: 120px;
+        background-image: url('https://static.vecteezy.com/system/resources/previews/021/680/298/original/seamless-geometric-pattern-with-stripes-modern-background-with-repeating-lines-dark-pattern-luxury-monochrome-backdrop-texture-for-wrapping-paper-branding-business-corporate-style-free-vector.jpg');
+      }
+      h1 {
+        font-size: 65px;
+        text-align: center;
+        color: rgb(255, 0, 0);
+        margin-bottom: -15px;
+      }
+      h3 {
+        font-size: 30px;
+        text-align: center;
+        color: rgb(133, 0, 145);
+        transition-duration: 1s;
+      }
+      h3:hover {
+        font-size: 40px;
+        text-align: center;
+        color: rgb(113, 0, 125);
+      }
+      p {
+        font-size: 15px;
+        text-align: center;
+        color: rgb(209, 105, 91);
+      }
+      a {
+        font-size: 15px;
+        text-align: center;
+        color: rgb(0, 164, 230);
+        transition-duration: 1s;
+      }
 
-        a:hover {
-          font-size: 20px;
-          text-align: center;
-          color: rgb(0, 82, 115);
-        }
-        
-        button {
-          background-color: rgb(133, 0, 145);
-          color: rgb(100,200,255);
-          margin: auto;
-          text-align: center;
-          text-decoration: underline; 
-          display: block;
-          font-size: 16px;
-          font-family: cursive;
-          padding-left: 40px;
-          padding-right: 40px;
-          padding-top: 12px;
-          padding-bottom: 12px;
-          transition-duration: 1.5s;
-          cursor: pointer;
-          border: 3px solid rgb(255,255,255);
-          border-radius: 20px;
-        }
+      a:hover {
+        font-size: 20px;
+        text-align: center;
+        color: rgb(0, 82, 115);
+      }
+      .class-item {
+        margin-bottom: -15px;
+      }
+      .class-container {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: -15px;
+      }
+      .a-day-container,
+      .b-day-container {
+        flex-grow: 1;
+        text-align: center;
+      }
+      .settings-form {
+        display: none; /* Hide the form by default */
+        text-align: center;
+        margin: 20px auto;
+        padding: 20px;
+        border: 2px solid white;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        max-width: 800px;
+      }
+      .settings-form input {
+        width: 45%;
+        margin: 5px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      .settings-form label {
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+      .settings-button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 24px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin: 20px auto;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+      .settings-button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Pick A Class</h1>
+    <h3>
+      <div id="Time"></div>
+    </h3>
 
-        button:hover {
-          box-shadow: 0 12px 16px 0 rgba(255,255,255,0.5), 0 17px 50px 0 rgba(255,255,255,0.25);
-          background-color: white;
-          color: rgb(133, 0, 145);
-          padding-top: 15px;
-          padding-bottom: 15px;
-          border: 3px solid rgb(133, 0, 145);     
-          border-radius: 60px;
-        }
-        button1 {
-          background-color: rgba(255,255,255,0);
-          color: rgb(0, 164, 230);
-          display: inline-block;
-          margin: 0px;
-          font-size: 15px;
-          text-decoration: underline; 
-          cursor: pointer;
-          border: 0px solid rgba(255,255,255,0);
-          transition-duration: 1s;
-        }
-        button1:hover {
-          text-shadow: rgba(255,255,255,0.5) 0px 3px 4px, 0 8px 10px 0 rgba(255,255,255,0.25);
-          background-color: rgba(255,255,255,0);
-          color: rgb(0, 82, 115);
-          display: inline-block;
-          margin: 0px;
-          font-size: 20px;
-          text-decoration: underline; 
-          cursor: pointer;
-          border: 0px solid rgba(255,255,255,0);
-        }
-        .class-container {
-          display: flex;
-          justify-content: space-around;
-          margin-bottom: -15px;
-        }
+    <button class="settings-button" onclick="toggleSettings()">Edit Class Settings</button>
+    <div id="settings-form" class="settings-form">
+      <form id="class-settings-form">
+        <h4>Other Classes</h4>
+        <div id="other-classes-form"></div>
+        <h4>A-Day Classes</h4>
+        <div id="a-day-classes-form"></div>
+        <h4>B-Day Classes</h4>
+        <div id="b-day-classes-form"></div>
+        <button type="button" class="settings-button" onclick="saveClassSettings()">Save Settings</button>
+      </form>
+    </div>
 
-      </style>
-<head>
-  <title>Pick A Class</title>
-  <link rel="shortcut icon" href="redirector.png" type="image/x-icon">
-</head>
-<body>
-  <h1>Pick A Class</h1>
-  <h3><div id = "Time"></div></h3>
-  <p title= "Advisory - Room 2405, Mrs. Gathro (A Day 7:45AM - 9:05AM)" style= "margin-bottom: -10px">
-    Advisory - <a href="https://canyons.instructure.com/courses/1814181" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1814181" target="">Open In Current Tab</a>
-  </p>
-  <p title= "Online Classes - Canyon's Virtual Academy" style= "margin-bottom: -20px">
-    Online Classes - <a href="https://canyonsva.agilixbuzz.com/student/home/courses" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyonsva.agilixbuzz.com/student/home/courses" target="">Open In Current Tab</a>
-  </p>
-    <p title= "FBLA - Room 2124, Mrs. Alires (Thursdays after School)" style= "margin-bottom: -20px">
-    FBLA - <a href="https://canyons.instructure.com/courses/1854918/modules" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1854918/modules" target="">Open In Current Tab</a>
-  </p>
-  <div class="class-container">
-  <h3 style= "margin: 18px; padding-top: 18px">A DAY</h3>
-  <h3 style= "margin: 18px; padding-top: 18px">B DAY</h3>
-  </div>
-  <div class="class-container">
-  <p title= "Period 1 - Room 1209, Mrs. Witherspoon (A Day 7:45AM - 9:05AM)">
-    Geography - <a href="https://canyons.instructure.com/courses/1813424" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1813424" target="">Open In Current Tab</a>
-  </p>
-  <p title= "Period 5 - Seminary (B Day 7:45AM - 9:05AM)">
-    Seminary - <a href="" target="">Open In New Tab</a> <text> | </text> <a href="" target="">Open In Current Tab</a>
-  </p>
-  </div>
-  <div class="class-container">
-  <p title= "Period 2 - Room 1916, Mr. Maupin (A Day 9:45AM - 11:05AM)">
-    Engineering Principles - <a href="https://canyons.instructure.com/courses/1815045" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1815045" target="">Open In Current Tab</a>
-  </p>
-  <p title= "Period 6 - Room 1918, Mr. Newman (B Day 9:45AM - 11:05AM)">
-    Wood Working - <a href="https://canyons.instructure.com/courses/1814761/modules" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1814761/modules" target="">Open In Current Tab</a>
-  </p>
-  </div>
-  <div class="class-container">
-  <p title= "Period 3 - Room 2213, Mr. Thomas (A Day 11:10AM - 1:00PM)">
-    German - <a href="https://canyons.instructure.com/courses/1815253/modules" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1815253/modules" target="">Open In Current Tab</a>
-  </p>
-  <p title= "Period 7 - Room 2103, Mrs. Kennedy (B Day 11:10AM - 1:00PM)">
-    Math - <a href="https://canyons.instructure.com/courses/1813313" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1813313" target="">Open In Current Tab</a> 
-  </p>
-  </div>
-  <div class="class-container">
-  <p title= "Period 4 - Room 1310, Ms. Fryer (A Day 1:05PM - 2:25PM)">
-    English - <a href="https://canyons.instructure.com/courses/1813068" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1813068" target="">Open In Current Tab</a> 
-  </p>
-  <p title= "Period 8 - Room 1139, Mrs. Nedrich (B Day 1:05PM - 2:25PM)">
-    Biology - <a href="https://canyons.instructure.com/courses/1815190" target="_blank">Open In New Tab</a> <text> | </text> <a href="https://canyons.instructure.com/courses/1815190" target="">Open In Current Tab</a> 
-  </p>
-  </div>
-  <p>_______________________________________________________________________________________________________________</p>
-  <h2 style="text-align: center; font-size: 40px; color: white;">SCHEDULES</h2>
-  <div style="text-align: center;"><img src="Mon-Thur.png" alt="An image" style="justify-content: center;"><text style="font-size: 100px;">  </text><img src="Friday.png" alt="An image" style="justify-content: center;"></div>
-  <p>_______________________________________________________________________________________________________________</p>
-  <text style="text-align: center; color: white;">Redirector - Bridger's Custom Website</text>
-</body>
-<script>
+    <div id="class-links-container">
+      </div>
+
+    <hr style="color: white" />
+
+    <h2 style="text-align: center; font-size: 40px; color: white">SCHEDULES</h2>
+    <div style="text-align: center">
+      <img src="Mon-Thur.png" alt="Monday - Thursday Schedule" />
+      <img src="Friday.png" alt="Friday Schedule" />
+    </div>
+
+    <hr style="color: white" />
+
+    <p style="text-align: center; color: white">
+      Redirector - Bridger's Custom Website
+    </p>
+    <button id="Refresh" class="settings-button">Refresh</button>
+  </body>
+
+  <script>
+    // Default class data
+    const defaultClassData = {
+      other: [
+        {
+          title: 'Advisory',
+          details: 'Room 2405, Mrs. Gathro (A Day 7:45AM - 9:05AM)',
+          url: 'https://canyons.instructure.com/courses/1814181',
+        },
+        {
+          title: 'Online Classes',
+          details: "Canyon's Virtual Academy",
+          url: 'https://canyonsva.agilixbuzz.com/student/home/courses',
+        },
+        {
+          title: 'FBLA',
+          details: 'Room 2124, Mrs. Alires (Thursdays after School)',
+          url: 'https://canyons.instructure.com/courses/1854918/modules',
+        },
+      ],
+      aDay: [
+        {
+          title: 'Geography',
+          details: 'Period 1 - Room 1209, Mrs. Witherspoon (A Day 7:45AM - 9:05AM)',
+          url: 'https://canyons.instructure.com/courses/1813424',
+        },
+        {
+          title: 'Engineering Principles',
+          details: 'Period 2 - Room 1916, Mr. Maupin (A Day 9:45AM - 11:05AM)',
+          url: 'https://canyons.instructure.com/courses/1815045',
+        },
+        {
+          title: 'German',
+          details: 'Period 3 - Room 2213, Mr. Thomas (A Day 11:10AM - 1:00PM)',
+          url: 'https://canyons.instructure.com/courses/1815253/modules',
+        },
+        {
+          title: 'English',
+          details: 'Period 4 - Room 1310, Ms. Fryer (A Day 1:05PM - 2:25PM)',
+          url: 'https://canyons.instructure.com/courses/1813068',
+        },
+      ],
+      bDay: [
+        {
+          title: 'Seminary',
+          details: 'Period 5 - Seminary (B Day 7:45AM - 9:05AM)',
+          url: '#', // Leave URL blank if there is no link
+        },
+        {
+          title: 'Wood Working',
+          details: 'Period 6 - Room 1918, Mr. Newman (B Day 9:45AM - 11:05AM)',
+          url: 'https://canyons.instructure.com/courses/1814761/modules',
+        },
+        {
+          title: 'Math',
+          details: 'Period 7 - Room 2103, Mrs. Kennedy (B Day 11:10AM - 1:00PM)',
+          url: 'https://canyons.instructure.com/courses/1813313',
+        },
+        {
+          title: 'Biology',
+          details: 'Period 8 - Room 1139, Mrs. Nedrich (B Day 1:05PM - 2:25PM)',
+          url: 'https://canyons.instructure.com/courses/1815190',
+        },
+      ],
+    };
+
+    let classData = {};
+
+    // Get saved data from local storage, or use the default data
+    function loadClassData() {
+        const savedData = localStorage.getItem('classData');
+        if (savedData) {
+            classData = JSON.parse(savedData);
+        } else {
+            classData = defaultClassData;
+        }
+    }
+
+    // Save the current data to local storage
+    function saveToLocalStorage() {
+        localStorage.setItem('classData', JSON.stringify(classData));
+    }
+
+    // Function to generate and display the class links
+    function renderClassLinks() {
+      const container = document.getElementById('class-links-container');
+      container.innerHTML = ''; // Clear existing content
+
+      // Generate "Other" classes
+      classData.other.forEach((item) => {
+        container.innerHTML += createClassLinkHTML(item);
+      });
+
+      // Add A Day / B Day headers
+      container.innerHTML += `
+        <div class="class-container">
+            <h3 style="margin: 18px; padding-top: 18px">A DAY</h3>
+            <h3 style="margin: 18px; padding-top: 18px">B DAY</h3>
+        </div>
+      `;
+
+      // Generate A Day and B Day classes side by side
+      for (let i = 0; i < classData.aDay.length; i++) {
+        const aDayItem = classData.aDay[i];
+        const bDayItem = classData.bDay[i];
+        container.innerHTML += `
+            <div class="class-container">
+                <div class="a-day-container">
+                    ${createClassLinkHTML(aDayItem)}
+                </div>
+                <div class="b-day-container">
+                    ${createClassLinkHTML(bDayItem)}
+                </div>
+            </div>
+        `;
+      }
+    }
+
+    // Helper function to create the HTML for a single link
+    function createClassLinkHTML(classItem) {
+      return `
+        <p title="${classItem.details}" class="class-item">
+            ${classItem.title} -
+            <a href="${classItem.url}" target="_blank">Open In New Tab</a>
+            <text> | </text>
+            <a href="${classItem.url}">Open In Current Tab</a>
+        </p>
+      `;
+    }
+
+    // Function to generate the form inputs
+    function renderSettingsForm() {
+        const otherForm = document.getElementById('other-classes-form');
+        const aDayForm = document.getElementById('a-day-classes-form');
+        const bDayForm = document.getElementById('b-day-classes-form');
+
+        otherForm.innerHTML = classData.other.map((item, index) => `
+            <label>Other Class ${index + 1} Title:</label>
+            <input type="text" id="other-title-${index}" value="${item.title}">
+            <label>URL:</label>
+            <input type="text" id="other-url-${index}" value="${item.url}">
+        `).join('<br>');
+
+        aDayForm.innerHTML = classData.aDay.map((item, index) => `
+            <label>A-Day Period ${index + 1} Title:</label>
+            <input type="text" id="a-day-title-${index}" value="${item.title}">
+            <label>URL:</label>
+            <input type="text" id="a-day-url-${index}" value="${item.url}">
+        `).join('<br>');
+
+        bDayForm.innerHTML = classData.bDay.map((item, index) => `
+            <label>B-Day Period ${index + 1} Title:</label>
+            <input type="text" id="b-day-title-${index}" value="${item.title}">
+            <label>URL:</label>
+            <input type="text" id="b-day-url-${index}" value="${item.url}">
+        `).join('<br>');
+    }
+
+    // Function to save the settings from the form
+    function saveClassSettings() {
+        const newClassData = { other: [], aDay: [], bDay: [] };
+
+        // Save other classes
+        classData.other.forEach((item, index) => {
+            const title = document.getElementById(`other-title-${index}`).value;
+            const url = document.getElementById(`other-url-${index}`).value;
+            newClassData.other.push({ title, details: item.details, url });
+        });
+
+        // Save a-day classes
+        classData.aDay.forEach((item, index) => {
+            const title = document.getElementById(`a-day-title-${index}`).value;
+            const url = document.getElementById(`a-day-url-${index}`).value;
+            newClassData.aDay.push({ title, details: item.details, url });
+        });
+
+        // Save b-day classes
+        classData.bDay.forEach((item, index) => {
+            const title = document.getElementById(`b-day-title-${index}`).value;
+            const url = document.getElementById(`b-day-url-${index}`).value;
+            newClassData.bDay.push({ title, details: item.details, url });
+        });
+
+        classData = newClassData;
+        saveToLocalStorage();
+        renderClassLinks(); // Update the displayed links
+        toggleSettings(); // Hide the settings form after saving
+    }
+
+    // Function to show/hide the settings form
+    function toggleSettings() {
+      const form = document.getElementById('settings-form');
+      if (form.style.display === 'block') {
+        form.style.display = 'none';
+      } else {
+        form.style.display = 'block';
+      }
+    }
+
+    // Initial setup on page load
+    loadClassData();
+    renderClassLinks();
+    renderSettingsForm();
+
+    // --- The rest of your existing JavaScript, modernized slightly ---
+    const aDays = ["8.19.2024", "8.21.2024", "8.23.2024", "8.27.2024", "8.29.2024", "9.3.2024", "9.5.2024", "9.9.2024", "9.11.2024", "9.13.2024", "9.17.2024", "9.19.2024", "9.23.2024", "9.25.2024", "9.30.2024", "10.2.2024", "10.4.2024", "10.8.2024", "10.10.2024", "10.14.2024", "10.16.2024", "10.23.2024", "10.25.2024", "10.29.2024", "10.31.2024", "11.4.2024", "11.6.2024", "11.8.2024", "11.12.2024", "11.14.2024", "11.18.2024", "11.20.2024", "11.22.2024", "11.26.2024", "12.3.2024", "12.5.2024", "12.9.2024", "12.11.2024", "12.13.2024", "12.17.2024", "12.19.2024", "1.6.2025", "1.8.2025", "1.10.2025", "1.14.2025", "1.16.2025", "1.22.2025", "1.24.2025", "1.28.2025", "1.30.2025", "2.3.2025", "2.5.2025", "2.7.2025", "2.11.2025", "2.13.2025", "2.18.2025", "2.20.2025", "2.24.2025", "2.26.2025", "3.3.2025", "3.5.2025", "3.7.2025", "3.11.2025", "3.13.2025", "3.17.2025", "3.19.2025", "3.21.2025", "3.26.2025", "3.28.2025", "4.1.2025", "4.3.2025", "4.14.2025", "4.16.2025", "4.18.2025", "4.22.2025", "4.24.2025", "4.28.2025", "4.30.2025", "5.2.2025", "5.6.2025", "5.8.2025", "5.12.2025", "5.14.2025", "5.16.2025", "5.20.2025", "5.22.2025", "5.27.2025", "5.29.2025"];
+    const bDays = ["8.20.2024", "8.22.2024", "8.26.2024", "8.28.2024", "8.30.2024", "9.4.2024", "9.6.2024", "9.10.2024", "9.12.2024", "9.16.2024", "9.18.2024", "9.20.2024", "9.24.2024", "9.26.2024", "10.1.2024", "10.3.2024", "10.7.2024", "10.9.2024", "10.11.2024", "10.15.2024", "10.22.2024", "10.24.2024", "10.28.2024", "10.30.2024", "11.1.2024", "11.5.2024", "11.7.2024", "11.11.2024", "11.13.2024", "11.15.2024", "11.19.2024", "11.21.2024", "11.25.2024", "12.2.2024", "12.4.2024", "12.6.2024", "12.10.2024", "12.12.2024", "12.16.2024", "12.18.2024", "12.20.2024", "1.7.2025", "1.9.2025", "1.13.2025", "1.15.2025", "1.21.2025", "1.23.2025", "1.27.2025", "1.29.2025", "1.31.2025", "2.4.2025", "2.6.2025", "2.10.2025", "2.12.2025", "2.14.2025", "2.19.2025", "2.21.2025", "2.25.2025", "2.27.2025", "3.4.2025", "3.6.2025", "3.10.2025", "3.12.2025", "3.14.2025", "3.18.2025", "3.20.2025", "3.25.2025", "3.27.2025", "3.31.2025", "4.2.2025", "4.4.2025", "4.15.2025", "4.17.2025", "4.21.2025", "4.23.2025", "4.25.2025", "4.29.2025", "5.1.2025", "5.5.2025", "5.7.2025", "5.9.2025", "5.13.2025", "5.15.2025", "5.19.2025", "5.21.2025", "5.23.2025", "5.28.2025", "5.30.2025"];
+
     function displayTime() {
-    const date = new Date();
-    var time = "Time: " + date.toLocaleTimeString();
-    const adays = ["8.19.2024", "8.21.2024", "8.23.2024", "8.27.2024", "8.29.2024", "9.3.2024", "9.5.2024", "9.9.2024", "9.11.2024", "9.13.2024", "9.17.2024", "9.19.2024", "9.23.2024", "9.25.2024", "9.30.2024", "10.2.2024", "10.4.2024", "10.8.2024", "10.10.2024", "10.14.2024", "10.16.2024", "10.23.2024", "10.25.2024", "10.29.2024", "10.31.2024", "11.4.2024", "11.6.2024", "11.8.2024", "11.12.2024", "11.14.2024", "11.18.2024", "11.20.2024", "11.22.2024", "11.26.2024", "12.3.2024", "12.5.2024", "12.9.2024", "12.11.2024", "12.13.2024", "12.17.2024", "12.19.2024", "1.6.2025", "1.8.2025", "1.10.2025", "1.14.2025", "1.16.2025", "1.22.2025", "1.24.2025", "1.28.2025", "1.30.2025", "2.3.2025", "2.5.2025", "2.7.2025", "2.11.2025", "2.13.2025", "2.18.2025", "2.20.2025", "2.24.2025", "2.26.2025", "3.3.2025", "3.5.2025", "3.7.2025", "3.11.2025", "3.13.2025", "3.17.2025", "3.19.2025", "3.21.2025", "3.26.2025", "3.28.2025", "4.1.2025", "4.3.2025", "4.14.2025", "4.16.2025", "4.18.2025", "4.22.2025", "4.24.2025", "4.28.2025", "4.30.2025", "5.2.2025", "5.6.2025", "5.8.2025", "5.12.2025", "5.14.2025", "5.16.2025", "5.20.2025", "5.22.2025", "5.27.2025", "5.29.2025"]
-    const bdays = ["8.20.2024", "8.22.2024", "8.26.2024", "8.28.2024", "8.30.2024", "9.4.2024", "9.6.2024", "9.10.2024", "9.12.2024", "9.16.2024", "9.18.2024", "9.20.2024", "9.24.2024", "9.26.2024", "10.1.2024", "10.3.2024", "10.7.2024", "10.9.2024", "10.11.2024", "10.15.2024", "10.22.2024", "10.24.2024", "10.28.2024", "10.30.2024", "11.1.2024", "11.5.2024", "11.7.2024", "11.11.2024", "11.13.2024", "11.15.2024", "11.19.2024", "11.21.2024", "11.25.2024", "12.2.2024", "12.4.2024", "12.6.2024", "12.10.2024", "12.12.2024", "12.16.2024", "12.18.2024", "12.20.2024", "1.7.2025", "1.9.2025", "1.13.2025", "1.15.2025", "1.21.2025", "1.23.2025", "1.27.2025", "1.29.2025", "1.31.2025", "2.4.2025", "2.6.2025", "2.10.2025", "2.12.2025", "2.14.2025", "2.19.2025", "2.21.2025", "2.25.2025", "2.27.2025", "3.4.2025", "3.6.2025", "3.10.2025", "3.12.2025", "3.14.2025", "3.18.2025", "3.20.2025", "3.25.2025", "3.27.2025", "3.31.2025", "4.2.2025", "4.4.2025", "4.15.2025", "4.17.2025", "4.21.2025", "4.23.2025", "4.25.2025", "4.29.2025", "5.1.2025", "5.5.2025", "5.7.2025", "5.9.2025", "5.13.2025", "5.15.2025", "5.19.2025", "5.21.2025", "5.23.2025", "5.28.2025", "5.30.2025"]
-    const year = date.getFullYear();
-    const month = date.getMonth()+1;
-    const day = date.getDate();
-    time += "  |  Date: " + month+"."+day+"."+year + "  |  "
-    if (!adays.includes(month+"."+day+"."+year) && !bdays.includes(month+"."+day+"."+year)) {
-        time += "No School"
+      const date = new Date();
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+      };
+      const time = date.toLocaleTimeString('en-US', options);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const formattedDate = `${month}.${day}.${year}`;
+
+      let dayType = 'No School';
+      if (aDays.includes(formattedDate)) {
+        dayType = 'A Day';
+      } else if (bDays.includes(formattedDate)) {
+        dayType = 'B Day';
+      }
+
+      document.getElementById('Time').textContent = `Time: ${time} | Date: ${formattedDate} | ${dayType}`;
     }
-    if (adays.includes(month+"."+day+"."+year)) {
-        time += "A Day"
-    }
-    if (bdays.includes(month+"."+day+"."+year)) {
-        time += "B Day"
-    }
-    document.getElementById("Time").textContent = time;
-    }
+
     displayTime();
     setInterval(displayTime, 50);
-    function refresh() {
-      setTimeout(() => {
-        document.getElementById("Refresh").innerHTML = "Refreshing.";
-        setTimeout(() => {
-            document.getElementById("Refresh").innerHTML = "Refreshing..";
-            setTimeout(() => {
-                document.getElementById("Refresh").innerHTML = "Refreshing...";
-                setTimeout(() => {
-                    document.getElementById("Refresh").innerHTML = "Refreshing..";
-                    setTimeout(() => {
-                        document.getElementById("Refresh").innerHTML = "Refreshing.";
-                        setTimeout(() => {
-                            document.getElementById("Refresh").innerHTML = "Refreshing..";
-                            setTimeout(() => {
-                                document.getElementById("Refresh").innerHTML = "Refreshing...";
-                                setTimeout(() => {
-                                    window.location.href = "sender.html";
-                                  }, 500);
-                              }, 500);
-                          }, 500);
-                      }, 500);
-                  }, 500);
-              }, 500);
-          }, 500);
-      }, 500);
-    }
-    document.getElementById("Refresh").addEventListener('click',() => {
-        refresh()
+
+    // Simple refresh function
+    document.getElementById('Refresh').addEventListener('click', () => {
+      window.location.href = "sender.html";
     });
-    
   </script>
 </html>
