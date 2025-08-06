@@ -1,385 +1,1206 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pick A Class</title>
-    <link rel="shortcut icon" href="redirector.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="redirector.png" type="image/x-icon">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-      img {
-        width: 373px;
-        height: 239px;
-        transition-duration: 1.5s;
-      }
-      img:hover {
-        width: 447px;
-        height: 286px;
-      }
-      body {
-        padding-left: 120px;
-        padding-right: 120px;
-        background-image: url('https://static.vecteezy.com/system/resources/previews/021/680/298/original/seamless-geometric-pattern-with-stripes-modern-background-with-repeating-lines-dark-pattern-luxury-monochrome-backdrop-texture-for-wrapping-paper-branding-business-corporate-style-free-vector.jpg');
-      }
-      h1 {
-        font-size: 65px;
-        text-align: center;
-        color: rgb(255, 0, 0);
-        margin-bottom: -15px;
-      }
-      h3 {
-        font-size: 30px;
-        text-align: center;
-        color: rgb(133, 0, 145);
-        transition-duration: 1s;
-      }
-      h3:hover {
-        font-size: 40px;
-        text-align: center;
-        color: rgb(113, 0, 125);
-      }
-      p {
-        font-size: 15px;
-        text-align: center;
-        color: rgb(209, 105, 91);
-      }
-      a {
-        font-size: 15px;
-        text-align: center;
-        color: rgb(0, 164, 230);
-        transition-duration: 1s;
-      }
-
-      a:hover {
-        font-size: 20px;
-        text-align: center;
-        color: rgb(0, 82, 115);
-      }
-      .class-item {
-        margin-bottom: -15px;
-      }
-      .class-container {
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: -15px;
-      }
-      .a-day-container,
-      .b-day-container {
-        flex-grow: 1;
-        text-align: center;
-      }
-      .settings-form {
-        display: none; /* Hide the form by default */
-        text-align: center;
-        margin: 20px auto;
-        padding: 20px;
-        border: 2px solid white;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        max-width: 800px;
-      }
-      .settings-form input {
-        width: 45%;
-        margin: 5px;
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-      }
-      .settings-form label {
-        color: white;
-        font-family: Arial, sans-serif;
-      }
-      .settings-button {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 10px 24px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        margin: 20px auto;
-        cursor: pointer;
-        border-radius: 8px;
-        font-size: 16px;
-      }
-      .settings-button:hover {
-        background-color: #45a049;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Pick A Class</h1>
-    <h3>
-      <div id="Time"></div>
-    </h3>
-
-    <button class="settings-button" onclick="toggleSettings()">Edit Class Settings</button>
-    <div id="settings-form" class="settings-form">
-      <form id="class-settings-form">
-        <h4>Other Classes</h4>
-        <div id="other-classes-form"></div>
-        <h4>A-Day Classes</h4>
-        <div id="a-day-classes-form"></div>
-        <h4>B-Day Classes</h4>
-        <div id="b-day-classes-form"></div>
-        <button type="button" class="settings-button" onclick="saveClassSettings()">Save Settings</button>
-      </form>
-    </div>
-
-    <div id="class-links-container">
-      </div>
-
-    <hr style="color: white" />
-
-    <h2 style="text-align: center; font-size: 40px; color: white">SCHEDULES</h2>
-    <div style="text-align: center">
-      <img src="Mon-Thur.png" alt="Monday - Thursday Schedule" />
-      <img src="Friday.png" alt="Friday Schedule" />
-    </div>
-
-    <hr style="color: white" />
-
-    <p style="text-align: center; color: white">
-      Redirector - Bridger's Custom Website
-    </p>
-    <button id="Refresh" class="settings-button">Refresh</button>
-  </body>
-
-  <script>
-    // Default class data
-    const defaultClassData = {
-      other: [
-        {
-          title: 'Advisory',
-          details: 'Room 2405, Mrs. Gathro (A Day 7:45AM - 9:05AM)',
-          url: 'https://canyons.instructure.com/courses/1814181',
-        },
-        {
-          title: 'Online Classes',
-          details: "Canyon's Virtual Academy",
-          url: 'https://canyonsva.agilixbuzz.com/student/home/courses',
-        },
-        {
-          title: 'FBLA',
-          details: 'Room 2124, Mrs. Alires (Thursdays after School)',
-          url: 'https://canyons.instructure.com/courses/1854918/modules',
-        },
-      ],
-      aDay: [
-        {
-          title: 'Geography',
-          details: 'Period 1 - Room 1209, Mrs. Witherspoon (A Day 7:45AM - 9:05AM)',
-          url: 'https://canyons.instructure.com/courses/1813424',
-        },
-        {
-          title: 'Engineering Principles',
-          details: 'Period 2 - Room 1916, Mr. Maupin (A Day 9:45AM - 11:05AM)',
-          url: 'https://canyons.instructure.com/courses/1815045',
-        },
-        {
-          title: 'German',
-          details: 'Period 3 - Room 2213, Mr. Thomas (A Day 11:10AM - 1:00PM)',
-          url: 'https://canyons.instructure.com/courses/1815253/modules',
-        },
-        {
-          title: 'English',
-          details: 'Period 4 - Room 1310, Ms. Fryer (A Day 1:05PM - 2:25PM)',
-          url: 'https://canyons.instructure.com/courses/1813068',
-        },
-      ],
-      bDay: [
-        {
-          title: 'Seminary',
-          details: 'Period 5 - Seminary (B Day 7:45AM - 9:05AM)',
-          url: '#', // Leave URL blank if there is no link
-        },
-        {
-          title: 'Wood Working',
-          details: 'Period 6 - Room 1918, Mr. Newman (B Day 9:45AM - 11:05AM)',
-          url: 'https://canyons.instructure.com/courses/1814761/modules',
-        },
-        {
-          title: 'Math',
-          details: 'Period 7 - Room 2103, Mrs. Kennedy (B Day 11:10AM - 1:00PM)',
-          url: 'https://canyons.instructure.com/courses/1813313',
-        },
-        {
-          title: 'Biology',
-          details: 'Period 8 - Room 1139, Mrs. Nedrich (B Day 1:05PM - 2:25PM)',
-          url: 'https://canyons.instructure.com/courses/1815190',
-        },
-      ],
-    };
-
-    let classData = {};
-
-    // Get saved data from local storage, or use the default data
-    function loadClassData() {
-        const savedData = localStorage.getItem('classData');
-        if (savedData) {
-            classData = JSON.parse(savedData);
-        } else {
-            classData = defaultClassData;
+        /* Custom styles for transitions and specific elements not covered by Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Base light theme colors */
+            background-color: #f3f4f6; /* gray-100 */
+            color: #1f2937; /* gray-800 */
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
         }
-    }
 
-    // Save the current data to local storage
-    function saveToLocalStorage() {
-        localStorage.setItem('classData', JSON.stringify(classData));
-    }
+        /* Dark Theme overrides */
+        body.dark-theme {
+            background-color: #0a0a0a; /* gray-950 */
+            color: #f9fafb; /* gray-100 */
+        }
 
-    // Function to generate and display the class links
-    function renderClassLinks() {
-      const container = document.getElementById('class-links-container');
-      container.innerHTML = ''; // Clear existing content
+        .main-container {
+            background-color: #ffffff; /* white */
+            border-color: #e5e7eb; /* gray-200 */
+            transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+        }
+        body.dark-theme .main-container {
+            background-color: #111827; /* gray-900 */
+            border-color: #374151; /* gray-800 */
+        }
 
-      // Generate "Other" classes
-      classData.other.forEach((item) => {
-        container.innerHTML += createClassLinkHTML(item);
-      });
+        h1 {
+            color: #dc2626; /* red-600 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme h1 {
+            color: #ef4444; /* red-500 */
+        }
 
-      // Add A Day / B Day headers
-      container.innerHTML += `
-        <div class="class-container">
-            <h3 style="margin: 18px; padding-top: 18px">A DAY</h3>
-            <h3 style="margin: 18px; padding-top: 18px">B DAY</h3>
-        </div>
-      `;
+        h3#Time {
+            color: #9333ea; /* purple-600 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme h3#Time {
+            color: #a78bfa; /* purple-400 */
+        }
 
-      // Generate A Day and B Day classes side by side
-      for (let i = 0; i < classData.aDay.length; i++) {
-        const aDayItem = classData.aDay[i];
-        const bDayItem = classData.bDay[i];
-        container.innerHTML += `
-            <div class="class-container">
-                <div class="a-day-container">
-                    ${createClassLinkHTML(aDayItem)}
-                </div>
-                <div class="b-day-container">
-                    ${createClassLinkHTML(bDayItem)}
+        h2 {
+            color: #1f2937; /* gray-800 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme h2 {
+            color: #f9fafb; /* gray-100 */
+        }
+
+        footer {
+            color: #6b7280; /* gray-500 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme footer {
+            color: #9ca3af; /* gray-400 */
+        }
+
+        #settings-button {
+            background-color: #9333ea; /* purple-600 */
+            transition: background-color 0.5s ease-in-out;
+        }
+        body.dark-theme #settings-button {
+            background-color: #a78bfa; /* purple-500 */
+        }
+
+        #theme-toggle {
+            background-color: #4b5563; /* gray-700 */
+            color: #ffffff; /* white */
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        }
+        body.dark-theme #theme-toggle {
+            background-color: #e5e7eb; /* gray-200 */
+            color: #1f2937; /* gray-800 */
+        }
+
+        .class-card {
+            background-color: #f9fafb; /* gray-50 */
+            border-color: #e5e7eb; /* gray-200 */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+            cursor: pointer;
+            position: relative;
+        }
+        body.dark-theme .class-card {
+            background-color: #1f2937; /* gray-800 */
+            border-color: #374151; /* gray-700 */
+        }
+        .class-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        body.dark-theme .class-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .class-card h4 {
+            color: #ea580c; /* orange-600 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme .class-card h4 {
+            color: #fbbf24; /* orange-400 */
+        }
+
+        .class-card p {
+            color: #4b5563; /* gray-600 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme .class-card p {
+            color: #d1d5db; /* gray-300 */
+        }
+
+        .new-tab-button {
+            background-color: rgba(129, 140, 248, 0.8); /* indigo-400 */
+            color: white; /* Always white */
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, background-color 0.5s ease-in-out;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            z-index: 10;
+        }
+        body.dark-theme .new-tab-button {
+            background-color: rgba(59, 130, 246, 0.8); /* blue-500 */
+        }
+        .class-card:hover .new-tab-button {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .schedule-img {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .schedule-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        body.dark-theme .schedule-img:hover {
+             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* --- Modal Styles --- */
+        .modal-content {
+            background-color: #ffffff; /* white */
+            border-color: #e5e7eb; /* gray-300 */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+        }
+        body.dark-theme .modal-content {
+            background-color: #1f2937; /* gray-800 */
+            border-color: #374151; /* gray-700 */
+        }
+
+        .modal-content h3 {
+            color: #1f2937; /* gray-800 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme .modal-content h3 {
+            color: #f9fafb; /* gray-100 */
+        }
+
+        .modal-content button.text-gray-400 { /* Close button */
+            color: #9ca3af; /* gray-400 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme .modal-content button.text-gray-400 {
+            color: #f9fafb; /* white */
+        }
+
+        #modal-scrollable-content {
+            scrollbar-width: thin;
+            scrollbar-color: #4b5563 #374151;
+        }
+        body.dark-theme #modal-scrollable-content {
+            scrollbar-color: #9ca3af #e5e7eb;
+        }
+
+        /* Drag and Drop Styles for Categories */
+        .category-group {
+            background-color: #f3f4f6; /* gray-100 */
+            border-color: #e5e7eb; /* gray-200 */
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.5s ease-in-out, border-color 0.5s ease-in-out; /* Bouncy transition */
+            flex-shrink: 0; /* Prevent unwanted shrinking */
+            box-sizing: border-box; /* Include padding/border in width calculation */
+            margin-bottom: 1rem; /* Add some default bottom margin */
+        }
+        body.dark-theme .category-group {
+            background-color: rgba(31, 41, 55, 0.5); /* gray-900/50 */
+            border-color: #374151; /* gray-700 */
+        }
+        .category-group.dragging {
+            opacity: 0.5;
+            border: 2px dashed #6366f1; /* Indigo-500 */
+        }
+        .category-group.drag-over {
+            border: 2px solid #3b82f6; /* Blue-500 */
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .drag-handle {
+            color: #9ca3af; /* gray-400 */
+            cursor: grab;
+            touch-action: none; /* Prevent default touch actions like scrolling */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme .drag-handle {
+            color: #9ca3af; /* gray-400 */
+        }
+        .drag-handle:hover {
+            color: #4b5563; /* gray-600 */
+        }
+        body.dark-theme .drag-handle:hover {
+            color: #d1d5db; /* gray-300 */
+        }
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        /* Layout for categories in settings modal */
+        #categories-form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem; /* Consistent gap for flex items */
+            align-items: flex-start; /* Align items to the top in rows */
+        }
+        .category-group.full-width-mode {
+            width: 100%;
+        }
+        .category-group.stacked-two-modal,
+        .category-group.stacked-three-modal {
+            padding: 0.75rem 1rem; /* Smaller padding */
+            display: flex; /* Use flexbox for internal layout */
+            flex-direction: column; /* Stack content vertically */
+            justify-content: space-between; /* Push header to top, add button to bottom */
+        }
+        .category-group.stacked-two-modal {
+            width: calc(50% - 0.5rem); /* 1/2 width minus gap compensation */
+        }
+        .category-group.stacked-three-modal {
+            width: calc(33.333% - 0.666rem); /* 1/3 width minus gap compensation */
+        }
+        .category-group.stacked-two-modal .flex.justify-between.items-center.mb-4,
+        .category-group.stacked-three-modal .flex.justify-between.items-center.mb-4 {
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+
+
+        /* Main screen category containers */
+        .main-category-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem; /* Tailwind gap-8 equivalent */
+            margin-bottom: 3rem; /* Tailwind mb-12 equivalent */
+        }
+        .main-category-item {
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+        .main-category-item.full-width {
+            width: 100%;
+        }
+        .main-category-item.stacked-two {
+            width: calc(50% - 1rem); /* 1/2 width minus gap compensation */
+        }
+        .main-category-item.stacked-three {
+            width: calc(33.333% - 1.333rem); /* 1/3 width minus gap compensation */
+        }
+
+        /* Responsive Input Group within Modal */
+        .class-input-group {
+            background-color: #ffffff; /* white */
+            border-color: #e5e7eb; /* gray-200 */
+            transition: all 0.2s ease-in-out, background-color 0.5s ease-in-out, border-color 0.5s ease-in-out; /* Animation for classes */
+            display: flex; /* Use flexbox */
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            gap: 0.75rem; /* Consistent gap between inputs */
+            align-items: center; /* Align items vertically */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid;
+        }
+        body.dark-theme .class-input-group {
+            background-color: rgba(31, 41, 55, 0.5); /* gray-800/50 */
+            border-color: #374151; /* gray-700 */
+        }
+
+        /* Make inputs take full width when wrapped, or distribute space */
+        .class-input-group .class-title-input,
+        .class-input-group .class-details-input,
+        .class-input-group .class-url-input {
+            flex-grow: 1; /* Allow inputs to grow */
+            flex-basis: 150px; /* Minimum width before wrapping */
+            min-width: 0; /* Allow shrinking below flex-basis if needed */
+        }
+        .class-input-group .flex.items-center.gap-2 { /* The URL input and remove button container */
+            flex-grow: 1;
+            flex-basis: 150px; /* Minimum width for this group */
+            min-width: 0;
+        }
+
+        /* Ensure form inputs themselves handle overflow */
+        .form-input {
+            width: 100%; /* Ensure inputs take full available width of their flex item */
+            padding: 0.75rem;
+            background-color: #f3f4f6; /* gray-100 */
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 0.5rem;
+            color: #1f2937; /* gray-800 */
+            transition: all 0.2s ease, background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, color 0.5s ease-in-out;
+            min-width: 0; /* Allow content to shrink */
+            word-break: break-word; /* Break long words to prevent horizontal scroll */
+        }
+        body.dark-theme .form-input {
+            background-color: #4b5563; /* gray-600 */
+            border-color: #6b7280; /* gray-500 */
+            color: #f9fafb; /* gray-50 */
+        }
+        .form-input:focus {
+            outline: none;
+            ring-width: 2px;
+            ring-color: #4f46e5; /* indigo-600 */
+            border-color: #4f46e5; /* indigo-600 */
+        }
+
+        /* Drag and Drop Styles for Classes */
+        .class-input-group.dragging {
+            opacity: 0.5;
+            border: 2px dashed #818cf8; /* Indigo-400 */
+        }
+        .class-input-group.drag-over {
+            border: 2px solid #60a5fa; /* Blue-400 */
+            box-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
+        }
+
+        .remove-class-btn {
+            color: #9ca3af; /* gray-400 */
+            transition: color 0.5s ease-in-out;
+        }
+        body.dark-theme .remove-class-btn {
+            color: #9ca3af; /* gray-400 */
+        }
+        .remove-class-btn:hover {
+            color: #ef4444; /* red-500 */
+        }
+
+        /* Styles for the new toggle buttons */
+        .toggle-layout-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.75rem; /* 25% larger than 3rem */
+            height: 1.0rem; /* 25% larger than 1.75rem (approx h-9) */
+            padding: 0.375rem; /* 25% larger than 0.25rem (approx p-1.5) */
+            border-radius: 9999px; /* rounded-full for pill shape */
+            color: white;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .toggle-layout-button.stacked {
+            background-color: #3b82f6; /* blue-500 */
+        }
+        .toggle-layout-button.full-width {
+            background-color: #9ca3af; /* gray-400 */
+        }
+        .toggle-layout-button:hover {
+            transform: scale(1.05);
+        }
+        .toggle-layout-button.stacked:hover {
+            background-color: #2563eb; /* blue-600 */
+        }
+        .toggle-layout-button.full-width:hover {
+            background-color: #6b7280; /* gray-500 */
+        }
+        body.dark-theme .toggle-layout-button.stacked {
+            background-color: #60a5fa; /* blue-400 */
+        }
+        body.dark-theme .toggle-layout-button.full-width {
+            background-color: #4b5563; /* gray-600 */
+        }
+        body.dark-theme .toggle-layout-button.stacked:hover {
+            background-color: #3b82f6; /* blue-500 */
+        }
+        body.dark-theme .toggle-layout-button.full-width:hover {
+            background-color: #6b7280; /* gray-500 */
+        }
+        .toggle-layout-button svg {
+            width: 1.5rem; /* 25% larger than 1.25rem (approx w-6) */
+            height: 1.5rem; /* 25% larger than 1.25rem (approx h-6) */
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col items-center p-6 sm:p-12">
+
+    <div class="max-w-7xl w-full rounded-2xl shadow-2xl p-8 sm:p-12 mb-12 main-container border relative">
+        <!-- Header Section -->
+        <header class="text-center mb-10">
+            <h1 class="text-6xl sm:text-7xl font-extrabold mb-3 tracking-tight">Pick A Class</h1>
+            <h3 class="text-2xl sm:text-3xl font-medium tracking-wide" id="Time"></h3>
+            
+            <!-- Header Buttons -->
+            <div class="absolute top-6 right-6 sm:top-8 sm:right-8 flex gap-3">
+                <button id="settings-button" class="text-white p-3 rounded-full shadow-md hover:scale-110 transition-all duration-300 ease-in-out" onclick="openSettingsModal()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </button>
+                <button id="theme-toggle" class="p-3 rounded-full shadow-md hover:scale-110 transition-all duration-300 ease-in-out">
+                    <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path></svg>
+                    <svg id="sun-icon" class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16">
+                        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                    </svg>
+                    <svg id="system-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13V7a2 2 0 012-2h14a2 2 0 012 2v6m-2 8H5a2 2 0 01-2-2v-6a2 2 0 012-2h14a2 2 0 012 2v6a2 2 0 01-2 2z"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Class Links Container -->
+        <section id="class-links-container" class="mb-16"></section>
+
+        <hr class="border-gray-300 my-10 transition-colors duration-500 ease-in-out">
+
+        <!-- Schedules Section -->
+        <section class="text-center mb-16">
+            <h2 class="text-4xl sm:text-5xl font-bold mb-8 tracking-tight">SCHEDULES</h2>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-8">
+                <img src="https://placehold.co/350x250/111827/FFFFFF?text=Mon-Thur+Schedule" alt="Monday - Thursday Schedule" class="max-w-full h-auto rounded-xl shadow-lg schedule-img border transition-colors duration-500 ease-in-out">
+                <img src="https://placehold.co/350x250/111827/FFFFFF?text=Friday+Schedule" alt="Friday Schedule" class="max-w-full h-auto rounded-xl shadow-lg schedule-img border transition-colors duration-500 ease-in-out">
+            </div>
+        </section>
+
+        <hr class="border-gray-300 my-10 transition-colors duration-500 ease-in-out">
+
+        <!-- Footer Section -->
+        <footer class="text-center text-base mt-12">
+            Redirector - Bridger's Custom Website
+            <button id="Refresh" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out block mx-auto mt-6 transform hover:scale-105">
+                Refresh Page
+            </button>
+        </footer>
+    </div>
+
+    <!-- Edit Settings Modal -->
+    <div id="settings-modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden opacity-0" onclick="closeSettingsModal(event)">
+        <div class="modal-content rounded-2xl shadow-2xl w-[95vw] max-w-6xl h-[90vh] flex flex-col p-8 border" onclick="event.stopPropagation()">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center mb-6 flex-shrink-0">
+                <h3 class="text-3xl font-bold tracking-tight">Edit Class Settings</h3>
+                <button class="text-gray-400 hover:text-gray-800 transition" onclick="closeSettingsModal()">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <!-- Scrollable Content Area -->
+            <div id="modal-scrollable-content" class="flex-grow overflow-y-auto pr-4 -mr-4">
+                <div id="categories-form-container">
+                    <!-- Categories will be dynamically generated here -->
                 </div>
             </div>
-        `;
-      }
-    }
 
-    // Helper function to create the HTML for a single link
-    function createClassLinkHTML(classItem) {
-      return `
-        <p title="${classItem.details}" class="class-item">
-            ${classItem.title} -
-            <a href="${classItem.url}" target="_blank">Open In New Tab</a>
-            <text> | </text>
-            <a href="${classItem.url}">Open In Current Tab</a>
-        </p>
-      `;
-    }
+            <!-- Modal Footer -->
+            <div class="flex justify-between items-center mt-6 flex-shrink-0">
+                <button type="button" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition duration-300 transform hover:scale-105" onclick="addCategory()">
+                    Add New Category
+                </button>
+                <div class="flex gap-4">
+                    <button type="button" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105" onclick="closeSettingsModal()">Cancel</button>
+                    <button type="button" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105" onclick="saveClassSettingsAndCloseModal()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    // Function to generate the form inputs
-    function renderSettingsForm() {
-        const otherForm = document.getElementById('other-classes-form');
-        const aDayForm = document.getElementById('a-day-classes-form');
-        const bDayForm = document.getElementById('b-day-classes-form');
+    <!-- Custom Confirmation Modal -->
+    <div id="confirmation-modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden opacity-0" onclick="hideConfirmationModal(event)">
+        <div class="modal-content rounded-2xl shadow-2xl w-[90vw] max-w-md p-8 border" onclick="event.stopPropagation()">
+            <h3 class="text-2xl font-bold mb-4">Confirm Action</h3>
+            <p class="text-gray-700 mb-6" id="confirmation-message"></p>
+            <div class="flex justify-end gap-4">
+                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-5 rounded-lg transition" onclick="hideConfirmationModal()">Cancel</button>
+                <button type="button" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition" id="confirm-action-button">Confirm</button>
+            </div>
+        </div>
+    </div>
 
-        otherForm.innerHTML = classData.other.map((item, index) => `
-            <label>Other Class ${index + 1} Title:</label>
-            <input type="text" id="other-title-${index}" value="${item.title}">
-            <label>URL:</label>
-            <input type="text" id="other-url-${index}" value="${item.url}">
-        `).join('<br>');
+    <script>
+        // --- DEFAULT DATA & CONFIGURATION ---
+        const defaultClassData = [
+            {
+                categoryName: 'Daily Schedule',
+                classes: [
+                    { title: 'Geography', details: 'Period 1 - Room 1209, Mrs. Witherspoon (A Day 7:45AM - 9:05AM)', url: 'https://canyons.instructure.com/courses/1813424' },
+                    { title: 'Seminary', details: 'Period 5 - Seminary (B Day 7:45AM - 9:05AM)', url: '#' },
+                    { title: 'Engineering', details: 'Period 2 - Room 1916, Mr. Maupin (A Day 9:45AM - 11:05AM)', url: 'https://canyons.instructure.com/courses/1815045' },
+                ],
+                isSideStacked: false // Default to full width
+            },
+            {
+                categoryName: 'Other Links',
+                classes: [
+                    { title: 'Advisory', details: 'Room 2405, Mrs. Gathro', url: 'https://canyons.instructure.com/courses/1814181' },
+                    { title: 'Online Classes', details: "Canyon's Virtual Academy", url: 'https://canyonsva.agilixbuzz.com/student/home/courses' },
+                ],
+                isSideStacked: false // Default to full width
+            }
+        ];
+        let classData = [];
+        let confirmActionCallback = null; // Callback for the custom confirmation modal
+        
+        // Global variables for drag-and-drop
+        let draggedCategoryItem = null; // For categories
+        let draggedCategoryOriginalIndex = null; // For categories
 
-        aDayForm.innerHTML = classData.aDay.map((item, index) => `
-            <label>A-Day Period ${index + 1} Title:</label>
-            <input type="text" id="a-day-title-${index}" value="${item.title}">
-            <label>URL:</label>
-            <input type="text" id="a-day-url-${index}" value="${item.url}">
-        `).join('<br>');
+        let draggedClassItem = null; // For classes
+        let draggedClassOriginalCategoryIndex = null; // Storing the category index of the dragged class
+        let draggedClassOriginalIndex = null; // Storing the original index of the dragged class
 
-        bDayForm.innerHTML = classData.bDay.map((item, index) => `
-            <label>B-Day Period ${index + 1} Title:</label>
-            <input type="text" id="b-day-title-${index}" value="${item.title}">
-            <label>URL:</label>
-            <input type="text" id="b-day-url-${index}" value="${item.url}">
-        `).join('<br>');
-    }
 
-    // Function to save the settings from the form
-    function saveClassSettings() {
-        const newClassData = { other: [], aDay: [], bDay: [] };
+        // --- DATA MANAGEMENT ---
+        function loadClassData() {
+            const savedData = localStorage.getItem('classDataV2');
+            classData = savedData ? JSON.parse(savedData) : JSON.parse(JSON.stringify(defaultClassData));
+            // Ensure all loaded categories have the isSideStacked property
+            classData.forEach(category => {
+                if (typeof category.isSideStacked === 'undefined') {
+                    category.isSideStacked = false;
+                }
+            });
+        }
 
-        // Save other classes
-        classData.other.forEach((item, index) => {
-            const title = document.getElementById(`other-title-${index}`).value;
-            const url = document.getElementById(`other-url-${index}`).value;
-            newClassData.other.push({ title, details: item.details, url });
+        function saveToLocalStorage() {
+            localStorage.setItem('classDataV2', JSON.stringify(classData));
+        }
+
+        // --- MAIN UI RENDERING ---
+        function renderClassLinks() {
+            const container = document.getElementById('class-links-container');
+            container.innerHTML = ''; 
+
+            if (!classData || classData.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-500">No classes configured. Click the settings icon to add some!</p>`;
+                return;
+            }
+
+            let htmlOutput = '';
+            let currentSideStackedGroup = [];
+
+            classData.forEach(category => {
+                if (category.isSideStacked) {
+                    currentSideStackedGroup.push(category);
+                    // If group is full (3 items) or this is the last category, render the group
+                    if (currentSideStackedGroup.length === 3 || category === classData[classData.length - 1]) {
+                        htmlOutput += renderSideStackedGroupHTML(currentSideStackedGroup);
+                        currentSideStackedGroup = []; // Reset group
+                    }
+                } else {
+                    // If there's an unfinished side-stacked group, render it first
+                    if (currentSideStackedGroup.length > 0) {
+                        htmlOutput += renderSideStackedGroupHTML(currentSideStackedGroup);
+                        currentSideStackedGroup = [];
+                    }
+                    // Then render this full-width category
+                    htmlOutput += renderFullWidthCategoryHTML(category);
+                }
+            });
+
+            // Catch any remaining side-stacked categories if the loop ends mid-group
+            if (currentSideStackedGroup.length > 0) {
+                htmlOutput += renderSideStackedGroupHTML(currentSideStackedGroup);
+            }
+            
+            container.innerHTML = htmlOutput;
+        }
+
+        function renderSideStackedGroupHTML(group) {
+            const widthClass = group.length === 2 ? 'stacked-two' : 'stacked-three'; // Dynamic width for main screen
+            const groupItemsHTML = group.map(category => {
+                const classCardsHTML = category.classes.map(createClassCardHTML).join('');
+                return `
+                    <div class="main-category-item ${widthClass}">
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-center">${category.categoryName}</h2>
+                        <div class="grid grid-cols-1 gap-4">
+                            ${classCardsHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            return `<div class="main-category-row">${groupItemsHTML}</div>`;
+        }
+
+        function renderFullWidthCategoryHTML(category) {
+            const classCardsHTML = category.classes.map(createClassCardHTML).join('');
+            return `
+                <div class="main-category-item full-width">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-center">${category.categoryName}</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${classCardsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+
+        function createClassCardHTML(classItem) {
+            return `
+                <div class="class-card p-6 rounded-xl shadow-lg border"
+                     onclick="window.location.href='${classItem.url}'">
+                    <h4 class="text-xl font-bold mb-2">${classItem.title}</h4>
+                    <p class="text-sm mb-4" title="${classItem.details}">${classItem.details}</p>
+                    <button class="new-tab-button" onclick="event.stopPropagation(); window.open('${classItem.url}', '_blank');" title="Open in new tab">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </button>
+                </div>
+            `;
+        }
+        
+        // --- SETTINGS MODAL: DYNAMIC FORM RENDERING ---
+        function renderSettingsForm() {
+            const container = document.getElementById('categories-form-container');
+            container.innerHTML = ''; // Clear existing content
+
+            let htmlOutput = '';
+            let currentModalSideStackedGroup = [];
+
+            classData.forEach((category, index) => {
+                if (category.isSideStacked) {
+                    currentModalSideStackedGroup.push({ category, index });
+                    // If group is full (3 items) or this is the last category, or the next category is full-width
+                    const nextCategory = classData[index + 1];
+                    if (currentModalSideStackedGroup.length === 3 || !nextCategory || !nextCategory.isSideStacked) {
+                        htmlOutput += renderModalSideStackedGroupHTML(currentModalSideStackedGroup);
+                        currentModalSideStackedGroup = []; // Reset group
+                    }
+                } else {
+                    // If there's an unfinished side-stacked group, render it first
+                    if (currentModalSideStackedGroup.length > 0) {
+                        htmlOutput += renderModalSideStackedGroupHTML(currentModalSideStackedGroup);
+                        currentModalSideStackedGroup = [];
+                    }
+                    // Then render this full-width category
+                    htmlOutput += renderModalFullWidthCategoryHTML(category, index);
+                }
+            });
+
+            // Catch any remaining side-stacked categories if the loop ends mid-group
+            if (currentModalSideStackedGroup.length > 0) {
+                htmlOutput += renderModalSideStackedGroupHTML(currentModalSideStackedGroup);
+            }
+            
+            container.innerHTML = htmlOutput;
+        }
+
+        function renderModalSideStackedGroupHTML(group) {
+            const widthClass = group.length === 2 ? 'stacked-two-modal' : 'stacked-three-modal'; // Dynamic width for modal
+            
+            const groupItemsHTML = group.map(item => {
+                const category = item.category;
+                const categoryIndex = item.index;
+                const classInputsHTML = category.classes.map((classItem, classIndex) => createClassInputHTML(categoryIndex, classIndex, classItem)).join('');
+                
+                const toggleButtonClass = category.isSideStacked ? 'stacked' : 'full-width';
+                const toggleButtonSvg = category.isSideStacked ? 
+                    `<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 4h4v16h-4zm-6 0h4v16h-4zm12 0h4v16h-4z"/></svg>` : 
+                    `<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16v16H4z"/></svg>`;
+                const toggleButtonTitle = category.isSideStacked ? 'Change to Full Width Layout' : 'Change to Stacked Layout';
+
+                return `
+                    <div class="category-group p-6 rounded-xl border ${widthClass}"
+                         draggable="true"
+                         data-category-index="${categoryIndex}"
+                         ondragstart="handleCategoryDragStart(event)"
+                         ondragover="handleCategoryDragOver(event)"
+                         ondragleave="handleCategoryDragLeave(event)"
+                         ondrop="handleCategoryDrop(event)"
+                         ondragend="handleCategoryDragEnd(event)">
+                        <!-- Category Header -->
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center flex-grow">
+                                <span class="drag-handle mr-3 p-1 rounded-md transition" title="Drag to reorder">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                                </span>
+                                <input type="text" value="${category.categoryName}" placeholder="Category Name"
+                                       class="category-name-input text-2xl font-bold bg-transparent focus:rounded p-2 -ml-2 w-full"
+                                       data-category-index="${categoryIndex}"
+                                       onchange="updateCategoryName(${categoryIndex}, this.value)">
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" class="toggle-layout-button ${toggleButtonClass}" onclick="toggleSideStacked(${categoryIndex})" title="${toggleButtonTitle}">
+                                    ${toggleButtonSvg}
+                                </button>
+                                <button type="button" class="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-100 transition" onclick="removeCategory(${categoryIndex})" title="Delete Category">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Classes within this category -->
+                        <div class="class-inputs-container space-y-3">
+                            ${classInputsHTML}
+                        </div>
+
+                        <!-- Add Class Button for this category -->
+                        <button type="button" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded-lg transition" onclick="addClass(${categoryIndex})">
+                            Add Class
+                        </button>
+                    </div>
+                `;
+            }).join('');
+            return groupItemsHTML; // Return just the items, as they are already wrapped by #categories-form-container
+        }
+
+        function renderModalFullWidthCategoryHTML(category, categoryIndex) {
+            const classInputsHTML = category.classes.map((classItem, classIndex) => createClassInputHTML(categoryIndex, classIndex, classItem)).join('');
+            
+            const toggleButtonClass = category.isSideStacked ? 'stacked' : 'full-width';
+            const toggleButtonSvg = category.isSideStacked ? 
+                `<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 4h4v16h-4zm-6 0h4v16h-4zm12 0h4v16h-4z"/></svg>` : 
+                `<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16v16H4z"/></svg>`;
+            const toggleButtonTitle = category.isSideStacked ? 'Change to Full Width Layout' : 'Change to Stacked Layout';
+
+            return `
+                <div class="category-group p-6 rounded-xl border full-width-mode"
+                     draggable="true"
+                     data-category-index="${categoryIndex}"
+                     ondragstart="handleCategoryDragStart(event)"
+                     ondragover="handleCategoryDragOver(event)"
+                     ondragleave="handleCategoryDragLeave(event)"
+                     ondrop="handleCategoryDrop(event)"
+                     ondragend="handleCategoryDragEnd(event)">
+                    <!-- Category Header -->
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center flex-grow">
+                            <span class="drag-handle mr-3 p-1 rounded-md transition" title="Drag to reorder">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                            </span>
+                            <input type="text" value="${category.categoryName}" placeholder="Category Name"
+                                   class="category-name-input text-2xl font-bold bg-transparent focus:rounded p-2 -ml-2 w-full"
+                                   data-category-index="${categoryIndex}"
+                                   onchange="updateCategoryName(${categoryIndex}, this.value)">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button type="button" class="toggle-layout-button ${toggleButtonClass}" onclick="toggleSideStacked(${categoryIndex})" title="${toggleButtonTitle}">
+                                ${toggleButtonSvg}
+                            </button>
+                            <button type="button" class="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-100 transition" onclick="removeCategory(${categoryIndex})" title="Delete Category">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Classes within this category -->
+                    <div class="class-inputs-container space-y-3">
+                        ${classInputsHTML}
+                    </div>
+
+                    <!-- Add Class Button for this category -->
+                    <button type="button" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded-lg transition" onclick="addClass(${categoryIndex})">
+                        Add Class
+                    </button>
+                </div>
+            `;
+        }
+
+
+        function createClassInputHTML(categoryIndex, classIndex, classItem) {
+            return `
+                <div class="class-input-group"
+                     draggable="true"
+                     data-category-index="${categoryIndex}"
+                     data-class-index="${classIndex}"
+                     ondragstart="handleClassDragStart(event, ${categoryIndex}, ${classIndex})"
+                     ondragover="handleClassDragOver(event)"
+                     ondragleave="handleClassDragLeave(event)"
+                     ondrop="handleClassDrop(event)"
+                     ondragend="handleClassDragEnd(event)">
+                    <input type="text" value="${classItem.title}" placeholder="Class Title" class="class-title-input form-input" onchange="updateClassItem(${categoryIndex}, ${classIndex}, 'title', this.value)">
+                    <input type="text" value="${classItem.details}" placeholder="Details (Room, Time)" class="class-details-input form-input" onchange="updateClassItem(${categoryIndex}, ${classIndex}, 'details', this.value)">
+                    <div class="flex items-center gap-2">
+                        <input type="url" value="${classItem.url}" placeholder="URL" class="class-url-input form-input flex-grow" onchange="updateClassItem(${categoryIndex}, ${classIndex}, 'url', this.value)">
+                        <button type="button" class="remove-class-btn p-2" onclick="removeClass(${categoryIndex}, ${classIndex})" title="Remove Class">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // --- SETTINGS MODAL: ACTIONS ---
+        function addCategory() {
+            classData.push({ categoryName: 'New Category', classes: [], isSideStacked: false });
+            renderSettingsForm();
+        }
+
+        function removeCategory(categoryIndex) {
+            showConfirmationModal('Are you sure you want to delete this entire category? This action cannot be undone.', () => {
+                classData.splice(categoryIndex, 1);
+                renderSettingsForm();
+                saveToLocalStorage(); // Save changes after deletion
+            });
+        }
+
+        function addClass(categoryIndex) {
+            classData[categoryIndex].classes.push({ title: '', details: '', url: '' });
+            renderSettingsForm();
+        }
+
+        function removeClass(categoryIndex, classIndex) {
+            showConfirmationModal('Are you sure you want to remove this class?', () => {
+                classData[categoryIndex].classes.splice(classIndex, 1);
+                renderSettingsForm();
+                saveToLocalStorage(); // Save changes after deletion
+            });
+        }
+
+        function updateCategoryName(categoryIndex, newName) {
+            classData[categoryIndex].categoryName = newName;
+            saveToLocalStorage();
+            // No need to re-render the whole form, just update data
+        }
+
+        function updateClassItem(categoryIndex, classIndex, field, value) {
+            classData[categoryIndex].classes[classIndex][field] = value;
+            saveToLocalStorage();
+            // No need to re-render the whole form, just update data
+        }
+
+        function toggleSideStacked(categoryIndex) {
+            classData[categoryIndex].isSideStacked = !classData[categoryIndex].isSideStacked;
+            renderSettingsForm(); // Re-render to apply new width class
+            saveToLocalStorage();
+        }
+
+        function saveClassSettings() {
+            const newClassData = [];
+            const categoryGroups = document.querySelectorAll('#categories-form-container .category-group');
+
+            // Re-read data from the DOM to ensure correct order after drag-and-drop
+            // The isSideStacked property is already updated by toggleSideStacked
+            // We need to map the DOM elements back to their original data objects based on data-category-index
+            const originalOrderMap = new Map();
+            classData.forEach((category, index) => {
+                originalOrderMap.set(index, category);
+            });
+
+            categoryGroups.forEach(group => {
+                const originalIndex = parseInt(group.dataset.categoryIndex);
+                const category = originalOrderMap.get(originalIndex);
+
+                // Re-read classes within this category from the DOM
+                const newClassesInThisCategory = [];
+                Array.from(group.querySelectorAll('.class-input-group')).forEach(classEl => {
+                    const title = classEl.querySelector('.class-title-input').value.trim();
+                    const details = classEl.querySelector('.class-details-input').value.trim();
+                    const url = classEl.querySelector('.class-url-input').value.trim();
+                    if (title) { // Only save if there's a title
+                        newClassesInThisCategory.push({ title, details, url });
+                    }
+                });
+                category.classes = newClassesInThisCategory; // Update classes for this category
+
+                newClassData.push(category); // Add the updated category to the new data array
+            });
+
+            classData = newClassData; // Update classData with the new order
+            saveToLocalStorage();
+            renderClassLinks(); // Re-render main links to reflect changes
+        }
+
+        function saveClassSettingsAndCloseModal() {
+            saveClassSettings();
+            closeSettingsModal();
+        }
+
+        function openSettingsModal() {
+            renderSettingsForm();
+            const modal = document.getElementById("settings-modal");
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // This forces the browser to redraw, ensuring the transition works.
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('show');
+            });
+        }
+
+        function closeSettingsModal(event) {
+            const modal = document.getElementById("settings-modal");
+            const modalContent = modal.querySelector('.modal-content');
+
+            // If an event object is provided, check if the click target is inside the modal content.
+            // If it is inside the modal content, do NOT close the modal.
+            if (event && modalContent.contains(event.target)) {
+                return;
+            }
+
+            // If no event (e.g., triggered by the close button) or if the click was on the background outside modalContent, then close.
+            modal.classList.add('opacity-0');
+            modal.classList.remove('show');
+            
+            modal.addEventListener('transitionend', () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                confirmActionCallback = null; // Clear callback after modal is hidden
+            }, { once: true });
+        }
+
+        // --- CUSTOM CONFIRMATION MODAL FUNCTIONS ---
+        function showConfirmationModal(message, callback) {
+            document.getElementById('confirmation-message').textContent = message;
+            confirmActionCallback = callback;
+            const modal = document.getElementById('confirmation-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('show');
+            });
+        }
+
+        function hideConfirmationModal(event) {
+            // Only close if the click is on the modal background itself, not its content, or if called without an event
+            if (event && event.target.id !== 'confirmation-modal' && event.target.tagName !== 'BUTTON') return;
+            
+            const modal = document.getElementById('confirmation-modal');
+            modal.classList.add('opacity-0');
+            modal.classList.remove('show');
+            
+            modal.addEventListener('transitionend', () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                confirmActionCallback = null; // Clear callback after modal is hidden
+            }, { once : true });
+        }
+
+
+        // --- THEME TOGGLE ---
+        let currentThemeState = localStorage.getItem('theme') || 'system';
+
+        function applyTheme(theme) {
+            console.log(`--- Theme Toggle Event Initiated ---`);
+            console.log(`Requested theme mode: "${theme}"`);
+            const htmlElement = document.documentElement;
+            const bodyElement = document.body; // Get the body element
+            const icons = {
+                moon: document.getElementById('moon-icon'),
+                sun: document.getElementById('sun-icon'),
+                system: document.getElementById('system-icon')
+            };
+
+            // Step 1: Hide all theme icons to prepare for showing the correct one
+            Object.values(icons).forEach(i => i.classList.add('hidden'));
+
+            // Step 2: Remove all theme classes from the body to ensure a clean state
+            bodyElement.classList.remove('dark-theme');
+            console.log(`'dark-theme' class removed from <body>. Current <body> classList: "${bodyElement.classList.toString()}"`);
+
+            // Step 3: Determine if dark mode should be visually active based on the requested theme
+            let isDarkModeActive = false;
+            if (theme === 'dark') {
+                isDarkModeActive = true;
+                console.log(`Decision: Dark mode is active because "dark" theme was explicitly selected.`);
+            } else if (theme === 'system') {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    isDarkModeActive = true;
+                    console.log(`Decision: Dark mode is active because "system" theme was selected AND your operating system prefers dark mode. (prefers-color-scheme: dark is ${prefersDark})`);
+                } else {
+                    console.log(`Decision: Light mode is active because "system" theme was selected AND your operating system prefers light mode. (prefers-color-scheme: dark is ${prefersDark})`);
+                }
+            } else { // theme === 'light'
+                console.log(`Decision: Light mode is active because "light" theme was explicitly selected.`);
+            }
+
+            // Step 4: Apply the 'dark-theme' class to the <body> element if dark mode is determined to be active
+            if (isDarkModeActive) {
+                bodyElement.classList.add('dark-theme');
+                console.log(`Result: 'dark-theme' class ADDED to <body>. Final <body> classList: "${bodyElement.classList.toString()}"`);
+            } else {
+                console.log(`Result: 'dark-theme' class NOT ADDED to <body>. Final <body> classList: "${bodyElement.classList.toString()}"`);
+            }
+            
+            // Step 5: Display the icon that represents the *requested* theme mode (sun, moon, or system icon)
+            let iconToShowId;
+            if (theme === 'dark') {
+                iconToShowId = 'moon';
+            } else if (theme === 'light') {
+                iconToShowId = 'sun';
+            } else { // system
+                iconToShowId = 'system';
+            }
+            icons[iconToShowId].classList.remove('hidden');
+            console.log(`Visual Feedback: Displaying the icon for the requested theme: "${iconToShowId}-icon"`);
+
+            // Step 6: Save the user's chosen theme preference to local storage and update the internal state variable
+            localStorage.setItem('theme', theme);
+            currentThemeState = theme;
+            console.log(`Persistence: Theme preference saved as "${currentThemeState}" for next visit.`);
+            console.log(`--- Theme Toggle Event Completed ---`);
+        }
+
+        function toggleTheme() {
+            const themeCycle = { 'dark': 'light', 'light': 'system', 'system': 'dark' };
+            applyTheme(themeCycle[currentThemeState]); // Apply the next theme in the cycle
+        }
+
+        // --- DRAG AND DROP FUNCTIONS FOR CATEGORIES ---
+        function handleCategoryDragStart(e) {
+            draggedCategoryItem = e.target;
+            draggedCategoryOriginalIndex = parseInt(e.target.dataset.categoryIndex);
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', draggedCategoryOriginalIndex);
+            
+            setTimeout(() => draggedCategoryItem.classList.add('dragging'), 0); 
+        }
+
+        function handleCategoryDragOver(e) {
+            e.preventDefault(); 
+            e.dataTransfer.dropEffect = 'move';
+            const target = e.target.closest('.category-group');
+
+            if (target && target !== draggedCategoryItem) {
+                const targetRect = target.getBoundingClientRect();
+                const draggedRect = draggedCategoryItem.getBoundingClientRect();
+
+                // Remove drag-over from all categories first
+                document.querySelectorAll('.category-group').forEach(item => item.classList.remove('drag-over'));
+                // Add drag-over to the current target
+                target.classList.add('drag-over');
+
+                // Determine insertion point based on both vertical and horizontal position
+                const isCloserVertically = Math.abs(e.clientY - targetRect.y) < Math.abs(e.clientX - targetRect.x);
+
+                if (isCloserVertically) {
+                    // Vertical drag logic
+                    if (e.clientY < (targetRect.y + targetRect.height / 2)) {
+                        target.parentNode.insertBefore(draggedCategoryItem, target);
+                    } else {
+                        target.parentNode.insertBefore(draggedCategoryItem, target.nextSibling);
+                    }
+                } else {
+                    // Horizontal drag logic (more relevant for side-stacked items)
+                    if (e.clientX < (targetRect.x + targetRect.width / 2)) {
+                        target.parentNode.insertBefore(draggedCategoryItem, target);
+                    } else {
+                        target.parentNode.insertBefore(draggedCategoryItem, target.nextSibling);
+                    }
+                }
+            }
+        }
+
+        function handleCategoryDragLeave(e) {
+            e.target.closest('.category-group')?.classList.remove('drag-over');
+        }
+
+        function handleCategoryDrop(e) {
+            e.preventDefault();
+            // The DOM has already been reordered by handleCategoryDragOver
+        }
+
+        function handleCategoryDragEnd(e) {
+            e.target.classList.remove('dragging');
+            document.querySelectorAll('.category-group').forEach(item => {
+                item.classList.remove('drag-over'); 
+            });
+            draggedCategoryItem = null;
+            draggedCategoryOriginalIndex = null;
+            saveClassSettings(); // Save the new order of categories
+        }
+
+        // --- DRAG AND DROP FUNCTIONS FOR CLASSES ---
+        function handleClassDragStart(e, categoryIndex, classIndex) {
+            draggedClassItem = e.target.closest('.class-input-group');
+            draggedClassOriginalCategoryIndex = categoryIndex;
+            draggedClassOriginalIndex = classIndex;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', `${categoryIndex},${classIndex}`); // Store original indices
+
+            setTimeout(() => draggedClassItem.classList.add('dragging'), 0);
+        }
+
+        function handleClassDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            const target = e.target.closest('.class-input-group');
+            // Ensure we are dragging within the same category for now
+            const targetCategoryElement = target?.closest('.category-group');
+            const draggedCategoryElement = draggedClassItem?.closest('.category-group');
+
+            if (target && target !== draggedClassItem && targetCategoryElement === draggedCategoryElement) {
+                const targetRect = target.getBoundingClientRect();
+                const targetMidpoint = targetRect.y + targetRect.height / 2;
+
+                // Remove drag-over from all class items in the current category first
+                Array.from(targetCategoryElement.querySelectorAll('.class-input-group')).forEach(item => item.classList.remove('drag-over'));
+                
+                // Add drag-over to the current target
+                target.classList.add('drag-over');
+
+                if (e.clientY < targetMidpoint) {
+                    target.parentNode.insertBefore(draggedClassItem, target);
+                } else {
+                    target.parentNode.insertBefore(draggedClassItem, target.nextSibling);
+                }
+            } else if (targetCategoryElement !== draggedCategoryElement) {
+                // If trying to drag between categories, clear drag-over on all class items
+                document.querySelectorAll('.class-input-group').forEach(item => item.classList.remove('drag-over'));
+                // Optionally, add visual feedback to the target category itself if cross-category drag is desired later
+            }
+        }
+
+        function handleClassDragLeave(e) {
+            e.target.closest('.class-input-group')?.classList.remove('drag-over');
+        }
+
+        function handleClassDrop(e) {
+            e.preventDefault();
+            // The DOM has already been reordered by handleClassDragOver
+        }
+
+        function handleClassDragEnd(e) {
+            e.target.classList.remove('dragging');
+            document.querySelectorAll('.class-input-group').forEach(item => {
+                item.classList.remove('drag-over'); 
+            });
+            draggedClassItem = null;
+            draggedClassOriginalCategoryIndex = null;
+            draggedClassOriginalIndex = null;
+            
+            saveToLocalStorage();
+            renderClassLinks(); // Update main display
+            renderSettingsForm(); // Re-render settings form to reflect new order and ensure data consistency
+        }
+
+        // --- TIME & DATE DISPLAY ---
+        function displayTime() {
+            const date = new Date();
+            const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            const formattedDate = `${date.getMonth() + 1}.${date.getDate()}.${date.getFullYear()}`;
+            document.getElementById('Time').textContent = `Time: ${time} | Date: ${formattedDate}`;
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadClassData();
+            renderClassLinks();
+            
+            displayTime();
+            setInterval(displayTime, 1000);
+
+            applyTheme(currentThemeState); // Apply the initial theme on load
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+            // Listen for system theme changes if the current theme is 'system'
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (currentThemeState === 'system') applyTheme('system');
+            });
+
+            document.getElementById('Refresh').addEventListener('click', () => window.location.reload());
+            
+            // Attach event listener for the custom confirmation modal's confirm button
+            document.getElementById('confirm-action-button').addEventListener('click', () => {
+                if (confirmActionCallback) {
+                    confirmActionCallback();
+                    hideConfirmationModal();
+                }
+            });
+
+            // Add a shared CSS class for all form inputs for easier styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .form-input {
+                    width: 100%;
+                    padding: 0.75rem;
+                    background-color: #f3f4f6; /* gray-100 */
+                    border: 1px solid #d1d5db; /* gray-300 */
+                    border-radius: 0.5rem;
+                    color: #1f2937; /* gray-800 */
+                    transition: all 0.2s ease;
+                }
+                body.dark-theme .form-input {
+                    background-color: #4b5563; /* gray-600 */
+                    border-color: #6b7280; /* gray-500 */
+                    color: #f9fafb; /* gray-50 */
+                }
+                .form-input:focus {
+                    outline: none;
+                    ring-width: 2px;
+                    ring-color: #4f46e5; /* indigo-600 */
+                    border-color: #4f46e5; /* indigo-600 */
+                }
+            `;
+            document.head.appendChild(style);
         });
-
-        // Save a-day classes
-        classData.aDay.forEach((item, index) => {
-            const title = document.getElementById(`a-day-title-${index}`).value;
-            const url = document.getElementById(`a-day-url-${index}`).value;
-            newClassData.aDay.push({ title, details: item.details, url });
-        });
-
-        // Save b-day classes
-        classData.bDay.forEach((item, index) => {
-            const title = document.getElementById(`b-day-title-${index}`).value;
-            const url = document.getElementById(`b-day-url-${index}`).value;
-            newClassData.bDay.push({ title, details: item.details, url });
-        });
-
-        classData = newClassData;
-        saveToLocalStorage();
-        renderClassLinks(); // Update the displayed links
-        toggleSettings(); // Hide the settings form after saving
-    }
-
-    // Function to show/hide the settings form
-    function toggleSettings() {
-      const form = document.getElementById('settings-form');
-      if (form.style.display === 'block') {
-        form.style.display = 'none';
-      } else {
-        form.style.display = 'block';
-      }
-    }
-
-    // Initial setup on page load
-    loadClassData();
-    renderClassLinks();
-    renderSettingsForm();
-
-    // --- The rest of your existing JavaScript, modernized slightly ---
-    const aDays = ["8.19.2024", "8.21.2024", "8.23.2024", "8.27.2024", "8.29.2024", "9.3.2024", "9.5.2024", "9.9.2024", "9.11.2024", "9.13.2024", "9.17.2024", "9.19.2024", "9.23.2024", "9.25.2024", "9.30.2024", "10.2.2024", "10.4.2024", "10.8.2024", "10.10.2024", "10.14.2024", "10.16.2024", "10.23.2024", "10.25.2024", "10.29.2024", "10.31.2024", "11.4.2024", "11.6.2024", "11.8.2024", "11.12.2024", "11.14.2024", "11.18.2024", "11.20.2024", "11.22.2024", "11.26.2024", "12.3.2024", "12.5.2024", "12.9.2024", "12.11.2024", "12.13.2024", "12.17.2024", "12.19.2024", "1.6.2025", "1.8.2025", "1.10.2025", "1.14.2025", "1.16.2025", "1.22.2025", "1.24.2025", "1.28.2025", "1.30.2025", "2.3.2025", "2.5.2025", "2.7.2025", "2.11.2025", "2.13.2025", "2.18.2025", "2.20.2025", "2.24.2025", "2.26.2025", "3.3.2025", "3.5.2025", "3.7.2025", "3.11.2025", "3.13.2025", "3.17.2025", "3.19.2025", "3.21.2025", "3.26.2025", "3.28.2025", "4.1.2025", "4.3.2025", "4.14.2025", "4.16.2025", "4.18.2025", "4.22.2025", "4.24.2025", "4.28.2025", "4.30.2025", "5.2.2025", "5.6.2025", "5.8.2025", "5.12.2025", "5.14.2025", "5.16.2025", "5.20.2025", "5.22.2025", "5.27.2025", "5.29.2025"];
-    const bDays = ["8.20.2024", "8.22.2024", "8.26.2024", "8.28.2024", "8.30.2024", "9.4.2024", "9.6.2024", "9.10.2024", "9.12.2024", "9.16.2024", "9.18.2024", "9.20.2024", "9.24.2024", "9.26.2024", "10.1.2024", "10.3.2024", "10.7.2024", "10.9.2024", "10.11.2024", "10.15.2024", "10.22.2024", "10.24.2024", "10.28.2024", "10.30.2024", "11.1.2024", "11.5.2024", "11.7.2024", "11.11.2024", "11.13.2024", "11.15.2024", "11.19.2024", "11.21.2024", "11.25.2024", "12.2.2024", "12.4.2024", "12.6.2024", "12.10.2024", "12.12.2024", "12.16.2024", "12.18.2024", "12.20.2024", "1.7.2025", "1.9.2025", "1.13.2025", "1.15.2025", "1.21.2025", "1.23.2025", "1.27.2025", "1.29.2025", "1.31.2025", "2.4.2025", "2.6.2025", "2.10.2025", "2.12.2025", "2.14.2025", "2.19.2025", "2.21.2025", "2.25.2025", "2.27.2025", "3.4.2025", "3.6.2025", "3.10.2025", "3.12.2025", "3.14.2025", "3.18.2025", "3.20.2025", "3.25.2025", "3.27.2025", "3.31.2025", "4.2.2025", "4.4.2025", "4.15.2025", "4.17.2025", "4.21.2025", "4.23.2025", "4.25.2025", "4.29.2025", "5.1.2025", "5.5.2025", "5.7.2025", "5.9.2025", "5.13.2025", "5.15.2025", "5.19.2025", "5.21.2025", "5.23.2025", "5.28.2025", "5.30.2025"];
-
-    function displayTime() {
-      const date = new Date();
-      const options = {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true,
-      };
-      const time = date.toLocaleTimeString('en-US', options);
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-      const formattedDate = `${month}.${day}.${year}`;
-
-      let dayType = 'No School';
-      if (aDays.includes(formattedDate)) {
-        dayType = 'A Day';
-      } else if (bDays.includes(formattedDate)) {
-        dayType = 'B Day';
-      }
-
-      document.getElementById('Time').textContent = `Time: ${time} | Date: ${formattedDate} | ${dayType}`;
-    }
-
-    displayTime();
-    setInterval(displayTime, 50);
-
-    // Simple refresh function
-    document.getElementById('Refresh').addEventListener('click', () => {
-      window.location.href = "sender.html";
-    });
-  </script>
+    </script>
+</body>
 </html>
