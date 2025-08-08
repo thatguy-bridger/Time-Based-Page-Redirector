@@ -298,9 +298,7 @@
             gap: 1rem; /* Consistent gap for flex items */
             align-items: flex-start; /* Align items to the top in rows */
         }
-        .category-group.full-width-mode {
-            width: 100%;
-        }
+        
         .category-group.stacked-two-modal,
         .category-group.stacked-three-modal {
             padding: 0.75rem 1rem; /* Smaller padding */
@@ -318,6 +316,9 @@
         .category-group.stacked-three-modal .flex.justify-between.items-center.mb-4 {
             flex-shrink: 0; /* Prevent header from shrinking */
         }
+        .category-group.full-width-mode {
+            width: 100%;
+        }
 
 
 
@@ -327,7 +328,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 2rem; /* Tailwind gap-8 equivalent */
-            margin-bottom: 3rem; /* Tailwind mb-12 equivalent */
+            margin-bottom: -6rem; /* Tailwind mb-12 equivalent */
         }
         .main-category-item {
             flex-shrink: 0;
@@ -631,9 +632,7 @@
         <section id="class-links-container" class="mb-16"></section>
 
 
-        <hr class="border-gray-300 my-10 transition-colors duration-500 ease-in-out">
-        <iframe src="https://canyons.instructure.com/dashboard" style="border:solid 1px #777;border-radius: 20px;
-  overflow: hidden;" width="100%" height="300" frameborder="0" scrolling="yes"></iframe>
+        <hr class="border-gray-300 my-5 transition-colors duration-500 ease-in-out">
         <iframe src="https://calendar.google.com/calendar/embed?height=1500&wkst=1&ctz=America%2FDenver&showPrint=0&showTitle=0&showCalendars=0&showTz=0&mode=AGENDA&title&src=NTczNGZhZTc4NGVmYzgxOTU5MzgxN2U3ZjYyNDQ3MDE0NGZlZWM0MzQzZTMyOWMwZjQ0ODhjYzZkMDg4YzUwZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ODgyM2YyNGQ0MTFiZjU5ZDlhY2U5Mzg5ZGVjYTEyZDIyYTM5MWQ1NWUwZGM4MWI4NzVkMWQ0YjFjNmE1Yjg3ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YmIzNzU5MmExNDkyNGUxOTMzNzM0MGI1NGI5OGNhNTljZjM2OGY5Y2YzYWY5NjEzMTY4ZmM0YjVkYTYzNjM3YUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Z212YmptZTY1bGlnNXZpdXY5bnNodGFmMWt2MG9rN2VAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&src=N3N0a2hzNmh0N201ZTRtdDJkM2IwbWkxa2Fya3NzNGNAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&src=MHFjbmE4dGF0Zjlxam9vZjRhY2k1N3RkNm1qb2Q4MTdAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&src=c3JhZWdsY2xhbjhxNm01NTFqYzFnbjZubHQ2MWZrM2FAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%2333b679&color=%23ad1457&color=%23f4511e&color=%23039be5&color=%23d50000&color=%23d50000&color=%23795548" style="border:solid 1px #777;border-radius: 20px;
   overflow: hidden;" width="100%" height="300" frameborder="0" scrolling="yes"></iframe>
 
@@ -735,43 +734,27 @@
 
 
     <script>
-        // --- SCHEDULE DATA (from redirector.html) ---
+        // --- SCHEDULE DATA ---
         // These will now be the default values, overwritten by localStorage if available
         let userADays = ["8.18.2025", "8.20.2025", "8.22.2025", "8.26.2025", "8.28.2025", "9.2.2025", "9.4.2025", "9.8.2025", "9.10.2025", "9.12.2025", "9.16.2025", "9.18.2025", "9.22.2025", "9.24.2025", "9.29.2025", "10.1.2025", "10.3.2025", "10.7.2025", "10.9.2025", "10.13.2025", "10.15.2025", "10.17.2025", "10.21.2025", "10.27.2025", "10.29.2025", "10.31.2025", "11.4.2025", "11.6.2025", "11.10.2025", "11.12.2025", "11.14.2025", "11.18.2025", "11.20.2025", "11.24.2025", "12.1.2025", "12.3.2025", "12.5.2025", "12.9.2025", "12.11.2025", "12.15.2025", "12.17.2025", "12.19.2025", "1.6.2026", "1.8.2026", "1.12.2026", "1.14.2026", "1.20.2026", "1.22.2026", "1.26.2026", "1.28.2026", "1.30.2026", "2.3.2026", "2.5.2026", "2.9.2026", "2.11.2026", "2.17.2026", "2.19.2026", "2.23.2026", "2.25.2026", "2.27.2026", "3.3.2026", "3.5.2026", "3.9.2026", "3.11.2026", "3.13.2026", "3.17.2026", "3.19.2026", "3.23.2026", "3.25.2026", "3.30.2026", "4.1.2026", "4.3.2026", "4.14.2026", "4.16.2026", "4.20.2026", "4.22.2026", "4.24.2026", "4.28.2026", "4.30.2026", "5.4.2026", "5.6.2026", "5.8.2026", "5.12.2026", "5.14.2026", "5.18.2026", "5.20.2026", "5.22.2026", "5.27.2026", "5.29.2026"];
         let userBDays = ["8.19.2025", "8.21.2025", "8.25.2025", "8.27.2025", "8.29.2025", "9.3.2025", "9.5.2025", "9.9.2025", "9.11.2025", "9.15.2025", "9.17.2025", "9.19.2025", "9.23.2025", "9.25.2025", "9.30.2025", "10.2.2025", "10.6.2025", "10.8.2025", "10.10.2025", "10.14.2025", "10.16.2025", "10.20.2025", "10.22.2025", "10.28.2025", "10.30.2025", "11.3.2025", "11.5.2025", "11.7.2025", "11.11.2025", "11.13.2025", "11.17.2025", "11.19.2025", "11.21.2025", "11.25.2025", "12.2.2025", "12.4.2025", "12.8.2025", "12.10.2025", "12.12.2025", "12.16.2025", "12.18.2025", "1.5.2026", "1.7.2026", "1.9.2026", "1.13.2026", "1.15.2026", "1.21.2026", "1.23.2026", "1.27.2026", "1.29.2026", "2.2.2026", "2.4.2026", "2.6.2026", "2.10.2026", "2.12.2026", "2.18.2026", "2.20.2026", "2.24.2026", "2.26.2026", "3.2.2026", "3.4.2026", "3.6.2026", "3.10.2026", "3.12.2026", "3.16.2026", "3.18.2026", "3.20.2026", "3.24.2026", "3.26.2026", "3.31.2026", "4.2.2026", "4.13.2026", "4.15.2026", "4.17.2026", "4.21.2026", "4.23.2026", "4.27.2026", "4.29.2026", "5.1.2026", "5.5.2026", "5.7.2026", "5.11.2026", "5.13.2026", "5.15.2026", "5.19.2026", "5.21.2026", "5.26.2026", "5.28.2026"];
 
 
         // Define schedule slot options with user-friendly labels and their default times
+        // NEW: Each slot has a fullDayTime and halfDayTime property.
         const defaultScheduleSlotOptions = [
             { label: 'None (Not Scheduled)', value: '' },
-            // A Day Full
-            { label: 'A Day - Full - Period 1', value: 'A_FULL_P1', time: '07:45 - 09:05' },
-            { label: 'A Day - Full - Advisory', value: 'A_FULL_ADVISORY', time: '09:05 - 09:46' }, // Moved
-            { label: 'A Day - Full - Period 2', value: 'A_FULL_P2', time: '09:45 - 11:05' },
-            { label: 'A Day - Full - Period 3', value: 'A_FULL_P3', time: '11:05 - 13:00' },
-            { label: 'A Day - Full - Period 4', value: 'A_FULL_P4', time: '13:00 - 14:26' },
-
-
-            // B Day Full
-            { label: 'B Day - Full - Period 5', value: 'B_FULL_P5', time: '07:45 - 09:05' },
-            { label: 'B Day - Full - Advisory', value: 'B_FULL_ADVISORY', time: '09:05 - 09:46' }, // Moved
-            { label: 'B Day - Full - Period 6', value: 'B_FULL_P6', time: '09:45 - 11:05' },
-            { label: 'B Day - Full - Period 7', value: 'B_FULL_P7', time: '11:05 - 13:00' },
-            { label: 'B Day - Full - Period 8', value: 'B_FULL_P8', time: '13:00 - 14:26' },
-
-
-            // A Day Half
-            { label: 'A Day - Half - Period 1', value: 'A_HALF_P1', time: '07:45 - 08:51' },
-            { label: 'A Day - Half - Period 2', value: 'A_HALF_P2', time: '08:50 - 10:01' },
-            { label: 'A Day - Half - Period 3', value: 'A_HALF_P3', time: '10:00 - 11:11' },
-            { label: 'A Day - Half - Period 4', value: 'A_HALF_P4', time: '11:10 - 12:01' },
-
-
-            // B Day Half
-            { label: 'B Day - Half - Period 5', value: 'B_HALF_P5', time: '07:45 - 08:51' },
-            { label: 'B Day - Half - Period 6', value: 'B_HALF_P6', time: '08:50 - 10:01' },
-            { label: 'B Day - Half - Period 7', value: 'B_HALF_P7', time: '10:00 - 11:11' },
-            { label: 'B Day - Half - Period 8', value: 'B_HALF_P8', time: '11:10 - 12:01' },
+            { label: 'Advisory',              value: 'ADVISORY', fullDayTime: '09:05 - 09:46', halfDayTime: null },
+            // A Day Periods
+            { label: 'A Day - Period 1',      value: 'A_P1',     fullDayTime: '07:45 - 09:05', halfDayTime: '07:45 - 08:51' },
+            { label: 'A Day - Period 2',      value: 'A_P2',     fullDayTime: '09:45 - 11:05', halfDayTime: '08:50 - 10:01' },
+            { label: 'A Day - Period 3',      value: 'A_P3',     fullDayTime: '11:05 - 13:00', halfDayTime: '10:00 - 11:11' },
+            { label: 'A Day - Period 4',      value: 'A_P4',     fullDayTime: '13:00 - 14:26', halfDayTime: '11:10 - 12:01' },
+            // B Day Periods
+            { label: 'B Day - Period 5',      value: 'B_P5',     fullDayTime: '07:45 - 09:05', halfDayTime: '07:45 - 08:51' },
+            { label: 'B Day - Period 6',      value: 'B_P6',     fullDayTime: '09:45 - 11:05', halfDayTime: '08:50 - 10:01' },
+            { label: 'B Day - Period 7',      value: 'B_P7',     fullDayTime: '11:05 - 13:00', halfDayTime: '10:00 - 11:11' },
+            { label: 'B Day - Period 8',      value: 'B_P8',     fullDayTime: '13:00 - 14:26', halfDayTime: '11:10 - 12:01' },
         ];
 
 
@@ -781,36 +764,31 @@
         // --- DEFAULT DATA & CONFIGURATION ---
         const defaultClassData = [
             {
-                categoryName: 'Daily Schedule',
+                categoryName: 'Advisory',
                 classes: [
-                    { title: 'Geography', details: 'Period 1 - Room 1209, Mrs. Witherspoon (A Day 7:45AM - 9:05AM)', url: 'https://canyons.instructure.com/courses/1813424', scheduleSlot: 'A_FULL_P1' },
-                    { title: 'Advisory (A Day)', details: 'Room 2405, Mrs. Gathro (A Day 9:05AM - 9:46AM)', url: 'https://canyons.instructure.com/courses/1814181/modules', scheduleSlot: 'A_FULL_ADVISORY' }, // Moved
-                    { title: 'Engineering', details: 'Period 2 - Room 1916, Mr. Maupin (A Day 9:45AM - 11:05AM)', url: 'https://canyons.instructure.com/courses/1815045', scheduleSlot: 'A_FULL_P2' },
-                    { title: 'Period 3 (A Day)', details: 'Placeholder for P3 A Day Full', url: 'https://canyons.instructure.com/courses/1815253/modules', scheduleSlot: 'A_FULL_P3' },
-                    { title: 'Period 4 (A Day)', details: 'Placeholder for P4 A Day Full', url: 'https://canyons.instructure.com/courses/1813068/modules', scheduleSlot: 'A_FULL_P4' },
-                    { title: 'Seminary', details: 'Period 5 - Seminary (B Day 7:45AM - 9:05AM)', url: '#', scheduleSlot: 'B_FULL_P5' },
-                    { title: 'Advisory (B Day)', details: 'Placeholder for B Day Advisory Full', url: 'https://canyons.instructure.com/courses/1814761/modules', scheduleSlot: 'B_FULL_ADVISORY' }, // Moved
-                    { title: 'Period 6 (B Day)', details: 'Placeholder for P6 B Day Full', url: 'https://canyons.instructure.com/courses/1814560/modules', scheduleSlot: 'B_FULL_P6' },
-                    { title: 'Period 7 (B Day)', details: 'Placeholder for P7 B Day Full', url: 'https://canyons.instructure.com/courses/1813313/modules', scheduleSlot: 'B_FULL_P7' },
-                    { title: 'Period 8 (B Day)', details: 'Placeholder for P8 B Day Full', url: 'https://canyons.instructure.com/courses/1815190/modules', scheduleSlot: 'B_FULL_P8' },
-                    // Half Day Classes
-                    { title: 'Period 1 (A Half Day)', details: 'Placeholder for P1 A Day Half', url: 'https://canyons.instructure.com/courses/1813424/modules', scheduleSlot: 'A_HALF_P1' },
-                    { title: 'Period 2 (A Half Day)', details: 'Placeholder for P2 A Day Half', url: 'https://canyons.instructure.com/courses/1815045', scheduleSlot: 'A_HALF_P2' },
-                    { title: 'Period 3 (A Half Day)', details: 'Placeholder for P3 A Day Half', url: 'https://canyons.instructure.com/courses/1815253/modules', scheduleSlot: 'A_HALF_P3' },
-                    { title: 'Period 4 (A Half Day)', details: 'Placeholder for P4 A Day Half', url: 'https://canyons.instructure.com/courses/1813068/modules', scheduleSlot: 'A_HALF_P4' },
-                    { title: 'Period 5 (B Half Day)', details: 'Placeholder for P5 B Day Half', url: '#', scheduleSlot: 'B_HALF_P5' },
-                    { title: 'Period 6 (B Half Day)', details: 'Placeholder for P6 B Day Half', url: 'https://canyons.instructure.com/courses/1814761', scheduleSlot: 'B_HALF_P6' },
-                    { title: 'Period 7 (B Half Day)', details: 'Placeholder for P7 B Day Half', url: 'https://canyons.instructure.com/courses/1813313/modules', scheduleSlot: 'B_HALF_P7' },
-                    { title: 'Period 8 (B Half Day)', details: 'Placeholder for P8 B Day Half', url: 'https://canyons.instructure.com/courses/1815190/modules', scheduleSlot: 'B_HALF_P8' },
+                    { title: 'Advisory', details: 'Room 2405, Mrs. Gathro', url: 'https://canyons.instructure.com/courses/1814181/modules', scheduleSlot: 'ADVISORY' }
                 ],
-                isSideStacked: false 
+                isSideStacked: null
             },
             {
-                categoryName: 'Other Links',
+                categoryName: 'A Day',
                 classes: [
-                    { title: 'Online Classes', details: "Canyon's Virtual Academy", url: 'https://canyonsva.agilixbuzz.com/student/home/courses' },
+                    { title: 'Math - 3H Precalc', details: 'Period 1 - Room 1209, Mrs. Witherspoon', url: 'https://canyons.instructure.com/courses/1813424', scheduleSlot: 'A_P1' },
+                    { title: 'CAD - Mechanical Design 2', details: 'Period 2 - Room 1916, Mr. Maupin', url: 'https://canyons.instructure.com/courses/1815045', scheduleSlot: 'A_P2' },
+                    { title: 'World History', details: 'Period 3 - Room 1209, Mrs. Witherspoon', url: 'https://canyons.instructure.com/courses/1815253/modules', scheduleSlot: 'A_P3' },
+                    { title: 'Woodworking - Guitar Design', details: 'Period 4 - Room 2405, Mrs. Gathro', url: 'https://canyons.instructure.com/courses/1813068/modules', scheduleSlot: 'A_P4' }
                 ],
-                isSideStacked: false
+                isSideStacked: true
+            },
+            {
+                categoryName: 'B Day',
+                classes: [
+                    { title: 'Photography', details: 'Period 5 - Seminary Building', url: '#', scheduleSlot: 'B_P5' },
+                    { title: 'German', details: 'Period 6 - Room 1511, Mr. Maughan', url: 'https://canyons.instructure.com/courses/1814560/modules', scheduleSlot: 'B_P6' },
+                    { title: 'Video Production', details: 'Period 7 - Room 2201, Mrs. Peterson', url: 'https://canyons.instructure.com/courses/1813313/modules', scheduleSlot: 'B_P7' },
+                    { title: 'Woodworking - Furniture Design', details: 'Period 8 - Room 1904, Mrs. Barlow', url: 'https://canyons.instructure.com/courses/1815190/modules', scheduleSlot: 'B_P8' }
+                ],
+                isSideStacked: true
             }
         ];
         let classData = [];
@@ -833,7 +811,7 @@
 
         // --- DATA MANAGEMENT (Local Storage) ---
         function loadClassData() {
-            const savedData = localStorage.getItem('classDataV2');
+            const savedData = localStorage.getItem('classDataV3'); // Changed version to prevent conflicts with old data
             classData = savedData ? JSON.parse(savedData) : JSON.parse(JSON.stringify(defaultClassData));
             // Ensure all loaded categories have the isSideStacked property and scheduleSlot
             classData.forEach(category => {
@@ -850,7 +828,7 @@
 
 
         function saveToLocalStorage() {
-            localStorage.setItem('classDataV2', JSON.stringify(classData));
+            localStorage.setItem('classDataV3', JSON.stringify(classData)); // Changed version
         }
 
 
@@ -879,10 +857,7 @@
                     }
                 } else {
                     // If there's an unfinished side-stacked group, render it first
-                    if (currentSideStackedGroup.length > 0) {
-                        htmlOutput += renderSideStackedGroupHTML(currentSideStackedGroup);
-                        currentSideStackedGroup = [];
-                    }
+                    
                     // Then render this full-width category
                     htmlOutput += renderFullWidthCategoryHTML(category);
                 }
@@ -911,16 +886,16 @@
                     </div>
                 `;
             }).join('');
-            return `<div class="main-category-row">${groupItemsHTML}</div>`;
+            return `<div class="main-category-row pb-12">${groupItemsHTML}</div>`;
         }
 
 
         function renderFullWidthCategoryHTML(category) {
             const classCardsHTML = category.classes.map(createClassCardHTML).join('');
             return `
-                <div class="main-category-item full-width">
+                <div class="main-category-item full-width pb-12">
                     <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-center">${category.categoryName}</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
                         ${classCardsHTML}
                     </div>
                 </div>
@@ -931,6 +906,7 @@
 
 
         function createClassCardHTML(classItem) {
+            const url = classItem.url.replace("https://", "");
             return `
                 <div class="class-card p-6 rounded-xl shadow-lg border"
                      onclick="window.location.href='${classItem.url}'">
@@ -939,7 +915,7 @@
                     <button class="new-tab-button" onclick="event.stopPropagation(); window.open('${classItem.url}', '_blank');" title="Open in new tab">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     </button>
-                    <div class="class-url-display" title="${classItem.url}">${classItem.url}</div>
+                    <div class="class-url-display" title="${url}">${url}</div>
                 </div>
             `;
         }
@@ -1357,7 +1333,7 @@
 
 
         function loadUserScheduleSlotOptions() {
-            const savedScheduleSlots = localStorage.getItem('userScheduleSlotOptions');
+            const savedScheduleSlots = localStorage.getItem('userScheduleSlotOptionsV2'); // New version
             if (savedScheduleSlots) {
                 userScheduleSlotOptions = JSON.parse(savedScheduleSlots);
             } else {
@@ -1368,7 +1344,7 @@
 
 
         function saveUserScheduleSlotOptions() {
-            localStorage.setItem('userScheduleSlotOptions', JSON.stringify(userScheduleSlotOptions));
+            localStorage.setItem('userScheduleSlotOptionsV2', JSON.stringify(userScheduleSlotOptions)); // New version
         }
 
 
@@ -1384,23 +1360,42 @@
             const periodsToDisplay = userScheduleSlotOptions.filter(option => option.value !== '');
 
 
-            periodsToDisplay.forEach((slot, index) => {
-                // Split the time string into start and end for two time inputs
-                const [startTime, endTime] = slot.time.split(' - ');
+            periodsToDisplay.forEach((slot) => {
+                const [fullDayStart, fullDayEnd] = slot.fullDayTime ? slot.fullDayTime.split(' - ') : ['', ''];
+                const [halfDayStart, halfDayEnd] = slot.halfDayTime ? slot.halfDayTime.split(' - ') : ['', ''];
 
 
                 const div = document.createElement('div');
-                div.className = 'bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm';
+                div.className = 'bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm space-y-3';
                 div.innerHTML = `
-                    <p class="font-semibold mb-2 text-gray-900 dark:text-white">${slot.label}</p>
-                    <div class="flex gap-2 items-center">
-                        <input type="time" class="form-input flex-1" value="${startTime}"
-                               data-slot-value="${slot.value}" data-time-part="start"
-                               onchange="updateScheduleTime(this.dataset.slotValue, this.dataset.timePart, this.value)">
-                        <span class="text-gray-600 dark:text-gray-300">-</span>
-                        <input type="time" class="form-input flex-1" value="${endTime}"
-                               data-slot-value="${slot.value}" data-time-part="end"
-                               onchange="updateScheduleTime(this.dataset.slotValue, this.dataset.timePart, this.value)">
+                    <p class="font-semibold text-lg text-center text-gray-900 dark:text-white">${slot.label}</p>
+                    
+                    <!-- Full Day Inputs -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Day (Mon-Thu)</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="time" class="form-input flex-1" value="${fullDayStart}"
+                                   data-slot-value="${slot.value}" data-time-type="fullDayTime" data-time-part="start"
+                                   onchange="updateScheduleTime(this)">
+                            <span class="text-gray-600 dark:text-gray-300">-</span>
+                            <input type="time" class="form-input flex-1" value="${fullDayEnd}"
+                                   data-slot-value="${slot.value}" data-time-type="fullDayTime" data-time-part="end"
+                                   onchange="updateScheduleTime(this)">
+                        </div>
+                    </div>
+
+                    <!-- Half Day Inputs -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Half Day (Fri)</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="time" class="form-input flex-1" value="${halfDayStart}"
+                                   data-slot-value="${slot.value}" data-time-type="halfDayTime" data-time-part="start"
+                                   onchange="updateScheduleTime(this)" ${!slot.halfDayTime ? 'disabled' : ''}>
+                            <span class="text-gray-600 dark:text-gray-300">-</span>
+                            <input type="time" class="form-input flex-1" value="${halfDayEnd}"
+                                   data-slot-value="${slot.value}" data-time-type="halfDayTime" data-time-part="end"
+                                   onchange="updateScheduleTime(this)" ${!slot.halfDayTime ? 'disabled' : ''}>
+                        </div>
                     </div>
                 `;
                 timeSlotsDisplay.appendChild(div);
@@ -1408,9 +1403,9 @@
         }
 
 
-        function updateScheduleTime(slotValue, part, newTime) {
-            // 1. Store original state for potential undo
-            originalScheduleSlotOptionsState = JSON.parse(JSON.stringify(userScheduleSlotOptions));
+        function updateScheduleTime(inputElement) {
+            const { slotValue, timeType, timePart } = inputElement.dataset;
+            const newTime = inputElement.value;
 
 
             const slotIndex = userScheduleSlotOptions.findIndex(slot => slot.value === slotValue);
@@ -1419,25 +1414,27 @@
                 return;
             }
 
-            let [startTime, endTime] = userScheduleSlotOptions[slotIndex].time.split(' - ');
-            if (part === 'start') {
+            let timeString = userScheduleSlotOptions[slotIndex][timeType];
+            if (!timeString) timeString = "00:00 - 00:00"; // Initialize if null
+
+            let [startTime, endTime] = timeString.split(' - ');
+
+            if (timePart === 'start') {
                 startTime = newTime;
             } else {
                 endTime = newTime;
             }
-            userScheduleSlotOptions[slotIndex].time = `${startTime} - ${endTime}`;
+            userScheduleSlotOptions[slotIndex][timeType] = `${startTime} - ${endTime}`;
 
-
-            // 2. Immediately re-render the form with the *proposed* change
-            renderSchedulingSettingsForm();
-
-
-            // 3. Check for overlaps and offer resolution
-            detectAndResolveConflict(slotValue);
+            // No conflict resolution for now as it gets complex with two schedules.
+            // The user is responsible for ensuring times don't overlap.
+            saveUserScheduleSlotOptions();
+            saveToLocalStorage();
         }
 
 
         function parseTime(timeStr) {
+            if (!timeStr || !timeStr.includes(':')) return { hour: 0, minute: 0 };
             const [hourStr, minuteStr] = timeStr.split(':');
             return { hour: parseInt(hourStr, 10), minute: parseInt(minuteStr, 10) };
         }
@@ -1453,199 +1450,6 @@
             const minutes = totalMinutes % 60;
             return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
         }
-
-
-        function getSlotDayType(slotValue) {
-            if (!slotValue) return null;
-            // Example: A_FULL_P1 -> A_FULL, B_HALF_P5 -> B_HALF
-            const parts = slotValue.split('_');
-            if (parts.length >= 2) {
-                return `${parts[0]}_${parts[1]}`;
-            }
-            return null;
-        }
-
-
-        function detectAndResolveConflict(editedSlotValue) {
-            const editedSlot = userScheduleSlotOptions.find(slot => slot.value === editedSlotValue);
-            if (!editedSlot) return;
-
-
-            const editedSlotDayType = getSlotDayType(editedSlot.value);
-            const editedSlotStartMinutes = timeToMinutes(parseTime(editedSlot.time.split(' - ')[0]));
-            const editedSlotEndMinutes = timeToMinutes(parseTime(editedSlot.time.split(' - ')[1]));
-
-
-            // Filter for other slots of the same day type, excluding the edited slot itself
-            let relevantSlots = userScheduleSlotOptions.filter(
-                slot => getSlotDayType(slot.value) === editedSlotDayType && slot.value !== editedSlotValue && slot.time
-            );
-
-
-            let hasOverlap = false;
-            for (const otherSlot of relevantSlots) {
-                const otherSlotStartMinutes = timeToMinutes(parseTime(otherSlot.time.split(' - ')[0]));
-                const otherSlotEndMinutes = timeToMinutes(parseTime(otherSlot.time.split(' - ')[1]));
-
-
-                // Check for overlap: (startA < endB && endA > startB)
-                if (editedSlotStartMinutes < otherSlotEndMinutes && editedSlotEndMinutes > otherSlotStartMinutes) {
-                    hasOverlap = true;
-                    break;
-                }
-            }
-
-
-            if (hasOverlap) {
-                showConfirmationModal(
-                    `The time change for "${editedSlot.label}" overlaps with another event. What would you like to do?`,
-                    [
-                        {
-                            text: 'Push Other Events Later',
-                            action: () => pushOverlappingEvents(editedSlotDayType, editedSlotValue)
-                        },
-                        {
-                            text: 'Undo Change',
-                            action: () => revertTimeChange()
-                        }
-                    ]
-                );
-            } else {
-                // No conflict, save the changes
-                saveUserScheduleSlotOptions();
-                saveToLocalStorage(); // Also save class data as schedule slots are part of it
-                renderClassLinks(); // Re-render main display to reflect potential schedule changes
-            }
-        }
-
-
-        function pushOverlappingEvents(dayType, editedSlotValue) {
-            const editedSlot = userScheduleSlotOptions.find(slot => slot.value === editedSlotValue);
-            if (!editedSlot) return;
-
-
-            // Get all slots for this day type, including the edited one
-            let slotsToAdjust = userScheduleSlotOptions.filter(
-                slot => getSlotDayType(slot.value) === dayType && slot.time
-            ).sort((a, b) => {
-                // Sort by start time
-                const timeA = timeToMinutes(parseTime(a.time.split(' - ')[0]));
-                const timeB = timeToMinutes(parseTime(b.time.split(' - ')[0]));
-                return timeA - timeB;
-            });
-
-
-            let lastOccupiedTime = 0; // Minutes from midnight
-
-
-            for (let i = 0; i < slotsToAdjust.length; i++) {
-                let currentSlot = slotsToAdjust[i];
-                let currentStartMinutes = timeToMinutes(parseTime(currentSlot.time.split(' -')[0]));
-                let currentEndMinutes = timeToMinutes(parseTime(currentSlot.time.split(' - ')[1]));
-                let currentDuration = currentEndMinutes - currentStartMinutes;
-
-
-                // If the current slot is the one that was just edited, its time is already set.
-                // We just need to ensure 'lastOccupiedTime' is updated based on its new end time.
-                if (currentSlot.value === editedSlotValue) {
-                    lastOccupiedTime = timeToMinutes(parseTime(editedSlot.time.split(' - ')[1]));
-                    continue; // Move to the next slot, as this one is already positioned
-                }
-
-
-                // If the current slot starts before the last occupied time, push it
-                if (currentStartMinutes < lastOccupiedTime) {
-                    const pushAmount = lastOccupiedTime - currentStartMinutes;
-                    currentStartMinutes += pushAmount;
-                    currentEndMinutes = currentStartMinutes + currentDuration; // Maintain duration
-                    
-                    // Update the actual userScheduleSlotOptions array (by reference)
-                    const originalIndex = userScheduleSlotOptions.findIndex(s => s.value === currentSlot.value);
-                    if (originalIndex !== -1) {
-                        userScheduleSlotOptions[originalIndex].time = `${minutesToTime(currentStartMinutes)} - ${minutesToTime(currentEndMinutes)}`;
-                    }
-                }
-                // Update lastOccupiedTime for the next iteration
-                lastOccupiedTime = Math.max(lastOccupiedTime, currentEndMinutes);
-            }
-
-
-            saveUserScheduleSlotOptions();
-            saveToLocalStorage(); // Save class data as schedule slots are part of it
-            renderSchedulingSettingsForm(); // Re-render the form with adjusted times
-            renderClassLinks(); // Update main display
-            hideConfirmationModal(); // Close the confirmation modal
-        }
-
-
-        function revertTimeChange() {
-            if (originalScheduleSlotOptionsState) {
-                userScheduleSlotOptions = JSON.parse(JSON.stringify(originalScheduleSlotOptionsState));
-                saveUserScheduleSlotOptions(); // Save the reverted state
-                saveToLocalStorage(); // Also save class data as schedule slots are part of it
-                renderSchedulingSettingsForm(); // Re-render the form with original times
-                renderClassLinks(); // Update main display
-            }
-            hideConfirmationModal(); // Close the confirmation modal
-        }
-
-
-        // Modify showConfirmationModal to accept options
-        function showConfirmationModal(message, options) {
-            document.getElementById('confirmation-message').textContent = message;
-            const confirmationButtonsContainer = document.getElementById('confirmation-buttons');
-
-
-            // Clear existing buttons
-            confirmationButtonsContainer.innerHTML = '';
-            
-            options.forEach(option => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.className = 'modal-footer-button'; // Base class for styling
-                // Apply specific color classes based on action type or just use a default
-                if (option.text === 'Push Other Events Later') {
-                    button.classList.add('bg-green-600');
-                } else if (option.text === 'Undo Change') {
-                    button.classList.add('bg-red-600');
-                } else {
-                    button.classList.add('bg-indigo-600'); // Default
-                }
-                button.textContent = option.text;
-                button.onclick = () => {
-                    option.action();
-                    hideConfirmationModal(); // Hide modal after action
-                };
-                confirmationButtonsContainer.appendChild(button);
-            });
-
-
-            const modal = document.getElementById('confirmation-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            requestAnimationFrame(() => {
-                modal.classList.remove('opacity-0');
-                modal.classList.add('show');
-            });
-        }
-
-
-        // Ensure the original hideConfirmationModal still works for simple cases
-        function hideConfirmationModal(event) {
-            // Only close if the click is on the modal background itself, not its content, or if called without an event
-            if (event && event.target.id !== 'confirmation-modal' && !event.target.classList.contains('modal-footer-button')) return;
-            
-            const modal = document.getElementById('confirmation-modal');
-            modal.classList.add('opacity-0');
-            modal.classList.remove('show');
-            
-            modal.addEventListener('transitionend', () => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }, { once : true });
-        }
-
-
 
 
         function openSchedulingSettingsModal() {
@@ -1771,8 +1575,6 @@
             e.dataTransfer.dropEffect = 'move';
 
 
-            // IMPORTANT: If a class item is currently being dragged, do not allow category reordering.
-            // This prevents class drags from accidentally triggering category drag-over visuals/logic.
             if (draggedClassItem) {
                 return; 
             }
@@ -1783,27 +1585,20 @@
 
             if (target && target !== draggedCategoryItem) {
                 const targetRect = target.getBoundingClientRect();
-
-
-                // Remove drag-over from all categories first
                 document.querySelectorAll('.category-group').forEach(item => item.classList.remove('drag-over'));
-                // Add drag-over to the current target
                 target.classList.add('drag-over');
 
 
-                // Determine insertion point based on both vertical and horizontal position
                 const isCloserVertically = Math.abs(e.clientY - targetRect.y) < Math.abs(e.clientX - targetRect.x);
 
 
                 if (isCloserVertically) {
-                    // Vertical drag logic
                     if (e.clientY < (targetRect.y + targetRect.height / 2)) {
                         target.parentNode.insertBefore(draggedCategoryItem, target);
                     } else {
                         target.parentNode.insertBefore(draggedCategoryItem, target.nextSibling);
                     }
                 } else {
-                    // Horizontal drag logic (more relevant for side-stacked items)
                     if (e.clientX < (targetRect.x + targetRect.width / 2)) {
                         target.parentNode.insertBefore(draggedCategoryItem, target);
                     } else {
@@ -1821,8 +1616,6 @@
 
         function handleCategoryDrop(e) {
             e.preventDefault();
-            // The DOM has already been reordered by handleCategoryDragOver
-            // The data model update and re-render will happen in handleCategoryDragEnd
         }
 
 
@@ -1834,11 +1627,8 @@
             draggedCategoryItem = null;
             draggedCategoryOriginalIndex = null;
             
-            // Re-read the order from the DOM and update classData
             const newClassDataOrder = [];
             document.querySelectorAll('#categories-form-container .category-group').forEach(groupEl => {
-                // Find the corresponding category object from the original classData based on its original index
-                // The safest way is to rebuild the data entirely from the DOM.
                 const categoryName = groupEl.querySelector('.category-name-input').value.trim();
                 const isSideStacked = groupEl.dataset.isSideStacked === 'true';
                 const classesInDom = Array.from(groupEl.querySelectorAll('.class-inputs-container .class-input-group')).map(classEl => {
@@ -1846,32 +1636,29 @@
                         title: classEl.querySelector('.class-title-input').value.trim(),
                         details: classEl.querySelector('.class-details-input').value.trim(),
                         url: classEl.querySelector('.class-url-input').value.trim(),
-                        scheduleSlot: classEl.querySelector('.class-schedule-slot-select').value.trim() // Get schedule slot from select
+                        scheduleSlot: classEl.querySelector('.class-schedule-slot-select').value.trim()
                     };
                 });
                 newClassDataOrder.push({ categoryName, classes: classesInDom, isSideStacked });
             });
-            // Update classData with the new order
             classData = newClassDataOrder;
 
 
-            saveClassSettings(); // Save the new order of categories
+            saveClassSettings(); 
         }
 
 
         // --- DRAG AND DROP FUNCTIONS FOR CLASSES ---
         function handleClassDragStart(e, categoryIndex, classIndex) {
-            // Ensure the drag is initiated from the drag handle, not input fields
             if (!e.target.classList.contains('drag-handle-class') && e.target.tagName !== 'svg' && e.target.tagName !== 'circle') {
                 e.preventDefault();
                 return;
             }
 
 
-            // Find the closest .class-input-group which is the actual draggable element
             draggedClassItem = e.target.closest('.class-input-group');
             if (!draggedClassItem) {
-                e.preventDefault(); // Prevent default drag if not dragging the correct element
+                e.preventDefault(); 
                 return;
             }
 
@@ -1879,17 +1666,13 @@
             draggedClassOriginalCategoryIndex = categoryIndex;
             draggedClassOriginalIndex = classIndex;
             e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/plain', JSON.stringify({ categoryIndex, classIndex })); // Store original indices
+            e.dataTransfer.setData('text/plain', JSON.stringify({ categoryIndex, classIndex })); 
             
-            // Set the drag image to be the entire class item
             e.dataTransfer.setDragImage(draggedClassItem, 0, 0);
 
 
-            // Add a class to the dragged item for styling
             setTimeout(() => {
                 draggedClassItem.classList.add('dragging');
-                // IMPORTANT: Remove the dragged item from its original parent here.
-                // This ensures it only exists in one place in the DOM during the drag.
                 if (draggedClassItem.parentNode) {
                     draggedClassItem.parentNode.removeChild(draggedClassItem);
                 }
@@ -1898,7 +1681,7 @@
 
 
         function handleClassDragOver(e) {
-            e.preventDefault(); // Necessary to allow dropping
+            e.preventDefault(); 
             e.dataTransfer.dropEffect = 'move';
 
 
@@ -1907,7 +1690,6 @@
             let targetClassContainer = null;
 
 
-            // Find the correct target container for classes
             targetClassContainer = target.closest('.class-inputs-container');
             if (!targetClassContainer) {
                 const targetCategoryGroup = target.closest('.category-group');
@@ -1918,21 +1700,16 @@
 
 
             if (draggedClassItem && targetClassContainer) {
-                // If dragging over the dragged item itself, do nothing
                 if (targetClassItem === draggedClassItem) {
                     return;
                 }
 
-                // The dragged item should already be removed from its original parent in handleClassDragStart.
-                // So, we always append it to the target container first, then position it.
                 if (draggedClassItem.parentNode !== targetClassContainer) {
                     targetClassContainer.appendChild(draggedClassItem);
                 }
 
 
-                // Now, determine the correct insertion point within the target container
                 if (targetClassItem && targetClassItem.parentNode === targetClassContainer) {
-                    // Dragging over another class item within the same or a different container
                     const targetRect = targetClassItem.getBoundingClientRect();
                     const targetMidpoint = targetRect.y + targetRect.height / 2;
 
@@ -1943,16 +1720,13 @@
                         targetClassContainer.insertBefore(draggedClassItem, targetClassItem.nextSibling);
                     }
                 } else {
-                    // Dragging over the container background (empty space) or into an empty container
                     const containerRect = targetClassContainer.getBoundingClientRect();
                     const containerMidpointY = containerRect.y + containerRect.height / 2;
 
 
                     if (e.clientY < containerMidpointY) {
-                        // Closer to the top of the container, insert at the beginning
                         targetClassContainer.insertBefore(draggedClassItem, targetClassContainer.firstElementChild);
                     } else {
-                        // Closer to the bottom, append to the end
                         targetClassContainer.appendChild(draggedClassItem);
                     }
                 }
@@ -1966,30 +1740,23 @@
 
 
         function handleClassDrop(e) {
-            e.preventDefault(); // Necessary to allow dropping
-            // The DOM has already been manipulated by handleClassDragOver.
-            // Data model update happens in handleClassDragEnd.
+            e.preventDefault(); 
         }
 
 
         function handleClassDragEnd(e) {
-            // Clean up visual feedback
             if (draggedClassItem) {
                 draggedClassItem.classList.remove('dragging');
-                draggedClassItem.style.opacity = '1'; // Ensure opacity is reset to 1
+                draggedClassItem.style.opacity = '1'; 
             }
 
 
-            if (!draggedClassItem) return; // Exit if no item was being dragged
+            if (!draggedClassItem) return; 
 
 
-            // The DOM should already be in the correct order from handleClassDragOver.
-            // Now, rebuild the classData based on the current DOM state after the drag operation.
-            // This function now also calls renderSettingsForm() internally, which will redraw everything.
             saveClassSettings(); 
 
 
-            // Reset global drag variables
             draggedClassItem = null;
             draggedClassOriginalCategoryIndex = null;
             draggedClassOriginalIndex = null;
@@ -2010,7 +1777,7 @@
             const now = new Date();
             const year = now.getFullYear();
             const month = now.getMonth() + 1;
-            const dotw = now.getDay(); //day of the week (0 is sunday)
+            const dotw = now.getDay(); // Sunday: 0, Monday: 1, ..., Friday: 5
             const day = now.getDate();
             const currentHour = now.getHours();
             const currentMinute = now.getMinutes();
@@ -2020,53 +1787,63 @@
             let scheduleSlotToFind = null;
 
 
-            // Determine if it's an A-Day or B-Day (full or half)
-            let isADay = userADays.includes(currentDateString);
-            let isBDay = userBDays.includes(currentDateString);
-            let isHalfDay = dotw === 5; // Friday is half day
+            // Determine day type
+            const isADay = userADays.includes(currentDateString);
+            const isBDay = userBDays.includes(currentDateString);
+            const isHalfDay = (dotw === 5); // Friday is half day
+
+
+            // If it's not a scheduled A or B day, do nothing.
+            if (!isADay && !isBDay) {
+                console.log("Not a scheduled A or B day. Staying on current page.");
+                return;
+            }
 
 
             // Iterate through userScheduleSlotOptions to find a matching time slot
             for (const slotOption of userScheduleSlotOptions) {
-                if (!slotOption.time) continue; // Skip if no time is defined for the slot
+                // Determine which time to use (full or half day)
+                const timeStringToUse = isHalfDay ? slotOption.halfDayTime : slotOption.fullDayTime;
 
 
-                const [startTimeStr, endTimeStr] = slotOption.time.split(' - ');
+                // Skip if no time is defined for this type of day (e.g., Advisory on half-day)
+                if (!timeStringToUse) continue;
+
+
+                const [startTimeStr, endTimeStr] = timeStringToUse.split(' - ');
                 const start = parseTime(startTimeStr);
                 const end = parseTime(endTimeStr);
 
 
-                // Convert current time and slot times to minutes for easier comparison
                 const currentTimeInMinutes = currentHour * 60 + currentMinute;
-                const startTimeInMinutes = start.hour * 60 + start.minute;
+                let startTimeInMinutes = start.hour * 60 + start.minute;
                 let endTimeInMinutes = end.hour * 60 + end.minute;
 
 
-                // Handle cases where the end time crosses midnight (e.g., 23:00 - 01:00)
-                if (endTimeInMinutes < startTimeInMinutes) {
-                    endTimeInMinutes += 24 * 60; // Add 24 hours to end time if it's on the next day
-                }
-                // Adjust current time if it's past midnight but before the "end time" of a slot that crosses midnight
-                let adjustedCurrentTimeInMinutes = currentTimeInMinutes;
-                if (currentTimeInMinutes < startTimeInMinutes && currentTimeInMinutes < end.minute && endTimeInMinutes > 24 * 60) {
-                    adjustedCurrentTimeInMinutes += 24 * 60;
-                }
-
-
+                // Handle overnight slots (unlikely for school but good practice)
+                if (endTimeInMinutes < startTimeInMinutes) endTimeInMinutes += 24 * 60;
 
 
                 // Check if current time falls within the period's time range
-                if (adjustedCurrentTimeInMinutes >= startTimeInMinutes && adjustedCurrentTimeInMinutes < endTimeInMinutes) {
-                    // Check if the slot matches the current day type (A/B, Full/Half)
-                    const slotPrefix = slotOption.value.substring(0, slotOption.value.indexOf('_')); // "A" or "B"
-                    const slotType = slotOption.value.includes('HALF') ? 'HALF' : 'FULL'; // "FULL" or "HALF"
+                if (currentTimeInMinutes >= startTimeInMinutes && currentTimeInMinutes < endTimeInMinutes) {
+                    const slotValue = slotOption.value;
+                    const slotDayType = slotValue.split('_')[0]; // 'A', 'B', or 'ADVISORY'
 
 
-                    if ((isADay && slotPrefix === 'A' && ((isHalfDay && slotType === 'HALF') || (!isHalfDay && slotType === 'FULL'))) ||
-                        (isBDay && slotPrefix === 'B' && ((isHalfDay && slotType === 'HALF') || (!isHalfDay && slotType === 'FULL')))) {
-                        
-                        scheduleSlotToFind = slotOption.value;
-                        break; // Found the current period, exit loop
+                    // Match Advisory: happens on any full A or B day
+                    if (slotValue === 'ADVISORY' && (isADay || isBDay) && !isHalfDay) {
+                        scheduleSlotToFind = slotValue;
+                        break;
+                    }
+                    // Match A day period
+                    if (isADay && slotDayType === 'A') {
+                        scheduleSlotToFind = slotValue;
+                        break;
+                    }
+                    // Match B day period
+                    if (isBDay && slotDayType === 'B') {
+                        scheduleSlotToFind = slotValue;
+                        break;
                     }
                 }
             }
@@ -2093,8 +1870,8 @@
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             loadClassData();
-            loadUserScheduleDates(); // Load user-defined A/B days on startup
-            loadUserScheduleSlotOptions(); // Load user-defined time slots on startup
+            loadUserScheduleDates(); 
+            loadUserScheduleSlotOptions(); 
 
 
             renderClassLinks();
@@ -2103,38 +1880,33 @@
             setInterval(displayTime, 1000);
 
 
-            applyTheme(currentThemeState); // Apply the initial theme on load
+            applyTheme(currentThemeState); 
             document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-            // Listen for system theme changes if the current theme is 'system'
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
                 if (currentThemeState === 'system') applyTheme('system');
             });
             
-            // No need to attach event listener for confirm-action-button here, as showConfirmationModal handles it dynamically.
-
-
-            // Add a shared CSS class for all form inputs and selects for easier styling
             const style = document.createElement('style');
             style.textContent = `
-                .form-input, .form-select { /* Added .form-select here */
+                .form-input, .form-select {
                     width: 100%;
                     padding: 0.75rem;
-                    background-color: #f3f4f6; /* gray-100 */
-                    border: 1px solid #d1d5db; /* gray-300 */
+                    background-color: #f3f4f6;
+                    border: 1px solid #d1d5db;
                     border-radius: 0.5rem;
-                    color: #1f2937; /* gray-800 */
+                    color: #1f2937;
                     transition: all 0.2s ease;
                 }
-                body.dark-theme .form-input, body.dark-theme .form-select { /* Added .form-select here */
-                    background-color: #4b5563; /* gray-600 */
-                    border-color: #6b7280; /* gray-500 */
-                    color: #f9fafb; /* gray-50 */
+                body.dark-theme .form-input, body.dark-theme .form-select {
+                    background-color: #4b5563;
+                    border-color: #6b7280;
+                    color: #f9fafb;
                 }
-                .form-input:focus, .form-select:focus { /* Added .form-select here */
+                .form-input:focus, .form-select:focus {
                     outline: none;
                     ring-width: 2px;
-                    ring-color: #4f46e5; /* indigo-600 */
-                    border-color: #4f46e5; /* indigo-600 */
+                    ring-color: #4f46e5;
+                    border-color: #4f46e5;
                 }
             `;
             document.head.appendChild(style);
@@ -2143,6 +1915,56 @@
             // Call redirect function on load
             getScheduledClassUrl();
         });
+        function showConfirmationModal(message, options) {
+            document.getElementById('confirmation-message').textContent = message;
+            const confirmationButtonsContainer = document.getElementById('confirmation-buttons');
+
+
+            // Clear existing buttons
+            confirmationButtonsContainer.innerHTML = '';
+            
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'modal-footer-button'; // Base class for styling
+                // Apply specific color classes based on action type or just use a default
+                if (option.text === 'Push Other Events Later') {
+                    button.classList.add('bg-green-600');
+                } else if (option.text === 'Undo Change') {
+                    button.classList.add('bg-red-600');
+                } else {
+                    button.classList.add('bg-indigo-600'); // Default
+                }
+                button.textContent = option.text;
+                button.onclick = () => {
+                    option.action();
+                    hideConfirmationModal(); // Hide modal after action
+                };
+                confirmationButtonsContainer.appendChild(button);
+            });
+
+
+            const modal = document.getElementById('confirmation-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('show');
+            });
+        }
+        function hideConfirmationModal(event) {
+            // Only close if the click is on the modal background itself, not its content, or if called without an event
+            if (event && event.target.id !== 'confirmation-modal' && !event.target.classList.contains('modal-footer-button')) return;
+            
+            const modal = document.getElementById('confirmation-modal');
+            modal.classList.add('opacity-0');
+            modal.classList.remove('show');
+            
+            modal.addEventListener('transitionend', () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, { once : true });
+        }
     </script>
 </body>
 </html>
