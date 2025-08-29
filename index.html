@@ -1859,8 +1859,8 @@
                     for (const classItem of category.classes) {
                         if (classItem.scheduleSlot === scheduleSlotToFind && classItem.url && classItem.url !== '#') {
                             console.log(`Redirecting to scheduled class: ${classItem.title} (${classItem.scheduleSlot})`);
-                            window.location.href = classItem.url;
-                            return; // Stop after redirecting
+                            return `${classItem.title}
+                            (${classItem.url}`; // Stop after redirecting
                         }
                     }
                 }
@@ -1917,7 +1917,7 @@
 
 
             // Call redirect function on load
-            showConfirmationModal('Open Current Class?', [
+            showConfirmationModal(`Open Current Class? ${getScheduledClassUrl()}`, [
                 { text: 'Confirm', action: () => {
                     getScheduledClassUrl();
                 }},
