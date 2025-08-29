@@ -1917,7 +1917,13 @@
 
 
             // Call redirect function on load
-            getScheduledClassUrl();
+            showConfirmationModal('Open Current Class?', [
+                { text: 'Confirm', action: () => {
+                    getScheduledClassUrl();
+                }},
+                { text: 'Cancel', action: () => {} } // Do nothing on cancel
+            ]);
+            
         });
         function showConfirmationModal(message, options) {
             document.getElementById('confirmation-message').textContent = message;
