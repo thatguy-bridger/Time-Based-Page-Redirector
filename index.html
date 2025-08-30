@@ -763,15 +763,6 @@
         // --- DEFAULT DATA & CONFIGURATION ---
         const defaultClassData = [
             {
-                categoryName: 'Advisory',
-                classes: [
-                    { title: 'Advisory', details: 'Advisory - Room 1301, Ms. Simonhill', url: 'https://github.com/thatguy-bridger/Time-Based-Page-Redirector/edit/main/index.html', scheduleSlot: 'ADVISORY' },
-                    { title: 'Online Courses', details: '-', url: 'https://canyonsva.agilixbuzz.com/student/home/courses', scheduleSlot: '' },
-                    { title: 'Dashboard', details: 'Canvas Classes', url: 'https://canyons.instructure.com', scheduleSlot: '' }
-                ],
-                isSideStacked: false
-            },
-            {
                 categoryName: 'A Day',
                 classes: [
                     { title: 'Math 3H', details: 'Period 1 - Room 1209, Mrs. Waters', url: 'https://canyons.instructure.com/courses/1906037/modules', scheduleSlot: 'A_P1' },
@@ -790,6 +781,15 @@
                     { title: 'Furniture Design', details: 'Period 8 - Room 1924, Mr. Newman', url: 'https://canyons.instructure.com/courses/1907451/modules', scheduleSlot: 'B_P8' }
                 ],
                 isSideStacked: true
+            }, 
+            {
+                categoryName: 'Other',
+                classes: [
+                    { title: 'Advisory', details: 'Advisory - Room 1301, Ms. Simonhill', url: 'https://github.com/thatguy-bridger/Time-Based-Page-Redirector/edit/main/index.html', scheduleSlot: 'ADVISORY' },
+                    { title: 'Online Courses', details: '-', url: 'https://canyonsva.agilixbuzz.com/student/home/courses', scheduleSlot: '' },
+                    { title: 'Dashboard', details: 'Canvas Classes', url: 'https://canyons.instructure.com', scheduleSlot: '' }
+                ],
+                isSideStacked: false
             }
         ];
 
@@ -1917,7 +1917,7 @@
 
 
             // Call redirect function on load
-            if (getScheduledClassUrl() ==undefined){
+            if (getScheduledClassUrl()!==undefined){
             const myInterval = setInterval(() => {
                 window.open(getScheduledClassUrl());
                 clearInterval(myInterval);
