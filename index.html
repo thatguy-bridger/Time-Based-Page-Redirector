@@ -1917,13 +1917,19 @@
 
 
             // Call redirect function on load
-            showConfirmationModal(`Open Current Class? ${getScheduledClassUrl()}`, [
-                { text: 'Confirm', action: () => {
+            if (getScheduledClassUrl() ==undefined){
+            const myInterval = setInterval(() => {
+                window.open(getScheduledClassUrl());
+                clearInterval(myInterval);
+            }, 5000);
+            
+            showConfirmationModal(`Open Current Class: ${getScheduledClassUrl()}?`, [
+                { text: 'Continue', action: () => {
                     getScheduledClassUrl();
                 }},
                 { text: 'Cancel', action: () => {} } // Do nothing on cancel
             ]);
-            
+            }
         });
         function showConfirmationModal(message, options) {
             document.getElementById('confirmation-message').textContent = message;
