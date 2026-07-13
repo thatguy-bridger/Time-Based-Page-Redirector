@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="redirector.png" type="image/x-icon">
     <style>
         /* Applied immediately (before Tailwind/JS load) so first paint never flashes white */
-        html { background-color: #eef1f8; } 
+        html { background-color: #eef1f8; }
         @media (prefers-color-scheme: dark) { html { background-color: #05050a; } }
     </style>
     <!-- Tailwind CSS CDN -->
@@ -884,6 +884,24 @@
                 </div>
             </div>
 
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold mb-3">Google Calendar Sync</h4>
+                <p class="text-xs text-gray-600 dark:text-gray-300 mb-3">
+                    Publishes your day notes (and A/B-Day labels) as a live .ics feed via a secret GitHub Gist, which Google Calendar can subscribe to. The gist URL is unauthenticated once created — anyone with the link can read it, so keep it as private as the token below.
+                </p>
+                <label class="block text-sm font-medium mb-1 text-gray-600 dark:text-gray-300">GitHub Token (Gist read/write scope)</label>
+                <input type="password" id="pref-github-token" class="form-input mb-3" placeholder="github_pat_..." onchange="saveGithubTokenPref(this.value)" autocomplete="off">
+                <div id="gist-sync-status" class="text-xs text-gray-600 dark:text-gray-300 mb-3">Not connected yet.</div>
+                <div id="gist-sync-url-row" class="hidden mb-3">
+                    <label class="block text-sm font-medium mb-1 text-gray-600 dark:text-gray-300">Subscribe in Google Calendar (Other calendars → + → From URL)</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="gist-sync-url" class="form-input" readonly>
+                        <button type="button" class="modal-footer-button bg-indigo-600" onclick="copyGistSyncUrl()">Copy</button>
+                    </div>
+                </div>
+                <button type="button" class="modal-footer-button bg-blue-600 text-white" onclick="syncNotesToGist(true)">Sync Now</button>
+            </div>
+
             <div>
                 <h4 class="text-lg font-semibold mb-3">Data</h4>
                 <button type="button" class="modal-footer-button bg-red-600" onclick="confirmClearAllNotes()">Clear All Notes</button>
@@ -1501,6 +1519,7 @@
 
             localStorage.setItem('userADays', JSON.stringify(userADays));
             localStorage.setItem('userBDays', JSON.stringify(userBDays));
+            scheduleGistSync();
         }
 
         function loadUserScheduleSlotOptions() {
@@ -1650,7 +1669,7 @@
         function confirmResetEverything() {
             showConfirmationModal('Reset EVERYTHING — classes, schedule dates, calendar notes, and preferences? This cannot be undone.', [
                 { text: 'Confirm', action: () => {
-                    ['classDataV3', 'userADays', 'userBDays', 'userScheduleSlotOptionsV2', 'dayNotesV1', 'theme', 'calendarView', 'timeFormat', 'showGoogleCalendar', 'googleCalendarEmbedUrl', 'weekStart'].forEach(k => localStorage.removeItem(k));
+                    ['classDataV3', 'userADays', 'userBDays', 'userScheduleSlotOptionsV2', 'dayNotesV1', 'theme', 'calendarView', 'timeFormat', 'showGoogleCalendar', 'googleCalendarEmbedUrl', 'weekStart', 'githubGistToken', 'githubGistId', 'githubGistRawUrl'].forEach(k => localStorage.removeItem(k));
                     window.location.reload();
                 }},
                 { text: 'Cancel', action: () => {} }
@@ -1964,6 +1983,7 @@
         }
         function saveDayNotes() {
             localStorage.setItem('dayNotesV1', JSON.stringify(dayNotes));
+            scheduleGistSync();
         }
 
         function switchView(view) {
@@ -2252,6 +2272,7 @@
         function openCalendarSettingsModal() {
             document.getElementById('pref-default-view-select').value = localStorage.getItem('calendarView') || 'month';
             document.getElementById('pref-week-start-select').value = localStorage.getItem('weekStart') || '0';
+            updateGistSyncUI();
             const modal = document.getElementById('calendar-settings-modal');
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -2280,6 +2301,204 @@
         function saveWeekStartPref(value) {
             localStorage.setItem('weekStart', value);
             renderCalendar();
+        }
+
+        // --- GOOGLE CALENDAR SYNC (via a secret GitHub Gist serving a live .ics feed) ---
+        const GIST_FILENAME = 'school-calendar-notes.ics';
+        let gistSyncTimer = null;
+        let gistSyncInFlight = false;
+
+        function saveGithubTokenPref(value) {
+            const token = value.trim();
+            if (token) {
+                localStorage.setItem('githubGistToken', token);
+            } else {
+                localStorage.removeItem('githubGistToken');
+            }
+            updateGistSyncUI();
+        }
+
+        function escapeIcsText(str) {
+            return (str || '')
+                .replace(/\\/g, '\\\\')
+                .replace(/;/g, '\\;')
+                .replace(/,/g, '\\,')
+                .replace(/\r?\n/g, '\\n');
+        }
+
+        function foldIcsLine(line) {
+            // RFC 5545: lines should not exceed 75 octets; continuation lines start with a space.
+            if (line.length <= 75) return line;
+            let result = line.slice(0, 75);
+            let rest = line.slice(75);
+            while (rest.length > 0) {
+                result += '\r\n ' + rest.slice(0, 74);
+                rest = rest.slice(74);
+            }
+            return result;
+        }
+
+        function formatIcsDate(date) {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
+            return `${y}${m}${d}`;
+        }
+
+        function formatIcsTimestamp(date) {
+            const pad = n => String(n).padStart(2, '0');
+            return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}Z`;
+        }
+
+        function buildIcsFeed() {
+            const dtstamp = formatIcsTimestamp(new Date());
+            const lines = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Pick A Class//School Calendar//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'X-WR-CALNAME:School Calendar Notes'
+            ];
+
+            const allDateKeys = new Set([...userADays, ...userBDays, ...Object.keys(dayNotes)]);
+
+            allDateKeys.forEach(key => {
+                const note = dayNotes[key];
+                const dayType = userADays.includes(key) ? 'A-Day' : userBDays.includes(key) ? 'B-Day' : null;
+                if (!note && !dayType) return;
+
+                const date = parseDateKey(key);
+                const nextDate = new Date(date);
+                nextDate.setDate(nextDate.getDate() + 1);
+
+                const summary = (note && note.title) ? note.title : (dayType || 'School Day');
+                const descriptionParts = [];
+                if (dayType) descriptionParts.push(dayType);
+                if (note && note.notes) descriptionParts.push(note.notes);
+
+                lines.push('BEGIN:VEVENT');
+                lines.push(foldIcsLine(`UID:${key}@pick-a-class-school-calendar`));
+                lines.push(`DTSTAMP:${dtstamp}`);
+                lines.push(`DTSTART;VALUE=DATE:${formatIcsDate(date)}`);
+                lines.push(`DTEND;VALUE=DATE:${formatIcsDate(nextDate)}`);
+                lines.push(foldIcsLine(`SUMMARY:${escapeIcsText(summary)}`));
+                if (descriptionParts.length) {
+                    lines.push(foldIcsLine(`DESCRIPTION:${escapeIcsText(descriptionParts.join(' — '))}`));
+                }
+                lines.push('END:VEVENT');
+            });
+
+            lines.push('END:VCALENDAR');
+            return lines.join('\r\n');
+        }
+
+        function scheduleGistSync() {
+            if (!localStorage.getItem('githubGistToken')) return;
+            clearTimeout(gistSyncTimer);
+            gistSyncTimer = setTimeout(() => syncNotesToGist(false), 2000);
+        }
+
+        async function syncNotesToGist(showStatus) {
+            const token = localStorage.getItem('githubGistToken');
+            const statusEl = document.getElementById('gist-sync-status');
+            if (!token) {
+                if (showStatus && statusEl) statusEl.textContent = 'Add a GitHub token above first.';
+                return;
+            }
+            if (gistSyncInFlight) return;
+            gistSyncInFlight = true;
+            if (showStatus && statusEl) statusEl.textContent = 'Syncing...';
+
+            try {
+                const icsContent = buildIcsFeed();
+                const gistId = localStorage.getItem('githubGistId');
+                const headers = {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/vnd.github+json',
+                    'Content-Type': 'application/json'
+                };
+
+                let response;
+                if (gistId) {
+                    response = await fetch(`https://api.github.com/gists/${gistId}`, {
+                        method: 'PATCH',
+                        headers,
+                        body: JSON.stringify({ files: { [GIST_FILENAME]: { content: icsContent } } })
+                    });
+                    if (response.status === 404) {
+                        // Gist was deleted/moved — fall through and create a new one.
+                        localStorage.removeItem('githubGistId');
+                        response = null;
+                    }
+                }
+
+                if (!response) {
+                    response = await fetch('https://api.github.com/gists', {
+                        method: 'POST',
+                        headers,
+                        body: JSON.stringify({
+                            description: 'School Calendar Notes (live .ics feed)',
+                            public: false,
+                            files: { [GIST_FILENAME]: { content: icsContent } }
+                        })
+                    });
+                }
+
+                if (!response.ok) {
+                    const errBody = await response.text();
+                    throw new Error(`GitHub API ${response.status}: ${errBody}`);
+                }
+
+                const data = await response.json();
+                localStorage.setItem('githubGistId', data.id);
+                const rawUrl = data.files[GIST_FILENAME].raw_url;
+                localStorage.setItem('githubGistRawUrl', rawUrl);
+
+                if (showStatus && statusEl) statusEl.textContent = `Synced just now.`;
+                updateGistSyncUI();
+            } catch (err) {
+                console.error('Gist sync failed:', err);
+                if (statusEl) statusEl.textContent = `Sync failed: ${err.message}`;
+            } finally {
+                gistSyncInFlight = false;
+            }
+        }
+
+        function updateGistSyncUI() {
+            const token = localStorage.getItem('githubGistToken');
+            const rawUrl = localStorage.getItem('githubGistRawUrl');
+            const tokenInput = document.getElementById('pref-github-token');
+            const statusEl = document.getElementById('gist-sync-status');
+            const urlRow = document.getElementById('gist-sync-url-row');
+            const urlInput = document.getElementById('gist-sync-url');
+            if (!tokenInput) return;
+
+            tokenInput.value = token || '';
+
+            if (rawUrl) {
+                urlRow.classList.remove('hidden');
+                urlInput.value = rawUrl;
+                if (statusEl && statusEl.textContent === 'Not connected yet.') {
+                    statusEl.textContent = 'Connected. Subscribe using the URL below.';
+                }
+            } else {
+                urlRow.classList.add('hidden');
+                if (statusEl) statusEl.textContent = token ? 'Not synced yet — click "Sync Now".' : 'Not connected yet.';
+            }
+        }
+
+        function copyGistSyncUrl() {
+            const urlInput = document.getElementById('gist-sync-url');
+            urlInput.select();
+            navigator.clipboard.writeText(urlInput.value).then(() => {
+                const statusEl = document.getElementById('gist-sync-status');
+                if (statusEl) {
+                    const prev = statusEl.textContent;
+                    statusEl.textContent = 'Copied!';
+                    setTimeout(() => { statusEl.textContent = prev; }, 1500);
+                }
+            });
         }
 
         function confirmClearAllNotes() {
