@@ -22,7 +22,7 @@
             --glass-bg: rgba(255, 255, 255, 0.55);
             --glass-bg-strong: rgba(255, 255, 255, 0.75);
             --glass-border: rgba(15, 23, 42, 0.08);
-            --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.10);
+            --glass-shadow: 0 8px 32px rgba(27, 30, 36, 0.1);
             --text-primary: #0f172a;
             --text-secondary: #475569;
             --text-muted: #64748b;
@@ -724,12 +724,11 @@
                     </div>
 
                     <!-- Class Links Container -->
-                    <section id="class-links-container" class="mb-16"></section>
+                    <section id="class-links-container" class="mb-10"></section>
 
-                    <div id="gcal-embed-wrapper">
-                        <hr class="border-0 h-px bg-gradient-to-r from-transparent via-current opacity-20 my-10 transition-colors duration-500 ease-in-out">
-                        <iframe id="gcal-iframe" src="https://calendar.google.com/calendar/embed?height=1500&wkst=1&ctz=America%2FDenver&showPrint=0&showTitle=0&showCalendars=0&showTz=0&mode=AGENDA&title&src=NTczNGZhZTc4NGVmYzgxOTU5MzgxN2U3ZjYyNDQ3MDE0NGZlZWM0MzQzZTMyOWMwZjQ0ODhjYzZkMDg4YzUwZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ODgyM2YyNGQ0MTFiZjU5ZDlhY2U5Mzg5ZGVjYTEyZDIyYTM5MWQ1NWUwZGM4MWI4NzVkMWQ0YjFjNmE1Yjg3ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YmIzNzU5MmExNDkyNGUxOTMzNzM0MGI1NGI5OGNhNTljZjM2OGY5Y2YzYWY5NjEzMTY4ZmM0YjVkYTYzNjM3YUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Z212YmptZTY1bGlnNXZpdXY5bnNodGFmMWt2MG9rN2VAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&src=N3N0a2hzNmh0N201ZTRtdDJkM2IwbWkxa2Fya3NzNGNAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&src=MHFjbmE4dGF0Zjlxam9vZjRhY2k1N3RkNm1qb2Q4MTdAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&src=c3JhZWdsY2xhbjhxNm01NTFqYzFnbjZubHQ2MWZrM2FAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%2333b679&color=%23ad1457&color=%23f4511e&color=%23039be5&color=%23d50000&color=%23d50000&color=%23795548" style="border:solid 1px rgba(148,163,184,0.35);border-radius: 20px;
-  overflow: hidden;" width="100%" height="300" frameborder="0" scrolling="yes"></iframe>
+                    <div class="mt-4">
+                        <hr class="border-0 h-px bg-gradient-to-r from-transparent via-current opacity-20 my-8 transition-colors duration-500 ease-in-out">
+                        <div id="classes-calendar-preview"></div>
                     </div>
                 </div>
             </section>
@@ -737,18 +736,19 @@
             <!-- ===================== CALENDAR VIEW ===================== -->
             <section id="view-calendar" class="app-view hidden">
                 <div class="main-container rounded-3xl p-6 sm:p-10 border relative">
-                    <header class="flex flex-wrap justify-between items-center gap-4 mb-8">
+                    <header class="flex flex-wrap justify-between items-center gap-4 mb-4">
                         <h1 class="gradient-text text-3xl sm:text-4xl font-extrabold tracking-tight">School Calendar</h1>
                         <div class="view-toolbar items-center">
                             <button id="today-button" class="px-4 py-2 rounded-full text-sm font-semibold">Today</button>
                             <button id="export-button" class="px-4 py-2 rounded-full text-sm font-semibold">Export</button>
                             <button id="import-button" class="px-4 py-2 rounded-full text-sm font-semibold">Import</button>
-                            <input type="file" id="import-file-input" accept="application/json" class="hidden">
+                            <input type="file" id="import-file-input" accept="application/json,.json,text/csv,.csv" class="hidden">
                             <button id="calendar-settings-button" class="icon-btn p-3 rounded-full" onclick="openCalendarSettingsModal()" title="Settings">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             </button>
                         </div>
                     </header>
+                    <div id="import-status" class="hidden rounded-xl border px-3 py-2 text-sm mb-4"></div>
 
                     <!-- View Tabs -->
                     <div class="flex flex-wrap gap-2 mb-6" id="view-tabs">
@@ -806,12 +806,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="mt-4">
-                        <label class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300">
-                            <input type="checkbox" id="pref-show-gcal" onchange="saveShowGoogleCalendarPref(this.checked)">
-                            Show embedded Google Calendar on main page
-                        </label>
-                        <input type="url" id="pref-gcal-url" class="form-input mt-2" placeholder="Google Calendar embed URL" onchange="saveGoogleCalendarUrlPref(this.value)">
+                    <div class="mt-4 rounded-2xl border border-dashed border-gray-300/80 dark:border-gray-700/80 p-4 text-sm text-gray-600 dark:text-gray-300">
+                        The classes screen now uses a built-in calendar preview instead of the old embedded Google Calendar panel.
                     </div>
                 </div>
 
@@ -881,6 +877,23 @@
                             <option value="1">Monday</option>
                         </select>
                     </div>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold mb-3">External Calendars</h4>
+                <p class="text-xs text-gray-600 dark:text-gray-300 mb-3">
+                    Read-only .ics feeds (sports schedules, school district calendars, etc.) shown alongside your notes. Fetched directly from the browser; if a feed blocks that, a public CORS-proxy is used as a fallback.
+                </p>
+                <div id="external-feeds-list" class="mb-3"></div>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <input type="text" id="external-feed-label-input" class="form-input" placeholder="Label (e.g. Alta Hawks Athletics)">
+                    <input type="url" id="external-feed-url-input" class="form-input" placeholder="https://.../calendar.ics">
+                    <button type="button" class="modal-footer-button bg-indigo-600 flex-shrink-0" onclick="addExternalFeed()">Add</button>
+                </div>
+                <div class="flex items-center justify-between mt-3">
+                    <div id="external-feeds-status" class="text-xs text-gray-600 dark:text-gray-300"></div>
+                    <button type="button" class="modal-footer-button bg-blue-600 text-white" onclick="refreshExternalFeeds(true)">Refresh Now</button>
                 </div>
             </div>
 
@@ -1622,8 +1635,10 @@
 
             document.getElementById('pref-theme-select').value = currentThemeState;
             document.getElementById('pref-time-format-select').value = timeFormat;
-            document.getElementById('pref-show-gcal').checked = showGCal !== 'false';
-            document.getElementById('pref-gcal-url').value = gcalUrl || DEFAULT_GCAL_URL;
+            const showGCalInput = document.getElementById('pref-show-gcal');
+            const gcalUrlInput = document.getElementById('pref-gcal-url');
+            if (showGCalInput) showGCalInput.checked = showGCal !== 'false';
+            if (gcalUrlInput) gcalUrlInput.value = gcalUrl || DEFAULT_GCAL_URL;
 
             applyGoogleCalendarPrefs();
         }
@@ -1639,7 +1654,15 @@
         }
 
         function saveGoogleCalendarUrlPref(url) {
-            localStorage.setItem('googleCalendarEmbedUrl', url.trim());
+            let cleanUrl = url.trim();
+            // Tolerate pasting a whole <iframe src="..."> tag instead of just the URL.
+            const iframeMatch = cleanUrl.match(/<iframe[^>]*\ssrc=["']([^"']+)["']/i);
+            if (iframeMatch) {
+                cleanUrl = iframeMatch[1];
+                const input = document.getElementById('pref-gcal-url');
+                if (input) input.value = cleanUrl;
+            }
+            localStorage.setItem('googleCalendarEmbedUrl', cleanUrl);
             applyGoogleCalendarPrefs();
         }
 
@@ -1647,9 +1670,12 @@
             const wrapper = document.getElementById('gcal-embed-wrapper');
             const iframe = document.getElementById('gcal-iframe');
             const show = localStorage.getItem('showGoogleCalendar') !== 'false';
-            wrapper.classList.toggle('hidden', !show);
-            const url = localStorage.getItem('googleCalendarEmbedUrl');
-            if (url && iframe.src !== url) iframe.src = url;
+            if (wrapper) wrapper.classList.toggle('hidden', !show);
+            if (iframe) {
+                iframe.style.display = show ? 'block' : 'none';
+                const url = localStorage.getItem('googleCalendarEmbedUrl');
+                if (url && iframe.src !== url) iframe.src = url;
+            }
         }
 
         // --- DATA RESET ---
@@ -1669,7 +1695,7 @@
         function confirmResetEverything() {
             showConfirmationModal('Reset EVERYTHING — classes, schedule dates, calendar notes, and preferences? This cannot be undone.', [
                 { text: 'Confirm', action: () => {
-                    ['classDataV3', 'userADays', 'userBDays', 'userScheduleSlotOptionsV2', 'dayNotesV1', 'theme', 'calendarView', 'timeFormat', 'showGoogleCalendar', 'googleCalendarEmbedUrl', 'weekStart', 'githubGistToken', 'githubGistId', 'githubGistRawUrl'].forEach(k => localStorage.removeItem(k));
+                    ['classDataV3', 'userADays', 'userBDays', 'userScheduleSlotOptionsV2', 'dayNotesV1', 'theme', 'calendarView', 'timeFormat', 'showGoogleCalendar', 'googleCalendarEmbedUrl', 'weekStart', 'githubGistToken', 'githubGistId', 'githubGistRawUrl', 'externalIcsFeeds', 'externalIcsCache'].forEach(k => localStorage.removeItem(k));
                     window.location.reload();
                 }},
                 { text: 'Cancel', action: () => {} }
@@ -1984,6 +2010,89 @@
         function saveDayNotes() {
             localStorage.setItem('dayNotesV1', JSON.stringify(dayNotes));
             scheduleGistSync();
+            renderClassesCalendarPreview();
+        }
+
+        function renderClassesCalendarPreview() {
+            const container = document.getElementById('classes-calendar-preview');
+            if (!container) return;
+
+            const previewDate = new Date();
+            const year = previewDate.getFullYear();
+            const month = previewDate.getMonth();
+            const firstOfMonth = new Date(year, month, 1);
+            const weekStart = parseInt(localStorage.getItem('weekStart') || '0', 10);
+            const gridStart = new Date(firstOfMonth);
+            gridStart.setDate(gridStart.getDate() - ((firstOfMonth.getDay() - weekStart + 7) % 7));
+            const today = new Date();
+            const weekdayLabelsBase = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const weekdayHeaders = Array.from({ length: 7 }, (_, i) => weekdayLabelsBase[(weekStart + i) % 7])
+                .map(label => `<div class="text-[10px] uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 text-center">${label}</div>`)
+                .join('');
+
+            let cells = '';
+            const cursor = new Date(gridStart);
+            for (let i = 0; i < 35; i++) {
+                const isOutside = cursor.getMonth() !== month;
+                const isToday = isSameDay(cursor, today);
+                const dayType = getDayType(cursor);
+                const note = getNote(cursor);
+                const externalEvents = getExternalEventsForDate(cursor);
+                const badgeHtml = dayType ? `<span class="mt-1 text-[9px] font-semibold px-1.5 py-0.5 rounded-full ${dayType === 'A' ? 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-300' : 'bg-amber-500/15 text-amber-600 dark:text-amber-300'}">${dayType}-Day</span>` : '';
+                const noteDotHtml = note && (note.title || note.notes) ? `<span class="w-1.5 h-1.5 rounded-full bg-violet-500 mt-1"></span>` : '';
+                const externalDotsHtml = externalEvents.length ? `<div class="flex gap-1 mt-1 justify-center">${externalEvents.slice(0, 2).map(event => `<span class="w-1.5 h-1.5 rounded-full" style="background:${event.color}"></span>`).join('')}</div>` : '';
+
+                cells += `
+                    <div class="flex flex-col items-center justify-start rounded-lg border border-gray-200/70 dark:border-gray-700/70 p-1.5 min-h-[54px] ${isOutside ? 'opacity-40' : ''} ${isToday ? 'bg-indigo-500/10 border-indigo-400/40' : ''}">
+                        <span class="text-xs font-semibold ${isToday ? 'text-indigo-600 dark:text-indigo-300' : ''}">${cursor.getDate()}</span>
+                        ${badgeHtml}
+                        ${noteDotHtml}
+                        ${externalDotsHtml}
+                    </div>
+                `;
+                cursor.setDate(cursor.getDate() + 1);
+            }
+
+            const upcomingItems = [];
+            for (let offset = 0; offset < 6; offset++) {
+                const currentDay = new Date(today);
+                currentDay.setDate(today.getDate() + offset);
+                const key = dateKey(currentDay);
+                const note = dayNotes[key];
+                const dayType = getDayType(currentDay);
+                const externalEvents = getExternalEventsForDate(currentDay);
+                if (!dayType && !note && !externalEvents.length) continue;
+
+                const titleHtml = note && note.title ? `<p class="font-semibold text-sm">${escapeHtml(note.title)}</p>` : (dayType ? `<p class="font-semibold text-sm">${dayType}-Day</p>` : '<p class="font-semibold text-sm">Scheduled</p>');
+                const notesHtml = note && note.notes ? `<p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${escapeHtml(note.notes)}</p>` : '';
+                const externalHtml = externalEvents.length ? `<div class="mt-1 space-y-1">${externalEvents.slice(0, 2).map(event => `<p class="text-[11px] text-gray-500 dark:text-gray-400 truncate">${escapeHtml(event.title)}</p>`).join('')}</div>` : '';
+                upcomingItems.push(`
+                    <div class="rounded-xl border border-gray-200/70 dark:border-gray-700/70 p-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">${currentDay.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                            ${dayType ? `<span class="text-[10px] font-semibold px-2 py-1 rounded-full ${dayType === 'A' ? 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-300' : 'bg-amber-500/15 text-amber-600 dark:text-amber-300'}">${dayType}-Day</span>` : ''}
+                        </div>
+                        ${titleHtml}
+                        ${notesHtml}
+                        ${externalHtml}
+                    </div>
+                `);
+            }
+
+            container.innerHTML = `
+                <div class="rounded-2xl border border-gray-200/70 dark:border-gray-700/70 bg-white/70 dark:bg-slate-900/50 p-4 shadow-sm backdrop-blur-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <div>
+                            <p class="text-sm font-semibold">Calendar</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">This month and what is coming up</p>
+                        </div>
+                        <button type="button" class="px-3 py-2 rounded-full text-sm font-semibold border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-slate-800 transition" onclick="switchAppView('calendar')">Open full calendar</button>
+                    </div>
+                    <div class="grid grid-cols-7 gap-1 mb-3">${weekdayHeaders}</div>
+                    <div class="grid grid-cols-7 gap-1">${cells}</div>
+                    <div class="mt-4 space-y-2">${upcomingItems.length ? upcomingItems.join('') : '<p class="text-sm text-gray-500 dark:text-gray-400">No notes or special dates are scheduled in the next week.</p>'}</div>
+                </div>
+            `;
         }
 
         function switchView(view) {
@@ -2032,6 +2141,7 @@
             } else if (calendarView === 'agenda') {
                 content.innerHTML = renderAgendaView();
             }
+            renderClassesCalendarPreview();
         }
 
         function getWeekStart() {
@@ -2069,9 +2179,15 @@
                 const isToday = isSameDay(cursor, today);
                 const dayType = getDayType(cursor);
                 const note = getNote(cursor);
+                const externalEvents = getExternalEventsForDate(cursor);
                 const badgeHtml = dayType ? `<span class="day-badge badge-${dayType.toLowerCase()}">${dayType}-Day</span>` : '';
                 const titleHtml = note && note.title ? `<p class="text-xs mt-1 truncate font-medium">${escapeHtml(note.title)}</p>` : '';
                 const dotHtml = note && (note.title || note.notes) ? `<span class="note-dot"></span>` : '';
+                const externalDotsHtml = externalEvents.length ? `
+                    <div class="flex gap-1 mt-1">
+                        ${externalEvents.slice(0, 4).map(e => `<span class="w-1.5 h-1.5 rounded-full" style="background:${e.color}" title="${escapeHtml(e.title)} — ${escapeHtml(e.feedLabel)}"></span>`).join('')}
+                    </div>
+                ` : '';
                 cells += `
                     <div class="day-cell p-2 rounded-lg border ${isOutside ? 'outside-month' : ''} ${isToday ? 'is-today' : ''}" onclick="openDay('${dateKey(cursor)}')">
                         <div class="flex justify-between items-center">
@@ -2079,6 +2195,7 @@
                             ${badgeHtml}
                         </div>
                         ${titleHtml}
+                        ${externalDotsHtml}
                         ${dotHtml}
                     </div>
                 `;
@@ -2104,9 +2221,17 @@
                 const isToday = isSameDay(d, today);
                 const dayType = getDayType(d);
                 const note = getNote(d);
-                const badgeHtml = dayType ? `<span class="day-badge badge-${dayType.toLowerCase()}">${dayType}-Day</span>` : '';
+                const externalEvents = getExternalEventsForDate(d);
+                const badgeLabel = dayType ? `${dayType}-Day` : note && (note.title || note.notes) ? 'Event' : '';
+                const badgeClass = dayType ? `day-badge badge-${dayType.toLowerCase()}` : note && (note.title || note.notes) ? 'day-badge bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-200' : '';
+                const badgeHtml = badgeLabel ? `<span class="${badgeClass}">${badgeLabel}</span>` : '';
                 const titleHtml = note && note.title ? `<p class="text-sm mt-2 font-semibold">${escapeHtml(note.title)}</p>` : '';
                 const notesHtml = note && note.notes ? `<p class="text-xs mt-1 text-gray-500 dark:text-gray-400 line-clamp-4">${escapeHtml(note.notes)}</p>` : '';
+                const externalHtml = externalEvents.length ? `
+                    <div class="mt-2 space-y-0.5">
+                        ${externalEvents.slice(0, 3).map(e => `<p class="text-xs truncate flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${e.color}"></span>${escapeHtml(e.title)}</p>`).join('')}
+                    </div>
+                ` : '';
                 cols += `
                     <div class="week-day-col p-3 rounded-lg border ${isToday ? 'is-today' : ''}" onclick="openDay('${dateKey(d)}')">
                         <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">${d.toLocaleDateString('en-US', { weekday: 'short' })}</p>
@@ -2116,6 +2241,7 @@
                         </div>
                         ${titleHtml}
                         ${notesHtml}
+                        ${externalHtml}
                     </div>
                 `;
             }
@@ -2125,11 +2251,31 @@
         function renderDayView() {
             const dayType = getDayType(currentDate);
             const note = getNote(currentDate) || { title: '', notes: '' };
-            const badgeHtml = dayType ? `<span class="day-badge badge-${dayType.toLowerCase()} text-sm px-3 py-1">${dayType}-Day</span>` : `<span class="text-sm text-gray-500 dark:text-gray-400">No school scheduled</span>`;
+            const externalEvents = getExternalEventsForDate(currentDate);
+            const badgeHtml = dayType
+                ? `<span class="day-badge badge-${dayType.toLowerCase()} text-sm px-3 py-1">${dayType}-Day</span>`
+                : note.title || note.notes
+                    ? `<span class="day-badge bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-200 text-sm px-3 py-1">Event</span>`
+                    : `<span class="text-sm text-gray-500 dark:text-gray-400">No school scheduled</span>`;
+            const externalHtml = externalEvents.length ? `
+                <div class="mb-6">
+                    <p class="text-sm font-semibold mb-2">Other Events Today</p>
+                    <div class="space-y-1">
+                        ${externalEvents.map(e => `
+                            <div class="flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${e.color}"></span>
+                                <span>${escapeHtml(e.title)}</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">(${escapeHtml(e.feedLabel)})</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
 
             return `
                 <div class="max-w-2xl mx-auto">
                     <div class="flex justify-center mb-6">${badgeHtml}</div>
+                    ${externalHtml}
                     <label class="block text-sm font-semibold mb-2" for="day-title-input">Title</label>
                     <input type="text" id="day-title-input" class="form-input mb-6" placeholder="e.g. Field Trip, Quiz in German" value="${escapeAttr(note.title)}">
 
@@ -2188,28 +2334,76 @@
         }
 
         function renderAgendaView() {
-            const allDays = [];
-            userADaysCal.forEach(k => allDays.push({ date: parseDateKey(k), type: 'A' }));
-            userBDaysCal.forEach(k => allDays.push({ date: parseDateKey(k), type: 'B' }));
-            allDays.sort((a, b) => a.date - b.date);
+            const dateMap = new Map();
+            userADaysCal.forEach(k => dateMap.set(k, { date: parseDateKey(k), type: 'A' }));
+            userBDaysCal.forEach(k => dateMap.set(k, { date: parseDateKey(k), type: 'B' }));
+            Object.keys(externalEventsByDate).forEach(k => {
+                if (!dateMap.has(k)) dateMap.set(k, { date: parseDateKey(k), type: null });
+            });
+            Object.keys(dayNotes).forEach(k => {
+                if (!dateMap.has(k)) dateMap.set(k, { date: parseDateKey(k), type: null });
+            });
+            const allDays = Array.from(dateMap.values()).sort((a, b) => a.date - b.date);
 
             const today = new Date();
+            const windowStart = new Date(today);
+            windowStart.setHours(0,0,0,0);
+            const windowEnd = new Date(windowStart);
+            windowEnd.setMonth(windowEnd.getMonth() + 3);
+            windowEnd.setHours(23,59,59,999);
+
             let html = '';
             let lastMonthLabel = '';
 
             allDays.forEach(entry => {
+                // only show days within the next 3 months
+                if (entry.date < windowStart || entry.date > windowEnd) return;
+                const key = dateKey(entry.date);
+                const dayType = getDayType(entry.date);
+                const note = dayNotes[key];
+                const externalEvents = getExternalEventsForDate(entry.date);
+                const hasNote = note && (note.title || note.notes);
+                const hasEntries = dayType || hasNote || externalEvents.length;
+                if (!hasEntries) return;
+
                 const monthLabel = entry.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                 if (monthLabel !== lastMonthLabel) {
                     html += `<h3 class="agenda-month-header">${monthLabel}</h3>`;
                     lastMonthLabel = monthLabel;
                 }
-                const key = dateKey(entry.date);
-                const note = dayNotes[key];
+
                 const isToday = isSameDay(entry.date, today);
-                const badgeHtml = `<span class="day-badge badge-${entry.type.toLowerCase()}">${entry.type}-Day</span>`;
-                const titleHtml = note && note.title ? `<span class="font-semibold">${escapeHtml(note.title)}</span>` : `<span class="text-gray-400 dark:text-gray-500 italic">No title</span>`;
-                const notesHtml = note && note.notes ? `<p class="text-xs mt-1 text-gray-500 dark:text-gray-400 truncate">${escapeHtml(note.notes)}</p>` : '';
-                const dotHtml = note && (note.title || note.notes) ? `<span class="note-dot" style="position:static; margin-left:0.5rem; display:inline-block;"></span>` : '';
+                const badgeHtml = dayType
+                    ? `<span class="day-badge badge-${dayType.toLowerCase()}">${dayType}-Day</span>`
+                    : hasNote
+                        ? `<span class="day-badge bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-200">Event</span>`
+                        : `<span class="day-badge bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-200">Calendar</span>`;
+
+                const titleText = note && note.title
+                    ? note.title
+                    : dayType
+                        ? `${dayType}-Day`
+                        : externalEvents.length
+                            ? externalEvents[0].title
+                            : 'Scheduled Event';
+                const titleHtml = `<span class="font-semibold">${escapeHtml(titleText)}</span>`;
+                const notesHtml = note && note.notes
+                    ? `<p class="text-xs mt-1 text-gray-500 dark:text-gray-400 whitespace-pre-wrap">${escapeHtml(note.notes)}</p>`
+                    : '';
+                const externalHtml = externalEvents.length ? `
+                    <div class="mt-2 space-y-1">
+                        ${externalEvents.map(e => `
+                            <div class="flex items-start gap-2 text-xs text-gray-700 dark:text-gray-300">
+                                <span class="w-2 h-2 rounded-full flex-shrink-0 mt-1" style="background:${e.color}"></span>
+                                <div>
+                                    <p class="font-medium">${escapeHtml(e.title)}</p>
+                                    <p class="text-[11px] text-gray-500 dark:text-gray-400">${escapeHtml(e.feedLabel || '')}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : '';
+                const dotHtml = hasNote ? `<span class="note-dot" style="position:static; margin-left:0.5rem; display:inline-block;"></span>` : '';
 
                 html += `
                     <div class="agenda-row flex items-center justify-between gap-4 p-4 rounded-lg border mb-2 ${isToday ? 'is-today' : ''}" onclick="openDay('${key}')">
@@ -2221,9 +2415,10 @@
                             <div class="min-w-0">
                                 ${titleHtml}
                                 ${notesHtml}
+                                ${externalHtml}
                             </div>
                         </div>
-                        <div class="flex items-center flex-shrink-0">
+                        <div class="flex items-center flex-shrink-0 gap-2">
                             ${badgeHtml}
                             ${dotHtml}
                         </div>
@@ -2232,7 +2427,7 @@
             });
 
             if (!html) {
-                html = `<p class="text-center text-gray-500 dark:text-gray-400 py-12">No A-Day or B-Day dates configured yet. Set them from the Classes settings.</p>`;
+                html = `<p class="text-center text-gray-500 dark:text-gray-400 py-12">No A-Day or B-Day dates, imported notes, or external events configured yet.</p>`;
             }
 
             return `<div class="max-h-[70vh] overflow-y-auto pr-2">${html}</div>`;
@@ -2250,28 +2445,668 @@
             URL.revokeObjectURL(url);
         }
 
+        function parseCsvRows(text) {
+            const rows = [];
+            let row = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (char === '"') {
+                    if (inQuotes && text[i + 1] === '"') {
+                        current += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    row.push(current);
+                    current = '';
+                } else if ((char === '\n' || char === '\r') && !inQuotes) {
+                    if (char === '\r' && text[i + 1] === '\n') {
+                        i++;
+                    }
+                    row.push(current);
+                    if (row.some(cell => cell !== '')) {
+                        rows.push(row);
+                    }
+                    row = [];
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+
+            if (current.length > 0 || row.length > 0) {
+                row.push(current);
+                if (row.some(cell => cell !== '')) {
+                    rows.push(row);
+                }
+            }
+
+            return rows;
+        }
+
+        function parseStandardCsv(text) {
+            const rows = parseCsvRows(text);
+            if (!rows.length) return null;
+
+            const normalizedHeaders = rows[0].map(cell => normalizeHeaderName(cell));
+            const subjectIndex = normalizedHeaders.findIndex(header => ['subject', 'title', 'name', 'event'].includes(header));
+            const startDateIndex = normalizedHeaders.findIndex(header => ['startdate', 'start', 'date', 'eventdate', 'begindate'].includes(header));
+            const startTimeIndex = normalizedHeaders.findIndex(header => ['starttime', 'starttimevalue', 'time', 'start'].includes(header));
+            const endDateIndex = normalizedHeaders.findIndex(header => ['enddate', 'end', 'finishdate'].includes(header));
+            const endTimeIndex = normalizedHeaders.findIndex(header => ['endtime', 'endtimevalue', 'finishtime'].includes(header));
+            const descriptionIndex = normalizedHeaders.findIndex(header => ['description', 'notes', 'details', 'content', 'summary'].includes(header));
+
+            if (startDateIndex === -1 && subjectIndex === -1) return null;
+
+            const imported = {};
+            rows.slice(1).forEach(row => {
+                const values = row.map(cell => cell.trim());
+                const dateValue = values[startDateIndex] || values[0] || '';
+                const subjectValue = values[subjectIndex] || values[0] || '';
+                const descriptionValue = values[descriptionIndex] || '';
+                const startTimeValue = values[startTimeIndex] || '';
+                const endTimeValue = values[endTimeIndex] || '';
+                const parsedDate = parseImportedDate(dateValue);
+                if (!parsedDate) return;
+
+                const noteKey = dateKey(parsedDate);
+                const timeText = startTimeValue && endTimeValue ? `${startTimeValue} - ${endTimeValue}` : '';
+                const noteText = [descriptionValue, timeText].filter(Boolean).join(' • ');
+                imported[noteKey] = {
+                    title: subjectValue || '',
+                    notes: noteText
+                };
+            });
+
+            return Object.keys(imported).length ? imported : null;
+        }
+
+        function normalizeHeaderName(value) {
+            return (value || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '');
+        }
+
+        function setImportStatus(message, type = 'info') {
+            const statusEl = document.getElementById('import-status');
+            if (!statusEl) return;
+            statusEl.classList.remove('hidden');
+            statusEl.className = 'rounded-xl border px-3 py-2 text-sm mb-4';
+            if (type === 'success') {
+                statusEl.classList.add('border-emerald-200', 'bg-emerald-50/80', 'text-emerald-700', 'dark:border-emerald-900/50', 'dark:bg-emerald-950/40', 'dark:text-emerald-200');
+            } else if (type === 'error') {
+                statusEl.classList.add('border-red-200', 'bg-red-50/80', 'text-red-700', 'dark:border-red-900/50', 'dark:bg-red-950/40', 'dark:text-red-200');
+            } else {
+                statusEl.classList.add('border-indigo-200', 'bg-indigo-50/80', 'text-indigo-700', 'dark:border-indigo-900/50', 'dark:bg-indigo-950/40', 'dark:text-indigo-200');
+            }
+            statusEl.textContent = message;
+        }
+
+        function parseColumnarCsv(text) {
+            const lines = text
+                .replace(/\r\n/g, '\n')
+                .replace(/\r/g, '\n')
+                .split('\n')
+                .map(line => line.replace(/^\uFEFF/, '').trim())
+                .filter(line => line !== '');
+
+            if (lines.length < 6) return null;
+
+            const expectedHeaders = ['subject', 'startdate', 'starttime', 'enddate', 'endtime', 'description'];
+            let startIndex = 0;
+            const firstHeaders = lines.slice(0, expectedHeaders.length).map(normalizeHeaderName);
+            const isHeaderBlock = firstHeaders.every((header, index) => header === expectedHeaders[index]);
+            if (isHeaderBlock) {
+                startIndex = expectedHeaders.length;
+            } else {
+                const subjectIndex = lines.findIndex(line => normalizeHeaderName(line) === 'subject');
+                if (subjectIndex !== -1) {
+                    const observedHeaders = lines.slice(subjectIndex, subjectIndex + expectedHeaders.length).map(normalizeHeaderName);
+                    if (observedHeaders.every((header, index) => header === expectedHeaders[index])) {
+                        startIndex = subjectIndex + expectedHeaders.length;
+                    }
+                }
+            }
+
+            const values = lines.slice(startIndex);
+            if (!values.length) return null;
+
+            const imported = {};
+            let parsedCount = 0;
+
+            for (let i = 0; i < values.length; i += 6) {
+                const row = values.slice(i, i + 6);
+                if (row.length < 6) break;
+                if (row.every(cell => !cell)) break;
+
+                const subject = row[0] || '';
+                const startDateValue = row[1] || '';
+                const startTimeValue = row[2] || '';
+                const endDateValue = row[3] || '';
+                const endTimeValue = row[4] || '';
+                const descriptionValue = row[5] || '';
+                const parsedDate = parseImportedDate(startDateValue || endDateValue);
+                if (!parsedDate) continue;
+
+                const noteKey = dateKey(parsedDate);
+                const existing = imported[noteKey] || {};
+                const timeText = startTimeValue && endTimeValue ? `${startTimeValue} - ${endTimeValue}` : '';
+                const noteText = [descriptionValue, timeText].filter(Boolean).join(' • ');
+                imported[noteKey] = {
+                    title: existing.title || subject || '',
+                    notes: [existing.notes, noteText].filter(Boolean).join('\n')
+                };
+                parsedCount += 1;
+            }
+
+            return parsedCount ? imported : null;
+        }
+
+        function parseImportedDate(value) {
+            const trimmed = (value || '').trim();
+            if (!trimmed) return null;
+
+            const isoDateMatch = trimmed.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[T ](\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+            if (isoDateMatch) {
+                const year = Number(isoDateMatch[1]);
+                const month = Number(isoDateMatch[2]);
+                const day = Number(isoDateMatch[3]);
+                const hour = isoDateMatch[4] ? Number(isoDateMatch[4]) : 0;
+                const minute = isoDateMatch[5] ? Number(isoDateMatch[5]) : 0;
+                const second = isoDateMatch[6] ? Number(isoDateMatch[6]) : 0;
+                if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+                    return new Date(year, month - 1, day, hour, minute, second);
+                }
+            }
+
+            const slashMatch = trimmed.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+            if (slashMatch) {
+                const [, first, second, third] = slashMatch;
+                const month = Number(first);
+                const day = Number(second);
+                const year = Number(third.length === 2 ? `20${third}` : third);
+                if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+                    return new Date(year, month - 1, day);
+                }
+            }
+
+            const direct = new Date(trimmed);
+            if (!Number.isNaN(direct.getTime())) return direct;
+
+            return null;
+        }
+
+        function parseImportedDayType(title) {
+            const rawTitle = (title || '').trim();
+            if (!rawTitle) return null;
+            const prefixMatch = rawTitle.match(/^\(?\s*([AB])\s*\)?[\s:-]+(.+)$/i);
+            if (prefixMatch) {
+                return prefixMatch[1].toUpperCase();
+            }
+            const normalized = rawTitle.toUpperCase();
+            if (/^A\s*-?\s*DAY\b/.test(normalized)) return 'A';
+            if (/^B\s*-?\s*DAY\b/.test(normalized)) return 'B';
+            return null;
+        }
+
+        function normalizeImportedTitle(title) {
+            const rawTitle = (title || '').trim();
+            if (!rawTitle) return rawTitle;
+            const prefixMatch = rawTitle.match(/^\(?\s*([AB])\s*\)?[\s:-]+(.+)$/i);
+            if (prefixMatch) {
+                return prefixMatch[2].trim() || rawTitle;
+            }
+            const dayMatch = rawTitle.match(/^\s*(A\s*-?\s*DAY|B\s*-?\s*DAY)[:\s-]+(.+)$/i);
+            if (dayMatch) {
+                return dayMatch[2].trim() || rawTitle;
+            }
+            return rawTitle;
+        }
+
+        function applyImportedDayTypes(imported) {
+            if (!imported || typeof imported !== 'object') return;
+            let changed = false;
+            Object.entries(imported).forEach(([key, note]) => {
+                if (!note || typeof note !== 'object') return;
+                const dayType = parseImportedDayType(note.title);
+                if (!dayType) return;
+                const target = dayType === 'A' ? userADays : userBDays;
+                const other = dayType === 'A' ? userBDays : userADays;
+                if (!target.includes(key)) {
+                    target.push(key);
+                    changed = true;
+                }
+                const otherIndex = other.indexOf(key);
+                if (otherIndex !== -1) {
+                    other.splice(otherIndex, 1);
+                    changed = true;
+                }
+                note.title = normalizeImportedTitle(note.title);
+            });
+            if (changed) {
+                localStorage.setItem('userADays', JSON.stringify(userADays));
+                localStorage.setItem('userBDays', JSON.stringify(userBDays));
+                loadScheduleDatesForCalendar();
+            }
+        }
+
+        function parseCsvNotes(text) {
+            const columnarImported = parseColumnarCsv(text);
+            if (columnarImported && Object.keys(columnarImported).length) {
+                return columnarImported;
+            }
+
+            const standardImported = parseStandardCsv(text);
+            if (standardImported && Object.keys(standardImported).length) {
+                return standardImported;
+            }
+
+            const rows = parseCsvRows(text);
+            if (!rows.length) return {};
+
+            const firstRow = rows[0].map(cell => cell.trim().toLowerCase());
+            const hasHeader = firstRow.some(header => ['date', 'title', 'notes', 'details', 'description'].includes(header));
+            const dataRows = hasHeader ? rows.slice(1) : rows;
+            const dateIndex = hasHeader ? firstRow.findIndex(header => header === 'date') : 0;
+            const titleIndex = hasHeader ? firstRow.findIndex(header => ['title', 'name'].includes(header)) : 1;
+            const notesIndex = hasHeader ? firstRow.findIndex(header => ['notes', 'details', 'description', 'content'].includes(header)) : 2;
+            const imported = {};
+
+            dataRows.forEach(row => {
+                const normalizedRow = row.map(cell => cell.trim());
+                const dateValue = normalizedRow[dateIndex] || normalizedRow[0] || '';
+                const titleValue = normalizedRow[titleIndex] || '';
+                const notesValue = normalizedRow[notesIndex] || normalizedRow[1] || '';
+                const parsedDate = parseImportedDate(dateValue);
+                if (!parsedDate) return;
+                imported[dateKey(parsedDate)] = {
+                    title: titleValue,
+                    notes: notesValue
+                };
+            });
+
+            return imported;
+        }
+
         function importNotes(file) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 try {
-                    const imported = JSON.parse(e.target.result);
+                    const text = e.target.result;
+                    const extension = (file.name || '').split('.').pop()?.toLowerCase();
+                    let imported;
+
+                    if (extension === 'csv') {
+                        imported = parseCsvNotes(text);
+                    } else {
+                        imported = JSON.parse(text);
+                    }
+
                     if (typeof imported !== 'object' || imported === null || Array.isArray(imported)) {
                         throw new Error('Invalid format');
                     }
+
+                    const importedCount = Object.keys(imported).length;
+                    if (!importedCount) {
+                        throw new Error('No valid dates were found in the file');
+                    }
+
+                    applyImportedDayTypes(imported);
                     dayNotes = { ...dayNotes, ...imported };
                     saveDayNotes();
+
+                    const importedDateKeys = Object.keys(imported).sort((a, b) => parseDateKey(a).getTime() - parseDateKey(b).getTime());
+                    if (importedDateKeys.length) {
+                        const firstImportedDate = parseDateKey(importedDateKeys[0]);
+                        currentDate = firstImportedDate;
+                        selectedDayKey = importedDateKeys[0];
+                    }
+
                     renderCalendar();
+                    const previewDate = importedDateKeys.slice(0, 3).map(key => `${parseDateKey(key).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`).join(', ');
+                    setImportStatus(`Imported ${importedCount} note${importedCount === 1 ? '' : 's'} from ${file.name}. First dates: ${previewDate}`, 'success');
+                    console.log('CSV import parsed', imported, 'keys', importedDateKeys);
                 } catch (err) {
-                    alert('Could not import that file — it doesn\'t look like a valid calendar notes export.');
+                    setImportStatus(`Import failed: ${err.message || 'The file did not match the supported calendar note formats.'}`, 'error');
+                    console.error(err);
                 }
             };
             reader.readAsText(file);
+        }
+
+        // --- EXTERNAL ICS CALENDAR FEEDS (read-only: sports schedules, school district calendars, etc.) ---
+        const EXTERNAL_FEED_COLORS = ['#22d3ee', '#fb923c', '#a3e635', '#f472b6', '#818cf8', '#facc15'];
+        let externalFeeds = [];
+        let externalEventsByDate = {};
+
+        function normalizeExternalFeed(feed, index) {
+            return {
+                id: feed.id || `feed-${Date.now()}`,
+                label: feed.label || feed.url || 'Untitled Feed',
+                url: feed.url || '',
+                color: feed.color || EXTERNAL_FEED_COLORS[index % EXTERNAL_FEED_COLORS.length],
+                enabled: typeof feed.enabled === 'boolean' ? feed.enabled : true
+            };
+        }
+
+        function loadExternalFeeds() {
+            const saved = localStorage.getItem('externalIcsFeeds');
+            if (saved) {
+                externalFeeds = JSON.parse(saved).map(normalizeExternalFeed);
+            } else {
+                externalFeeds = [
+                    { id: 'altahawks', label: 'Alta Hawks Athletics', url: 'https://www.calendarwiz.com/CalendarWiz_iCal.php?crd=altahawks' },
+                    { id: 'agilixbuzz', label: 'Online Courses', url: 'https://api.agilixbuzz.com/ical/~0~prObHCX.wEg28NaXxE2J3.VuXpEWjdZzfVNB4mDxpG8!/calendar.ics' }
+                ].map(normalizeExternalFeed);
+                saveExternalFeeds();
+            }
+        }
+
+        function saveExternalFeeds() {
+            localStorage.setItem('externalIcsFeeds', JSON.stringify(externalFeeds));
+        }
+
+        function feedColor(feed, index) {
+            return feed.color || EXTERNAL_FEED_COLORS[index % EXTERNAL_FEED_COLORS.length];
+        }
+
+        function addExternalFeed() {
+            const labelInput = document.getElementById('external-feed-label-input');
+            const urlInput = document.getElementById('external-feed-url-input');
+            const label = labelInput.value.trim();
+            const url = urlInput.value.trim();
+            if (!url) return;
+            externalFeeds.push({ id: 'feed-' + Date.now(), label: label || url, url, color: EXTERNAL_FEED_COLORS[externalFeeds.length % EXTERNAL_FEED_COLORS.length], enabled: true });
+            saveExternalFeeds();
+            labelInput.value = '';
+            urlInput.value = '';
+            renderExternalFeedsList();
+            refreshExternalFeeds(true);
+        }
+
+        function updateExternalFeedColor(id, color) {
+            const feed = externalFeeds.find(f => f.id === id);
+            if (!feed) return;
+            feed.color = color;
+            saveExternalFeeds();
+            renderExternalFeedsList();
+            rebuildExternalEventsIndex();
+            renderCalendar();
+        }
+
+        function toggleExternalFeedVisibility(id, visible) {
+            const feed = externalFeeds.find(f => f.id === id);
+            if (!feed) return;
+            feed.enabled = visible;
+            saveExternalFeeds();
+            renderExternalFeedsList();
+            if (!visible) {
+                const cache = getExternalFeedCache();
+                if (cache[feed.id]) {
+                    delete cache[feed.id];
+                    saveExternalFeedCache(cache);
+                }
+                rebuildExternalEventsIndex();
+                renderCalendar();
+            } else {
+                refreshExternalFeeds(true);
+            }
+        }
+
+        function removeExternalFeed(id) {
+            externalFeeds = externalFeeds.filter(f => f.id !== id);
+            saveExternalFeeds();
+            const cache = getExternalFeedCache();
+            delete cache[id];
+            saveExternalFeedCache(cache);
+            renderExternalFeedsList();
+            rebuildExternalEventsIndex();
+            renderCalendar();
+        }
+
+        function renderExternalFeedsList() {
+            const container = document.getElementById('external-feeds-list');
+            if (!container) return;
+            if (externalFeeds.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-500 dark:text-gray-400">No external calendars added yet.</p>`;
+                return;
+            }
+            container.innerHTML = externalFeeds.map((feed, i) => `
+                <div class="grid grid-cols-[40px_1fr_auto] items-center gap-3 text-sm py-2">
+                    <button type="button" class="w-9 h-9 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm flex-shrink-0" style="background:${escapeAttr(feed.color || feedColor(feed, i))};" onclick="document.getElementById('feed-color-${feed.id}').click()" title="Change feed color"></button>
+                    <input id="feed-color-${feed.id}" type="color" class="hidden" value="${escapeAttr(feed.color || feedColor(feed, i))}" onchange="updateExternalFeedColor('${feed.id}', this.value)">
+
+                    <div class="min-w-0">
+                        <div class="font-semibold truncate">${escapeHtml(feed.label)}</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400 truncate">${escapeHtml(feed.url)}</div>
+                    </div>
+
+                    <div class="flex items-center gap-2 justify-end">
+                        <button type="button" class="modal-footer-button ${feed.enabled ? 'bg-slate-100 text-slate-900 dark:bg-slate-700 dark:text-slate-100' : 'bg-transparent border border-gray-300 text-gray-700 dark:border-gray-700 dark:text-gray-300'}" onclick="toggleExternalFeedVisibility('${feed.id}', ${!feed.enabled})">
+                            ${feed.enabled ? 'Hide' : 'Show'}
+                        </button>
+                        <button type="button" class="remove-class-btn p-1" onclick="removeExternalFeed('${feed.id}')" title="Remove">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getExternalFeedCache() {
+            const saved = localStorage.getItem('externalIcsCache');
+            return saved ? JSON.parse(saved) : {};
+        }
+
+        function saveExternalFeedCache(cache) {
+            localStorage.setItem('externalIcsCache', JSON.stringify(cache));
+        }
+
+        async function fetchIcsWithFallback(url) {
+            try {
+                const res = await fetch(url, { cache: 'no-store' });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return await res.text();
+            } catch (err) {
+                const proxyUrl = 'https://corsproxy.io/?url=' + encodeURIComponent(url);
+                const res2 = await fetch(proxyUrl);
+                if (!res2.ok) throw new Error('Proxy HTTP ' + res2.status);
+                return await res2.text();
+            }
+        }
+
+        function unescapeIcsText(str) {
+            return (str || '')
+                .replace(/\\n/gi, '\n')
+                .replace(/\\,/g, ',')
+                .replace(/\\;/g, ';')
+                .replace(/\\\\/g, '\\');
+        }
+
+        function unfoldIcsLines(text) {
+            return text.replace(/\r\n[ \t]/g, '').replace(/\n[ \t]/g, '');
+        }
+
+        function parseIcsDateValue(value) {
+            const clean = value.replace(/[^0-9TZ]/g, '');
+            const isDateOnly = clean.length === 8;
+            const y = +clean.slice(0, 4), m = +clean.slice(4, 6) - 1, d = +clean.slice(6, 8);
+            if (isDateOnly) return { date: new Date(y, m, d), allDay: true };
+            const hh = +clean.slice(9, 11) || 0, mm = +clean.slice(11, 13) || 0, ss = +clean.slice(13, 15) || 0;
+            if (clean.endsWith('Z')) return { date: new Date(Date.UTC(y, m, d, hh, mm, ss)), allDay: false };
+            return { date: new Date(y, m, d, hh, mm, ss), allDay: false };
+        }
+
+        function parseIcsProperty(line) {
+            const colonIndex = line.indexOf(':');
+            if (colonIndex === -1) return null;
+            const left = line.slice(0, colonIndex);
+            const value = line.slice(colonIndex + 1);
+            const [name, ...paramParts] = left.split(';');
+            return { name: name.toUpperCase(), value, params: paramParts };
+        }
+
+        function expandRecurrence(startDate, rruleStr, windowStart, windowEnd) {
+            const parts = {};
+            rruleStr.split(';').forEach(p => {
+                const [k, v] = p.split('=');
+                if (k) parts[k] = v;
+            });
+            const freq = parts.FREQ;
+            const occurrences = [];
+            if (startDate >= windowStart && startDate <= windowEnd) occurrences.push(new Date(startDate));
+            if (!freq) return occurrences;
+
+            const interval = parseInt(parts.INTERVAL || '1', 10) || 1;
+            const count = parts.COUNT ? parseInt(parts.COUNT, 10) : null;
+            const until = parts.UNTIL ? parseIcsDateValue(parts.UNTIL).date : null;
+            const dayMap = { SU: 0, MO: 1, TU: 2, WE: 3, TH: 4, FR: 5, SA: 6 };
+            const byDay = parts.BYDAY ? parts.BYDAY.split(',').map(bd => dayMap[bd.slice(-2)]).filter(v => v !== undefined) : null;
+            const msPerDay = 86400000;
+            const maxOccurrences = 400;
+            let generated = 1;
+
+            if (freq === 'DAILY') {
+                let cursor = new Date(startDate);
+                while (generated < maxOccurrences) {
+                    cursor = new Date(cursor.getTime() + interval * msPerDay);
+                    if (until && cursor > until) break;
+                    if (cursor > windowEnd) break;
+                    if (count && generated >= count) break;
+                    if (cursor >= windowStart) occurrences.push(new Date(cursor));
+                    generated++;
+                }
+            } else if (freq === 'WEEKLY') {
+                const days = byDay && byDay.length ? byDay : [startDate.getDay()];
+                let dayCursor = new Date(startDate);
+                let safety = 0;
+                while (safety < 3000) {
+                    safety++;
+                    dayCursor = new Date(dayCursor.getTime() + msPerDay);
+                    if (dayCursor > windowEnd) break;
+                    if (until && dayCursor > until) break;
+                    const weeksSince = Math.floor((dayCursor - startDate) / (7 * msPerDay));
+                    if (days.includes(dayCursor.getDay()) && weeksSince % interval === 0) {
+                        if (dayCursor >= windowStart) occurrences.push(new Date(dayCursor));
+                        generated++;
+                        if (count && generated >= count) break;
+                        if (generated >= maxOccurrences) break;
+                    }
+                }
+            } else if (freq === 'MONTHLY') {
+                let cursor = new Date(startDate);
+                while (generated < maxOccurrences) {
+                    cursor = new Date(cursor);
+                    cursor.setMonth(cursor.getMonth() + interval);
+                    if (until && cursor > until) break;
+                    if (cursor > windowEnd) break;
+                    if (count && generated >= count) break;
+                    if (cursor >= windowStart) occurrences.push(new Date(cursor));
+                    generated++;
+                }
+            }
+            return occurrences;
+        }
+
+        function parseIcsToEvents(icsText, windowStart, windowEnd) {
+            const text = unfoldIcsLines(icsText);
+            const lines = text.split(/\r\n|\n|\r/);
+            const events = [];
+            let current = null;
+            lines.forEach(rawLine => {
+                const line = rawLine.trim();
+                if (line === 'BEGIN:VEVENT') {
+                    current = { summary: '', description: '', start: null, allDay: false, rrule: null };
+                } else if (line === 'END:VEVENT') {
+                    if (current && current.start) events.push(current);
+                    current = null;
+                } else if (current) {
+                    const prop = parseIcsProperty(line);
+                    if (!prop) return;
+                    if (prop.name === 'SUMMARY') {
+                        current.summary = unescapeIcsText(prop.value);
+                    } else if (prop.name === 'DESCRIPTION') {
+                        current.description = unescapeIcsText(prop.value);
+                    } else if (prop.name === 'DTSTART') {
+                        const parsed = parseIcsDateValue(prop.value);
+                        current.start = parsed.date;
+                        current.allDay = parsed.allDay || prop.params.some(p => p.toUpperCase() === 'VALUE=DATE');
+                    } else if (prop.name === 'RRULE') {
+                        current.rrule = prop.value;
+                    }
+                }
+            });
+
+            const expanded = [];
+            events.forEach(ev => {
+                const occurrences = ev.rrule
+                    ? expandRecurrence(ev.start, ev.rrule, windowStart, windowEnd)
+                    : (ev.start >= windowStart && ev.start <= windowEnd ? [ev.start] : []);
+                occurrences.forEach(occDate => {
+                    expanded.push({ title: ev.summary || '(No title)', description: ev.description, date: occDate });
+                });
+            });
+            return expanded;
+        }
+
+        async function refreshExternalFeeds(force) {
+            const cache = getExternalFeedCache();
+            const now = Date.now();
+            const sixHours = 6 * 60 * 60 * 1000;
+            const windowStart = new Date();
+            windowStart.setMonth(windowStart.getMonth() - 1);
+            const windowEnd = new Date();
+            windowEnd.setMonth(windowEnd.getMonth() + 6);
+
+            const statusEl = document.getElementById('external-feeds-status');
+            if (statusEl) statusEl.textContent = 'Refreshing external calendars...';
+
+            for (const feed of externalFeeds) {
+                const cached = cache[feed.id];
+                if (!force && cached && (now - cached.fetchedAt) < sixHours) continue;
+                try {
+                    const icsText = await fetchIcsWithFallback(feed.url);
+                    const events = parseIcsToEvents(icsText, windowStart, windowEnd);
+                    cache[feed.id] = {
+                        fetchedAt: now,
+                        events: events.map(e => ({ title: e.title, description: e.description, date: dateKey(e.date) }))
+                    };
+                } catch (err) {
+                    console.error('Failed to fetch external feed', feed.label, err);
+                    if (!cache[feed.id]) cache[feed.id] = { fetchedAt: now, events: [], error: err.message };
+                }
+            }
+            saveExternalFeedCache(cache);
+            rebuildExternalEventsIndex();
+            if (statusEl) statusEl.textContent = `Last refreshed ${new Date(now).toLocaleTimeString()}.`;
+            renderCalendar();
+        }
+
+        function rebuildExternalEventsIndex() {
+            const cache = getExternalFeedCache();
+            externalEventsByDate = {};
+            externalFeeds.forEach((feed, i) => {
+                if (!feed.enabled) return;
+                const entry = cache[feed.id];
+                if (!entry) return;
+                entry.events.forEach(ev => {
+                    if (!externalEventsByDate[ev.date]) externalEventsByDate[ev.date] = [];
+                    externalEventsByDate[ev.date].push({ title: ev.title, feedLabel: feed.label, color: feed.color || feedColor(feed, i) });
+                });
+            });
+        }
+
+        function getExternalEventsForDate(date) {
+            return externalEventsByDate[dateKey(date)] || [];
         }
 
         // --- CALENDAR SETTINGS MODAL ---
         function openCalendarSettingsModal() {
             document.getElementById('pref-default-view-select').value = localStorage.getItem('calendarView') || 'month';
             document.getElementById('pref-week-start-select').value = localStorage.getItem('weekStart') || '0';
+            renderExternalFeedsList();
             updateGistSyncUI();
             const modal = document.getElementById('calendar-settings-modal');
             modal.classList.remove('hidden');
@@ -2525,6 +3360,9 @@
         function initCalendar() {
             loadScheduleDatesForCalendar();
             loadDayNotes();
+            loadExternalFeeds();
+            rebuildExternalEventsIndex();
+            refreshExternalFeeds(false);
 
             document.querySelectorAll('.view-tab').forEach(tab => {
                 tab.addEventListener('click', () => switchView(tab.dataset.view));
@@ -2554,6 +3392,11 @@
             loadUserScheduleSlotOptions();
 
             renderClassLinks();
+            loadDayNotes();
+            loadExternalFeeds();
+            rebuildExternalEventsIndex();
+            refreshExternalFeeds(false);
+            renderClassesCalendarPreview();
             applyGoogleCalendarPrefs();
 
             displayTime();
