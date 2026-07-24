@@ -48,6 +48,24 @@
             --scrollbar-thumb: rgba(167, 139, 250, 0.5);
         }
 
+        /* ===================== Color Palettes ===================== */
+        /* --accent-grad is re-declared (not just var()-composed) on every palette rule below:
+           some engines don't reactively re-resolve a custom property that is only ever
+           nested inside another custom property when the leaf values change at runtime. */
+        body[data-palette="violet"]  { --accent-1: #7c3aed; --accent-2: #a78bfa; --accent-3: #c026d3; --accent-grad: linear-gradient(135deg, #7c3aed, #a78bfa, #c026d3); --glow-accent: rgba(124, 58, 237, 0.35); --scrollbar-thumb: rgba(167, 139, 250, 0.4); }
+        body[data-palette="emerald"] { --accent-1: #10b981; --accent-2: #14b8a6; --accent-3: #84cc16; --accent-grad: linear-gradient(135deg, #10b981, #14b8a6, #84cc16); --glow-accent: rgba(16, 185, 129, 0.32); --scrollbar-thumb: rgba(52, 211, 153, 0.4); }
+        body[data-palette="rose"]    { --accent-1: #f43f5e; --accent-2: #ec4899; --accent-3: #fb7185; --accent-grad: linear-gradient(135deg, #f43f5e, #ec4899, #fb7185); --glow-accent: rgba(244, 63, 94, 0.32); --scrollbar-thumb: rgba(251, 113, 133, 0.4); }
+        body[data-palette="sunset"]  { --accent-1: #f59e0b; --accent-2: #f97316; --accent-3: #ef4444; --accent-grad: linear-gradient(135deg, #f59e0b, #f97316, #ef4444); --glow-accent: rgba(249, 115, 22, 0.32); --scrollbar-thumb: rgba(251, 146, 60, 0.4); }
+        body[data-palette="ocean"]   { --accent-1: #0ea5e9; --accent-2: #06b6d4; --accent-3: #22d3ee; --accent-grad: linear-gradient(135deg, #0ea5e9, #06b6d4, #22d3ee); --glow-accent: rgba(14, 165, 233, 0.32); --scrollbar-thumb: rgba(56, 189, 248, 0.4); }
+        body[data-palette="slate"]   { --accent-1: #64748b; --accent-2: #475569; --accent-3: #94a3b8; --accent-grad: linear-gradient(135deg, #64748b, #475569, #94a3b8); --glow-accent: rgba(100, 116, 139, 0.28); --scrollbar-thumb: rgba(148, 163, 184, 0.4); }
+
+        body.dark-theme[data-palette="violet"]  { --glow-accent: rgba(167, 139, 250, 0.55); --scrollbar-thumb: rgba(196, 181, 253, 0.5); }
+        body.dark-theme[data-palette="emerald"] { --glow-accent: rgba(52, 211, 153, 0.5); --scrollbar-thumb: rgba(110, 231, 183, 0.5); }
+        body.dark-theme[data-palette="rose"]    { --glow-accent: rgba(251, 113, 133, 0.5); --scrollbar-thumb: rgba(253, 164, 175, 0.5); }
+        body.dark-theme[data-palette="sunset"]  { --glow-accent: rgba(251, 146, 60, 0.5); --scrollbar-thumb: rgba(253, 186, 116, 0.5); }
+        body.dark-theme[data-palette="ocean"]   { --glow-accent: rgba(56, 189, 248, 0.5); --scrollbar-thumb: rgba(125, 211, 252, 0.5); }
+        body.dark-theme[data-palette="slate"]   { --glow-accent: rgba(148, 163, 184, 0.45); --scrollbar-thumb: rgba(203, 213, 225, 0.45); }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-solid);
@@ -68,12 +86,9 @@
             animation: drift 22s ease-in-out infinite alternate;
         }
         body.dark-theme .bg-blob { opacity: 0.35; }
-        .bg-blob-1 { width: 32rem; height: 32rem; top: -10rem; left: -8rem; background: #818cf8; }
-        .bg-blob-2 { width: 28rem; height: 28rem; bottom: -8rem; right: -6rem; background: #f472b6; animation-delay: -6s; }
-        .bg-blob-3 { width: 24rem; height: 24rem; top: 40%; left: 55%; background: #22d3ee; animation-delay: -12s; }
-        body.dark-theme .bg-blob-1 { background: #4338ca; }
-        body.dark-theme .bg-blob-2 { background: #9d174d; }
-        body.dark-theme .bg-blob-3 { background: #0e7490; }
+        .bg-blob-1 { width: 32rem; height: 32rem; top: -10rem; left: -8rem; background: var(--accent-1); transition: background-color 0.6s ease-in-out; }
+        .bg-blob-2 { width: 28rem; height: 28rem; bottom: -8rem; right: -6rem; background: var(--accent-3); animation-delay: -6s; transition: background-color 0.6s ease-in-out; }
+        .bg-blob-3 { width: 24rem; height: 24rem; top: 40%; left: 55%; background: var(--accent-2); animation-delay: -12s; transition: background-color 0.6s ease-in-out; }
         @keyframes drift {
             0% { transform: translate(0, 0) scale(1); }
             100% { transform: translate(2.5rem, -2rem) scale(1.08); }
@@ -95,73 +110,205 @@
 
         .app-sidebar {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 1.25rem;
-            width: 5.5rem;
-            flex-shrink: 0;
-            padding: 1.5rem 0;
-            position: sticky;
-            top: 1.5rem;
-            max-height: calc(100vh - 3rem);
+            justify-content: center;
+            padding: 1.1rem;
+            position: fixed;
+            left: 50%;
+            bottom: 1rem;
+            /* Resting state: drops ~80% of its own height below the fold, just a sliver peeking above it */
+            transform: translate(-50%, 11.25rem);
+            z-index: 40;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 1.75rem;
             backdrop-filter: blur(28px) saturate(160%);
             -webkit-backdrop-filter: blur(28px) saturate(160%);
             box-shadow: var(--glass-shadow);
-            transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+            transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        /* Hovering the hub slides the whole dock fully into view */
+        .app-sidebar.is-revealed {
+            transform: translate(-50%, 0);
+        }
+        /* Slides down out of the way while the page is being scrolled -- wins over is-revealed */
+        .app-sidebar.is-hidden {
+            transform: translate(-50%, calc(100% + 2rem));
         }
 
-        .brand-mark {
-            width: 2.75rem;
-            height: 2.75rem;
-            border-radius: 1rem;
+        /* ===================== Orbit Nav (Classes / Calendar / Theme drift around the PA hub) ===================== */
+        .orbit-stage {
+            position: relative;
+            width: 10.5rem;
+            height: 10.5rem;
+        }
+
+        .orbit-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.9rem;
             background: var(--accent-grad);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
             color: white;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             letter-spacing: -0.02em;
             box-shadow: 0 6px 18px var(--glow-accent);
-            flex-shrink: 0;
+            z-index: 200;
+            transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
         }
 
-        .app-sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: center;
+        /* Position/depth are driven per-frame from JS (organic drift, not a fixed CSS loop) */
+        .orbit-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
         }
 
         .sidebar-link {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 0.3rem;
-            width: 3.9rem;
-            padding: 0.65rem 0;
-            border-radius: 1rem;
+            justify-content: center;
+            width: 2.9rem;
+            height: 2.9rem;
+            padding: 0;
+            border-radius: 9999px;
             color: var(--text-muted);
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
-            transition: all 0.25s ease-in-out;
+            background: var(--glass-bg-strong);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            transform: scale(calc(var(--pulse, 1) * var(--mag, 1)));
+            transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
         }
-        .sidebar-link svg { width: 1.3rem; height: 1.3rem; }
-        .sidebar-link:hover { color: var(--text-primary); background: var(--glass-bg-strong); }
+        .sidebar-link svg { width: 1.4rem; height: 1.4rem; pointer-events: none; flex-shrink: 0; }
+        .sidebar-link:hover { color: var(--text-primary); }
         .sidebar-link.active {
             background: var(--accent-grad);
             color: white;
             box-shadow: 0 6px 16px var(--glow-accent);
         }
+        .sidebar-link.is-locked {
+            transform: scale(1.7);
+            color: white;
+            background: var(--accent-grad);
+            box-shadow: 0 10px 26px var(--glow-accent);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease-in-out, color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+        }
 
-        .app-sidebar-spacer { flex-grow: 1; }
+        /* Floating label shown above an icon while it's locked (hover) -- keeps the icon itself circular */
+        .orbit-tooltip {
+            position: fixed;
+            z-index: 70;
+            padding: 0.35rem 0.8rem;
+            border-radius: 9999px;
+            background: var(--glass-bg-strong);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            box-shadow: var(--glass-shadow);
+            color: var(--text-primary);
+            font-size: 0.7rem;
+            font-weight: 700;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, calc(-100% - 8px)) scale(0.9);
+            transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+        }
+        .orbit-tooltip.visible {
+            opacity: 1;
+            transform: translate(-50%, calc(-100% - 8px)) scale(1);
+        }
+
+        /* ===================== Theme Popover ===================== */
+        .theme-popover {
+            position: fixed;
+            z-index: 60;
+            width: 15.5rem;
+            padding: 1rem;
+            border-radius: 1.25rem;
+            background: var(--glass-bg-strong);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(28px) saturate(160%);
+            -webkit-backdrop-filter: blur(28px) saturate(160%);
+            box-shadow: var(--glass-shadow);
+            transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+        }
+        .theme-popover.hidden { display: none; }
+        .theme-popover-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin: 0 0 0.5rem;
+        }
+        .theme-mode-row {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 1.1rem;
+        }
+        .theme-mode-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.55rem 0.25rem;
+            border-radius: 0.85rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .theme-mode-btn svg { width: 1.1rem; height: 1.1rem; }
+        .theme-mode-btn:hover { color: var(--text-primary); }
+        .theme-mode-btn.active {
+            background: var(--accent-grad);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 14px var(--glow-accent);
+        }
+        .theme-palette-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.65rem;
+            justify-items: center;
+        }
+        .theme-palette-swatch {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--sw1), var(--sw2), var(--sw3));
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        .theme-palette-swatch:hover { transform: scale(1.12); }
+        .theme-palette-swatch.active {
+            border-color: var(--text-primary);
+            box-shadow: 0 0 0 3px var(--glass-bg-strong);
+        }
 
         .app-main {
             flex-grow: 1;
             min-width: 0;
+            padding-bottom: 15rem;
         }
 
         .app-view.hidden { display: none; }
@@ -170,27 +317,6 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
-        }
-
-        @media (max-width: 860px) {
-            .app-shell { flex-direction: column; }
-            .app-sidebar {
-                position: fixed;
-                bottom: 1rem;
-                left: 50%;
-                transform: translateX(-50%);
-                top: auto;
-                max-height: none;
-                width: auto;
-                flex-direction: row;
-                padding: 0.6rem;
-                z-index: 40;
-                gap: 0.5rem;
-            }
-            .app-sidebar-spacer { display: none; }
-            .app-sidebar-nav { flex-direction: row; }
-            .brand-mark { display: none; }
-            .app-main { padding-bottom: 6rem; }
         }
 
         .main-container {
@@ -328,6 +454,34 @@
 
         .class-card:hover .class-url-display {
             opacity: 1;
+        }
+
+        .class-note-toggle {
+            flex-shrink: 0;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.3rem;
+            border-radius: 9999px;
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+        .class-note-toggle svg { width: 1rem; height: 1rem; }
+        .class-note-toggle:hover { color: var(--text-primary); background: var(--glass-bg-strong); }
+        .class-note-toggle.has-note { color: var(--accent-2); }
+        .class-note-box { margin: -0.25rem 0 0.75rem; }
+        .class-note-box.hidden { display: none; }
+        .class-note-textarea {
+            width: 100%;
+            min-height: 3.5rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg-strong);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            font-family: inherit;
+            resize: vertical;
         }
 
         /* --- Modal Styles --- */
@@ -607,6 +761,30 @@
         .day-badge.badge-b { background-color: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
         body.dark-theme .day-badge.badge-a { background-color: rgba(34, 211, 238, 0.2); color: #67e8f9; }
         body.dark-theme .day-badge.badge-b { background-color: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+
+        .countdown-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--glass-bg-strong);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+        .countdown-chip.hidden { display: none; }
+        .countdown-chip .countdown-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 9999px;
+            flex-shrink: 0;
+            background: var(--accent-amber);
+        }
+        .countdown-chip.is-current .countdown-dot { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+        .countdown-chip strong { color: var(--text-primary); font-weight: 800; }
         .note-dot {
             width: 0.4rem;
             height: 0.4rem;
@@ -617,6 +795,44 @@
             right: 0.5rem;
             box-shadow: 0 0 8px var(--glow-accent);
         }
+
+        .day-classes-preview {
+            margin-top: 0.25rem;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .week-classes-list { margin-top: 0.5rem; }
+        .week-class-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        .week-class-time {
+            flex-shrink: 0;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+        .day-classes-section { margin-bottom: 1.5rem; }
+        .day-class-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.9rem;
+            border-radius: 0.85rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            text-decoration: none;
+            color: inherit;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        .day-class-row:hover { background: var(--glass-bg-strong); }
 
         .week-day-col {
             background: var(--glass-bg);
@@ -671,6 +887,8 @@
                 var t = localStorage.getItem('theme') || 'system';
                 var dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
                 if (dark) document.body.classList.add('dark-theme');
+                var p = localStorage.getItem('themePalette');
+                if (p) document.body.dataset.palette = p;
             } catch (e) {}
         })();
     </script>
@@ -682,25 +900,34 @@
     <div class="app-shell">
         <!-- Sidebar: app-level navigation -->
         <aside class="app-sidebar">
-            <div class="brand-mark"><a href="Resources/logo.svg"</div>
-            <nav class="app-sidebar-nav">
-                <a href="#classes" data-view="classes" class="sidebar-link active" onclick="event.preventDefault(); switchAppView('classes')">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
-                    <span>Classes</span>
-                </a>
-                <a href="#calendar" data-view="calendar" class="sidebar-link" onclick="event.preventDefault(); switchAppView('calendar')">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    <span>Calendar</span>
-                </a>
-            </nav>
-            <div class="app-sidebar-spacer"></div>
-            <button id="theme-toggle" class="icon-btn p-3 rounded-full">
-                <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path></svg>
-                <svg id="sun-icon" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
-                </svg>
-                <svg id="system-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13V7a2 2 0 012-2h14a2 2 0 012 2v6m-2 8H5a2 2 0 01-2-2v-6a2 2 0 012-2h14a2 2 0 012 2v6a2 2 0 01-2 2z"></path></svg>
-            </button>
+            <div class="orbit-stage" id="orbit-stage">
+                <div class="orbit-hub" aria-hidden="true">PA</div>
+
+                <div class="orbit-item">
+                    <a href="#classes" data-view="classes" class="sidebar-link active" onclick="event.preventDefault(); switchAppView('classes')" title="Classes">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                        <span class="sr-only">Classes</span>
+                    </a>
+                </div>
+
+                <div class="orbit-item">
+                    <a href="#calendar" data-view="calendar" class="sidebar-link" onclick="event.preventDefault(); switchAppView('calendar')" title="Calendar">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span class="sr-only">Calendar</span>
+                    </a>
+                </div>
+
+                <div class="orbit-item">
+                    <button type="button" id="theme-toggle" class="sidebar-link" aria-haspopup="true" aria-expanded="false" onclick="event.preventDefault(); toggleThemePopover()" title="Theme">
+                        <svg id="moon-icon" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path></svg>
+                        <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                        </svg>
+                        <svg id="system-icon" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13V7a2 2 0 012-2h14a2 2 0 012 2v6m-2 8H5a2 2 0 01-2-2v-6a2 2 0 012-2h14a2 2 0 012 2v6a2 2 0 01-2 2z"></path></svg>
+                        <span class="sr-only">Theme</span>
+                    </button>
+                </div>
+            </div>
         </aside>
 
         <!-- Main content: swappable views -->
@@ -710,8 +937,9 @@
                 <div class="main-container rounded-3xl p-6 sm:p-10 border relative">
                     <div class="flex flex-wrap justify-between items-start gap-6 mb-10">
                         <div>
-                            <h1 class="gradient-text text-5xl sm:text-6xl font-extrabold tracking-tight">Pick A Class</h1>
+                            <h1 class="gradient-text text-5xl sm:text-6xl font-extrabold tracking-tight">School Dashboard</h1>
                             <h3 class="text-xl sm:text-2xl font-medium tracking-wide mt-1" id="Time"></h3>
+                            <div id="period-countdown-chip" class="countdown-chip hidden"></div>
                         </div>
                         <div class="view-toolbar">
                             <button id="edit-classes-button" class="icon-btn p-3 rounded-full" onclick="toggleClassEditMode()" title="Edit Classes">
@@ -736,7 +964,7 @@
             <!-- ===================== CALENDAR VIEW ===================== -->
             <section id="view-calendar" class="app-view hidden">
                 <div class="main-container rounded-3xl p-6 sm:p-10 border relative">
-                    <header class="flex flex-wrap justify-between items-center gap-4 mb-4">
+                    <header class="flex flex-wrap justify-between items-center gap-4 mb-4">x
                         <h1 class="gradient-text text-3xl sm:text-4xl font-extrabold tracking-tight">School Calendar</h1>
                         <div class="view-toolbar items-center">
                             <button id="today-button" class="px-4 py-2 rounded-full text-sm font-semibold">Today</button>
@@ -774,6 +1002,36 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <div id="orbit-tooltip" class="orbit-tooltip" aria-hidden="true"></div>
+
+    <div id="theme-popover" class="theme-popover hidden" role="dialog" aria-label="Theme settings">
+        <p class="theme-popover-label">Mode</p>
+        <div class="theme-mode-row">
+            <button type="button" class="theme-mode-btn" data-mode="light" onclick="applyTheme('light')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4" stroke-width="2"></circle><path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"></path></svg>
+                <span>Light</span>
+            </button>
+            <button type="button" class="theme-mode-btn" data-mode="dark" onclick="applyTheme('dark')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path></svg>
+                <span>Dark</span>
+            </button>
+            <button type="button" class="theme-mode-btn" data-mode="system" onclick="applyTheme('system')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13V7a2 2 0 012-2h14a2 2 0 012 2v6m-2 8H5a2 2 0 01-2-2v-6a2 2 0 012-2h14a2 2 0 012 2v6a2 2 0 01-2 2z"></path></svg>
+                <span>Auto</span>
+            </button>
+        </div>
+        <p class="theme-popover-label">Color</p>
+        <div class="theme-palette-grid">
+            <button type="button" class="theme-palette-swatch" data-palette="indigo" style="--sw1:#6366f1;--sw2:#a855f7;--sw3:#ec4899" onclick="applyPalette('indigo')" title="Indigo"><span class="sr-only">Indigo</span></button>
+            <button type="button" class="theme-palette-swatch" data-palette="violet" style="--sw1:#7c3aed;--sw2:#a78bfa;--sw3:#c026d3" onclick="applyPalette('violet')" title="Violet"><span class="sr-only">Violet</span></button>
+            <button type="button" class="theme-palette-swatch" data-palette="emerald" style="--sw1:#10b981;--sw2:#14b8a6;--sw3:#84cc16" onclick="applyPalette('emerald')" title="Emerald"><span class="sr-only">Emerald</span></button>
+            <button type="button" class="theme-palette-swatch" data-palette="rose" style="--sw1:#f43f5e;--sw2:#ec4899;--sw3:#fb7185" onclick="applyPalette('rose')" title="Rose"><span class="sr-only">Rose</span></button>
+            <button type="button" class="theme-palette-swatch" data-palette="sunset" style="--sw1:#f59e0b;--sw2:#f97316;--sw3:#ef4444" onclick="applyPalette('sunset')" title="Sunset"><span class="sr-only">Sunset</span></button>
+            <button type="button" class="theme-palette-swatch" data-palette="ocean" style="--sw1:#0ea5e9;--sw2:#06b6d4;--sw3:#22d3ee" onclick="applyPalette('ocean')" title="Ocean"><span class="sr-only">Ocean</span></button>
+            <button type="button" class="theme-palette-swatch" data-palette="slate" style="--sw1:#64748b;--sw2:#475569;--sw3:#94a3b8" onclick="applyPalette('slate')" title="Slate"><span class="sr-only">Slate</span></button>
+        </div>
     </div>
 
     <!-- Settings Modal (Classes) -->
@@ -942,7 +1200,7 @@
                 document.getElementById('view-classes').classList.toggle('hidden', view !== 'classes');
                 document.getElementById('view-calendar').classList.toggle('hidden', view !== 'calendar');
                 document.querySelectorAll('.sidebar-link').forEach(a => a.classList.toggle('active', a.dataset.view === view));
-                document.title = view === 'calendar' ? 'School Calendar' : 'Pick A Class';
+                document.title = view === 'calendar' ? 'School Calendar' : 'School Dashboard';
                 if (view === 'calendar' && !calendarInitialized) {
                     calendarInitialized = true;
                     initCalendar();
@@ -965,6 +1223,7 @@
 
         // ===================== THEME (shared) =====================
         let currentThemeState = localStorage.getItem('theme') || 'system';
+        let currentPaletteState = localStorage.getItem('themePalette') || 'indigo';
 
         function applyTheme(theme) {
             const bodyElement = document.body;
@@ -989,11 +1248,207 @@
 
             localStorage.setItem('theme', theme);
             currentThemeState = theme;
+
+            document.querySelectorAll('.theme-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === theme));
+            const prefSelect = document.getElementById('pref-theme-select');
+            if (prefSelect) prefSelect.value = theme;
         }
 
-        function toggleTheme() {
-            const themeCycle = { 'dark': 'light', 'light': 'system', 'system': 'dark' };
-            applyTheme(themeCycle[currentThemeState]);
+        function applyPalette(palette) {
+            document.body.dataset.palette = palette;
+            localStorage.setItem('themePalette', palette);
+            currentPaletteState = palette;
+            document.querySelectorAll('.theme-palette-swatch').forEach(s => s.classList.toggle('active', s.dataset.palette === palette));
+        }
+
+        // ===================== THEME POPOVER =====================
+        function toggleThemePopover() {
+            const popover = document.getElementById('theme-popover');
+            if (popover.classList.contains('hidden')) {
+                openThemePopover();
+            } else {
+                closeThemePopover();
+            }
+        }
+
+        function openThemePopover() {
+            const popover = document.getElementById('theme-popover');
+            positionThemePopover();
+            popover.classList.remove('hidden');
+            document.getElementById('theme-toggle').setAttribute('aria-expanded', 'true');
+        }
+
+        function closeThemePopover() {
+            document.getElementById('theme-popover').classList.add('hidden');
+            document.getElementById('theme-toggle').setAttribute('aria-expanded', 'false');
+        }
+
+        function positionThemePopover() {
+            const popover = document.getElementById('theme-popover');
+            const btn = document.getElementById('theme-toggle');
+            const rect = btn.getBoundingClientRect();
+            const isMobileDock = window.matchMedia('(max-width: 860px)').matches;
+
+            popover.style.visibility = 'hidden';
+            popover.classList.remove('hidden');
+            const pw = popover.offsetWidth;
+            const ph = popover.offsetHeight;
+            popover.classList.add('hidden');
+            popover.style.visibility = '';
+
+            if (isMobileDock) {
+                let left = rect.left + rect.width / 2 - pw / 2;
+                left = Math.max(12, Math.min(left, window.innerWidth - pw - 12));
+                popover.style.left = left + 'px';
+                popover.style.top = Math.max(12, rect.top - ph - 12) + 'px';
+            } else {
+                let top = rect.top + rect.height / 2 - ph / 2;
+                top = Math.max(12, Math.min(top, window.innerHeight - ph - 12));
+                popover.style.top = top + 'px';
+                popover.style.left = (rect.right + 14) + 'px';
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            const popover = document.getElementById('theme-popover');
+            const btn = document.getElementById('theme-toggle');
+            if (popover.classList.contains('hidden')) return;
+            if (!popover.contains(e.target) && !btn.contains(e.target)) closeThemePopover();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeThemePopover();
+        });
+        window.addEventListener('resize', () => {
+            const popover = document.getElementById('theme-popover');
+            if (!popover.classList.contains('hidden')) positionThemePopover();
+        });
+
+        // ===================== ORBIT NAV: organic drift + proximity magnify + hover lock =====================
+        function setupSidebarDock() {
+            const stage = document.getElementById('orbit-stage');
+            if (!stage) return;
+            const items = Array.from(stage.querySelectorAll('.orbit-item'));
+            const links = Array.from(stage.querySelectorAll('.sidebar-link'));
+            const tooltip = document.getElementById('orbit-tooltip');
+
+            // Each icon gets its own home spot spaced around the hub (so they mostly keep to their
+            // own patch of sky and don't constantly cross the center), plus a randomized drift
+            // recipe (two summed sine waves per axis, at incommensurate frequencies) layered on top
+            // of that home spot so they still wander sporadically and occasionally cross paths.
+            const drift = links.map((_, i) => {
+                const homeAngle = (i * 120 + (Math.random() * 30 - 15)) * (Math.PI / 180);
+                const homeRadius = 58 + Math.random() * 10;
+                return {
+                    homeX: Math.cos(homeAngle) * homeRadius,
+                    homeY: Math.sin(homeAngle) * homeRadius,
+                    ax1: 10 + Math.random() * 8, fx1: 0.00015 + Math.random() * 0.00010, px1: Math.random() * Math.PI * 2,
+                    ax2: 5 + Math.random() * 6, fx2: 0.00035 + Math.random() * 0.00025, px2: Math.random() * Math.PI * 2,
+                    ay1: 10 + Math.random() * 8, fy1: 0.00018 + Math.random() * 0.00012, py1: Math.random() * Math.PI * 2,
+                    ay2: 5 + Math.random() * 6, fy2: 0.00032 + Math.random() * 0.00022, py2: Math.random() * Math.PI * 2,
+                    sizeAmp: 0.14 + Math.random() * 0.10, sizeFreq: 0.00020 + Math.random() * 0.00018, sizePhase: Math.random() * Math.PI * 2
+                };
+            });
+
+            let mouse = null;
+            let lockedIndex = -1;
+
+            function positionOrbitTooltip(link) {
+                const r = link.getBoundingClientRect();
+                tooltip.style.left = (r.left + r.width / 2) + 'px';
+                tooltip.style.top = r.top + 'px';
+            }
+
+            function frame(t) {
+                const stageRect = stage.getBoundingClientRect();
+                const maxDist = Math.max(stageRect.width, stageRect.height) * 0.85;
+
+                links.forEach((link, i) => {
+                    // The locked (hovered) icon freezes in place instead of continuing to drift.
+                    if (i === lockedIndex) return;
+
+                    const d = drift[i];
+                    const x = d.homeX + d.ax1 * Math.sin(t * d.fx1 + d.px1) + d.ax2 * Math.sin(t * d.fx2 + d.px2);
+                    const y = d.homeY + d.ay1 * Math.cos(t * d.fy1 + d.py1) + d.ay2 * Math.sin(t * d.fy2 + d.py2);
+                    const pulse = 1 + d.sizeAmp * Math.sin(t * d.sizeFreq + d.sizePhase);
+
+                    items[i].style.transform = 'translate(calc(-50% + ' + x.toFixed(2) + 'px), calc(-50% + ' + y.toFixed(2) + 'px))';
+                    // Depth-sort by vertical position so drifting icons pass in front of / behind each other, pool-ball style.
+                    items[i].style.zIndex = String(60 + Math.round(y));
+                    link.style.setProperty('--pulse', pulse.toFixed(3));
+
+                    if (mouse) {
+                        const r = link.getBoundingClientRect();
+                        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+                        const dist = Math.hypot(mouse.x - cx, mouse.y - cy);
+                        const tt = Math.max(0, 1 - dist / maxDist);
+                        link.style.setProperty('--mag', (1 + tt * 0.5).toFixed(3));
+                    } else {
+                        link.style.removeProperty('--mag');
+                    }
+                });
+
+                if (lockedIndex !== -1) positionOrbitTooltip(links[lockedIndex]);
+
+                requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+
+            stage.addEventListener('mousemove', (e) => { mouse = { x: e.clientX, y: e.clientY }; });
+            stage.addEventListener('mouseleave', () => {
+                mouse = null;
+                links.forEach(l => l.style.removeProperty('--mag'));
+            });
+
+            links.forEach((link, i) => {
+                link.addEventListener('mouseenter', () => {
+                    lockedIndex = i;
+                    link.classList.add('is-locked');
+                    link.style.removeProperty('--mag');
+                    items[i].style.zIndex = 300;
+                    tooltip.textContent = link.getAttribute('title') || '';
+                    tooltip.classList.add('visible');
+                    positionOrbitTooltip(link);
+                });
+                link.addEventListener('mouseleave', () => {
+                    if (lockedIndex === i) lockedIndex = -1;
+                    link.classList.remove('is-locked');
+                    tooltip.classList.remove('visible');
+                });
+            });
+        }
+
+        // ===================== SIDEBAR SCROLL-HIDE =====================
+        function setupSidebarScrollHide() {
+            const sidebar = document.querySelector('.app-sidebar');
+            if (!sidebar) return;
+            let lastY = window.scrollY;
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                    const y = window.scrollY;
+                    const delta = y - lastY;
+                    if (delta > 4 && y > 80) {
+                        sidebar.classList.add('is-hidden');
+                        sidebar.classList.remove('is-revealed');
+                    } else if (delta < -4 || y <= 80) {
+                        sidebar.classList.remove('is-hidden');
+                    }
+                    lastY = y;
+                    ticking = false;
+                });
+            }, { passive: true });
+        }
+
+        // ===================== PA HUB PEEK/REVEAL =====================
+        function setupHubPeek() {
+            const sidebar = document.querySelector('.app-sidebar');
+            if (!sidebar) return;
+            // The hub itself is a small target -- while peeking, most of what's actually visible
+            // above the fold is the surrounding glass background, so that has to trigger the reveal too.
+            sidebar.addEventListener('mouseenter', () => sidebar.classList.add('is-revealed'));
+            sidebar.addEventListener('mouseleave', () => sidebar.classList.remove('is-revealed'));
         }
 
         // ===================== CONFIRMATION MODAL (shared) =====================
@@ -1096,6 +1551,7 @@
 
         let classData = [];
         let classEditMode = false;
+        let classNotes = {};
 
         let draggedCategoryItem = null;
         let draggedCategoryOriginalIndex = null;
@@ -1107,16 +1563,45 @@
         function loadClassData() {
             const savedData = localStorage.getItem('classDataV3');
             classData = savedData ? JSON.parse(savedData) : JSON.parse(JSON.stringify(defaultClassData));
+            let assignedNewIds = false;
             classData.forEach(category => {
                 if (typeof category.isSideStacked === 'undefined') category.isSideStacked = false;
                 category.classes.forEach(classItem => {
                     if (typeof classItem.scheduleSlot === 'undefined') classItem.scheduleSlot = '';
+                    if (!classItem.noteId) {
+                        classItem.noteId = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+                        assignedNewIds = true;
+                    }
                 });
             });
+            if (assignedNewIds) saveToLocalStorage();
         }
 
         function saveToLocalStorage() {
             localStorage.setItem('classDataV3', JSON.stringify(classData));
+        }
+
+        // --- QUICK CLASS NOTES ---
+        function loadClassNotes() {
+            const saved = localStorage.getItem('classNotesV1');
+            classNotes = saved ? JSON.parse(saved) : {};
+        }
+
+        function saveClassNotesToStorage() {
+            localStorage.setItem('classNotesV1', JSON.stringify(classNotes));
+        }
+
+        function saveClassNote(noteId, value) {
+            const trimmed = value.trim();
+            if (trimmed) classNotes[noteId] = trimmed; else delete classNotes[noteId];
+            saveClassNotesToStorage();
+            const toggle = document.querySelector(`.class-note-toggle[data-note-id="${noteId}"]`);
+            if (toggle) toggle.classList.toggle('has-note', !!trimmed);
+        }
+
+        function toggleClassNote(noteId) {
+            const box = document.getElementById('note-box-' + noteId);
+            if (box) box.classList.toggle('hidden');
         }
 
         // --- MAIN UI RENDERING ---
@@ -1195,11 +1680,22 @@
         }
 
         function createClassCardHTML(classItem) {
+            const noteId = classItem.noteId || '';
+            const noteValue = classNotes[noteId] || '';
+            const hasNote = !!noteValue;
             return `
                 <div class="class-card p-6 rounded-2xl border"
                      onclick="window.location.href='${classItem.url}'">
-                    <h4 class="text-xl font-bold mb-2">${classItem.title}</h4>
+                    <div class="flex items-start justify-between gap-2 mb-2 pr-8">
+                        <h4 class="text-xl font-bold">${classItem.title}</h4>
+                        <button class="class-note-toggle ${hasNote ? 'has-note' : ''}" data-note-id="${noteId}" onclick="event.stopPropagation(); toggleClassNote('${noteId}')" title="Quick note">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        </button>
+                    </div>
                     <p class="text-sm mb-4" title="${classItem.details}">${classItem.details}</p>
+                    <div class="class-note-box ${hasNote ? '' : 'hidden'}" id="note-box-${noteId}" onclick="event.stopPropagation()">
+                        <textarea class="class-note-textarea" placeholder="Quick note..." onchange="saveClassNote('${noteId}', this.value)">${escapeHtml(noteValue)}</textarea>
+                    </div>
                     <button class="new-tab-button" onclick="event.stopPropagation(); window.open('${classItem.url}', '_blank');" title="Open in new tab">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     </button>
@@ -1695,7 +2191,7 @@
         function confirmResetEverything() {
             showConfirmationModal('Reset EVERYTHING — classes, schedule dates, calendar notes, and preferences? This cannot be undone.', [
                 { text: 'Confirm', action: () => {
-                    ['classDataV3', 'userADays', 'userBDays', 'userScheduleSlotOptionsV2', 'dayNotesV1', 'theme', 'calendarView', 'timeFormat', 'showGoogleCalendar', 'googleCalendarEmbedUrl', 'weekStart', 'githubGistToken', 'githubGistId', 'githubGistRawUrl', 'externalIcsFeeds', 'externalIcsCache'].forEach(k => localStorage.removeItem(k));
+                    ['classDataV3', 'userADays', 'userBDays', 'userScheduleSlotOptionsV2', 'dayNotesV1', 'classNotesV1', 'theme', 'calendarView', 'timeFormat', 'showGoogleCalendar', 'googleCalendarEmbedUrl', 'weekStart', 'githubGistToken', 'githubGistId', 'githubGistRawUrl', 'externalIcsFeeds', 'externalIcsCache'].forEach(k => localStorage.removeItem(k));
                     window.location.reload();
                 }},
                 { text: 'Cancel', action: () => {} }
@@ -1894,6 +2390,81 @@
             const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: hour12 });
             const formattedDate = `${date.getMonth() + 1}.${date.getDate()}.${date.getFullYear()}`;
             document.getElementById('Time').textContent = `Time: ${time} | Date: ${formattedDate}`;
+            updateCountdownChip();
+        }
+
+        // --- PERIOD COUNTDOWN CHIP ---
+        function getCurrentOrNextPeriodInfo() {
+            const now = new Date();
+            const dateString = `${now.getMonth() + 1}.${now.getDate()}.${now.getFullYear()}`;
+            const isADay = userADays.includes(dateString);
+            const isBDay = userBDays.includes(dateString);
+            if (!isADay && !isBDay) return null;
+            const isHalfDay = now.getDay() === 5;
+            const nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+
+            const candidates = [];
+            userScheduleSlotOptions.forEach(slot => {
+                if (!slot.value) return;
+                const slotDayType = slot.value.split('_')[0];
+                if (slot.value === 'ADVISORY') {
+                    if (isHalfDay) return;
+                } else if (slotDayType === 'A' && !isADay) {
+                    return;
+                } else if (slotDayType === 'B' && !isBDay) {
+                    return;
+                }
+
+                const timeStr = isHalfDay ? slot.halfDayTime : slot.fullDayTime;
+                if (!timeStr) return;
+                const [startStr, endStr] = timeStr.split(' - ');
+                const start = parseTime(startStr);
+                const end = parseTime(endStr);
+                let startMin = start.hour * 60 + start.minute;
+                let endMin = end.hour * 60 + end.minute;
+                if (endMin < startMin) endMin += 24 * 60;
+
+                let classItem = null;
+                for (const category of classData) {
+                    for (const ci of category.classes) {
+                        if (ci.scheduleSlot === slot.value) { classItem = ci; break; }
+                    }
+                    if (classItem) break;
+                }
+                candidates.push({ slot, startMin, endMin, classItem });
+            });
+            candidates.sort((a, b) => a.startMin - b.startMin);
+
+            for (const c of candidates) {
+                if (nowMinutes >= c.startMin && nowMinutes < c.endMin) {
+                    return { status: 'current', label: c.classItem ? c.classItem.title : c.slot.label, secondsLeft: (c.endMin - nowMinutes) * 60 };
+                }
+            }
+            for (const c of candidates) {
+                if (c.startMin > nowMinutes) {
+                    return { status: 'next', label: c.classItem ? c.classItem.title : c.slot.label, secondsLeft: (c.startMin - nowMinutes) * 60 };
+                }
+            }
+            return null;
+        }
+
+        function updateCountdownChip() {
+            const chip = document.getElementById('period-countdown-chip');
+            if (!chip) return;
+            const info = getCurrentOrNextPeriodInfo();
+            if (!info) {
+                chip.classList.add('hidden');
+                return;
+            }
+            const totalSeconds = Math.max(0, Math.round(info.secondsLeft));
+            const mm = Math.floor(totalSeconds / 60);
+            const ss = totalSeconds % 60;
+            const timeStr = mm > 0 ? `${mm}m ${String(ss).padStart(2, '0')}s` : `${ss}s`;
+            chip.classList.remove('hidden');
+            chip.classList.toggle('is-current', info.status === 'current');
+            chip.classList.toggle('is-next', info.status === 'next');
+            const verb = info.status === 'current' ? 'ends in' : 'starts in';
+            chip.innerHTML = `<span class="countdown-dot"></span><span>${escapeHtml(info.label)} ${verb} <strong>${timeStr}</strong></span>`;
         }
 
         // --- SCHEDULE REDIRECTION LOGIC ---
@@ -1994,6 +2565,31 @@
             return dayNotes[dateKey(date)] || null;
         }
 
+        // --- CLASSES SCHEDULED FOR A GIVEN CALENDAR DATE ---
+        function getSlotTimeRange(slotValue, isHalfDay) {
+            const opt = userScheduleSlotOptions.find(o => o.value === slotValue);
+            if (!opt) return null;
+            return (isHalfDay ? opt.halfDayTime : opt.fullDayTime) || opt.fullDayTime || null;
+        }
+
+        function getClassesForDate(date) {
+            const dayType = getDayType(date);
+            if (!dayType) return [];
+            const isHalfDay = date.getDay() === 5;
+            const items = [];
+            classData.forEach(category => {
+                category.classes.forEach(classItem => {
+                    if (!classItem.scheduleSlot) return;
+                    const slotDayType = classItem.scheduleSlot.split('_')[0];
+                    if (slotDayType !== dayType && classItem.scheduleSlot !== 'ADVISORY') return;
+                    const timeRange = getSlotTimeRange(classItem.scheduleSlot, isHalfDay);
+                    items.push({ classItem, timeRange, sortKey: timeRange ? timeRange.split(' - ')[0] : '99:99' });
+                });
+            });
+            items.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+            return items;
+        }
+
         const defaultADays = userADays;
         const defaultBDays = userBDays;
 
@@ -2065,6 +2661,8 @@
 
                 const titleHtml = note && note.title ? `<p class="font-semibold text-sm">${escapeHtml(note.title)}</p>` : (dayType ? `<p class="font-semibold text-sm">${dayType}-Day</p>` : '<p class="font-semibold text-sm">Scheduled</p>');
                 const notesHtml = note && note.notes ? `<p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${escapeHtml(note.notes)}</p>` : '';
+                const classesToday = getClassesForDate(currentDay);
+                const classesHtml = classesToday.length ? `<p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1 truncate">${escapeHtml(classesToday.map(c => c.classItem.title).join(', '))}</p>` : '';
                 const externalHtml = externalEvents.length ? `<div class="mt-1 space-y-1">${externalEvents.slice(0, 2).map(event => `<p class="text-[11px] text-gray-500 dark:text-gray-400 truncate">${escapeHtml(event.title)}</p>`).join('')}</div>` : '';
                 upcomingItems.push(`
                     <div class="rounded-xl border border-gray-200/70 dark:border-gray-700/70 p-3">
@@ -2074,6 +2672,7 @@
                         </div>
                         ${titleHtml}
                         ${notesHtml}
+                        ${classesHtml}
                         ${externalHtml}
                     </div>
                 `);
@@ -2180,6 +2779,7 @@
                 const dayType = getDayType(cursor);
                 const note = getNote(cursor);
                 const externalEvents = getExternalEventsForDate(cursor);
+                const classesToday = getClassesForDate(cursor);
                 const badgeHtml = dayType ? `<span class="day-badge badge-${dayType.toLowerCase()}">${dayType}-Day</span>` : '';
                 const titleHtml = note && note.title ? `<p class="text-xs mt-1 truncate font-medium">${escapeHtml(note.title)}</p>` : '';
                 const dotHtml = note && (note.title || note.notes) ? `<span class="note-dot"></span>` : '';
@@ -2188,6 +2788,7 @@
                         ${externalEvents.slice(0, 4).map(e => `<span class="w-1.5 h-1.5 rounded-full" style="background:${e.color}" title="${escapeHtml(e.title)} — ${escapeHtml(e.feedLabel)}"></span>`).join('')}
                     </div>
                 ` : '';
+                const classesPreviewHtml = classesToday.length ? `<p class="day-classes-preview">${escapeHtml(classesToday.map(c => c.classItem.title).join(', '))}</p>` : '';
                 cells += `
                     <div class="day-cell p-2 rounded-lg border ${isOutside ? 'outside-month' : ''} ${isToday ? 'is-today' : ''}" onclick="openDay('${dateKey(cursor)}')">
                         <div class="flex justify-between items-center">
@@ -2195,6 +2796,7 @@
                             ${badgeHtml}
                         </div>
                         ${titleHtml}
+                        ${classesPreviewHtml}
                         ${externalDotsHtml}
                         ${dotHtml}
                     </div>
@@ -2222,6 +2824,7 @@
                 const dayType = getDayType(d);
                 const note = getNote(d);
                 const externalEvents = getExternalEventsForDate(d);
+                const classesToday = getClassesForDate(d);
                 const badgeLabel = dayType ? `${dayType}-Day` : note && (note.title || note.notes) ? 'Event' : '';
                 const badgeClass = dayType ? `day-badge badge-${dayType.toLowerCase()}` : note && (note.title || note.notes) ? 'day-badge bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-200' : '';
                 const badgeHtml = badgeLabel ? `<span class="${badgeClass}">${badgeLabel}</span>` : '';
@@ -2230,6 +2833,11 @@
                 const externalHtml = externalEvents.length ? `
                     <div class="mt-2 space-y-0.5">
                         ${externalEvents.slice(0, 3).map(e => `<p class="text-xs truncate flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${e.color}"></span>${escapeHtml(e.title)}</p>`).join('')}
+                    </div>
+                ` : '';
+                const classesHtml = classesToday.length ? `
+                    <div class="week-classes-list">
+                        ${classesToday.map(c => `<p class="week-class-row"><span class="truncate">${escapeHtml(c.classItem.title)}</span>${c.timeRange ? `<span class="week-class-time">${escapeHtml(c.timeRange.split(' - ')[0])}</span>` : ''}</p>`).join('')}
                     </div>
                 ` : '';
                 cols += `
@@ -2241,6 +2849,7 @@
                         </div>
                         ${titleHtml}
                         ${notesHtml}
+                        ${classesHtml}
                         ${externalHtml}
                     </div>
                 `;
@@ -2252,11 +2861,25 @@
             const dayType = getDayType(currentDate);
             const note = getNote(currentDate) || { title: '', notes: '' };
             const externalEvents = getExternalEventsForDate(currentDate);
+            const classesToday = getClassesForDate(currentDate);
             const badgeHtml = dayType
                 ? `<span class="day-badge badge-${dayType.toLowerCase()} text-sm px-3 py-1">${dayType}-Day</span>`
                 : note.title || note.notes
                     ? `<span class="day-badge bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-200 text-sm px-3 py-1">Event</span>`
                     : `<span class="text-sm text-gray-500 dark:text-gray-400">No school scheduled</span>`;
+            const classesHtml = classesToday.length ? `
+                <div class="day-classes-section">
+                    <p class="text-sm font-semibold mb-2">Today's Classes</p>
+                    <div class="space-y-2">
+                        ${classesToday.map(c => `
+                            <a class="day-class-row" href="${c.classItem.url || '#'}" onclick="${c.classItem.url ? '' : 'return false;'}">
+                                <span class="font-medium">${escapeHtml(c.classItem.title)}</span>
+                                ${c.timeRange ? `<span class="text-xs text-gray-500 dark:text-gray-400">${escapeHtml(c.timeRange)}</span>` : ''}
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
             const externalHtml = externalEvents.length ? `
                 <div class="mb-6">
                     <p class="text-sm font-semibold mb-2">Other Events Today</p>
@@ -2275,6 +2898,7 @@
             return `
                 <div class="max-w-2xl mx-auto">
                     <div class="flex justify-center mb-6">${badgeHtml}</div>
+                    ${classesHtml}
                     ${externalHtml}
                     <label class="block text-sm font-semibold mb-2" for="day-title-input">Title</label>
                     <input type="text" id="day-title-input" class="form-input mb-6" placeholder="e.g. Field Trip, Quiz in German" value="${escapeAttr(note.title)}">
@@ -2390,6 +3014,10 @@
                 const notesHtml = note && note.notes
                     ? `<p class="text-xs mt-1 text-gray-500 dark:text-gray-400 whitespace-pre-wrap">${escapeHtml(note.notes)}</p>`
                     : '';
+                const classesToday = getClassesForDate(entry.date);
+                const classesHtml = classesToday.length ? `
+                    <p class="text-xs mt-1 text-gray-500 dark:text-gray-400 truncate">${escapeHtml(classesToday.map(c => c.classItem.title).join(', '))}</p>
+                ` : '';
                 const externalHtml = externalEvents.length ? `
                     <div class="mt-2 space-y-1">
                         ${externalEvents.map(e => `
@@ -2415,6 +3043,7 @@
                             <div class="min-w-0">
                                 ${titleHtml}
                                 ${notesHtml}
+                                ${classesHtml}
                                 ${externalHtml}
                             </div>
                         </div>
@@ -3190,7 +3819,7 @@
             const lines = [
                 'BEGIN:VCALENDAR',
                 'VERSION:2.0',
-                'PRODID:-//Pick A Class//School Calendar//EN',
+                'PRODID:-//School Dashboard//School Calendar//EN',
                 'CALSCALE:GREGORIAN',
                 'METHOD:PUBLISH',
                 'X-WR-CALNAME:School Calendar Notes'
@@ -3388,6 +4017,7 @@
         // =====================================================================================
         document.addEventListener('DOMContentLoaded', () => {
             loadClassData();
+            loadClassNotes();
             loadUserScheduleDates();
             loadUserScheduleSlotOptions();
 
@@ -3403,7 +4033,10 @@
             setInterval(displayTime, 1000);
 
             applyTheme(currentThemeState);
-            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+            applyPalette(currentPaletteState);
+            setupSidebarDock();
+            setupSidebarScrollHide();
+            setupHubPeek();
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
                 if (currentThemeState === 'system') applyTheme('system');
             });
@@ -3439,7 +4072,7 @@
             document.getElementById('view-classes').classList.toggle('hidden', initialView !== 'classes');
             document.getElementById('view-calendar').classList.toggle('hidden', initialView !== 'calendar');
             document.querySelectorAll('.sidebar-link').forEach(a => a.classList.toggle('active', a.dataset.view === initialView));
-            document.title = initialView === 'calendar' ? 'School Calendar' : 'Pick A Class';
+            document.title = initialView === 'calendar' ? 'School Calendar' : 'School Dashboard';
             if (initialView === 'calendar') {
                 calendarInitialized = true;
                 initCalendar();
